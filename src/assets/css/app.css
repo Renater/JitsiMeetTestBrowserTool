@@ -1,0 +1,123 @@
+/* General */
+html, body{
+    background: linear-gradient(#eee, #fff);
+    margin: 0;
+    padding: 0;
+    height:100%;
+    width: 100%;
+    font-family: Helvetica,Arial,sans-serif;
+    color: #35476b;
+}
+ul li{
+    line-height: 1.5rem;
+    padding-left: 0.5rem;
+}
+.hide{
+    display: none;
+}
+
+
+/* Main & panels */
+div#main{
+    display: flex;
+    justify-content: left;
+    align-items: stretch;
+    position: relative;
+    height: 100%;
+    overflow: auto;
+}
+div#left-pane{
+    background: #5f7bbf;
+    height:100%;
+    width: 6rem;
+    min-height: 33rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+div#right-pane{
+    height:100%;
+    width: 95%;
+    margin-left: 7rem;
+}
+div#right-pane h1{
+    font-style: italic;
+    border-bottom:1px solid #5f7bbf;
+    padding-bottom: 0.5rem;
+}
+div#right-pane h2{
+    font-style: italic;
+    margin-left: 1rem;
+}
+
+
+/* Test cases*/
+.test-case{
+    color: white;
+    text-align: center;
+    border: 1px solid #039be5;
+    font-size: 2rem;
+    cursor: pointer;
+    height: 2rem;
+    padding: 1rem;
+    background:  #5f7bbf;
+    border-left: 0 solid  #A8BEF3FF;
+    transition: background 200ms ease 100ms,
+    padding-left 100ms ease-in-out, padding-left 300ms ease-in-out,
+    border-left 100ms ease-in-out, padding-left 300ms ease-in-out;
+
+}
+.test-case:hover{
+    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    background: #42a5f5;
+    padding-left: 1rem;
+    border-left: 0.3rem solid #A8BEF3FF;
+}
+.test-case.is-active{
+    background: #42a5f5;
+}
+
+
+
+/* test results */
+div.test-result div,
+div.test-result div a{
+    display: block;
+    margin-top: 1rem;
+}
+
+
+/* Video components */
+video{
+    background-color: black;
+}
+
+
+
+/* Actions */
+div.actions {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+div.actions a{
+    width: fit-content;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: white;
+    cursor: pointer;
+    background: #6c79b8;
+}
+div.actions a:hover{
+    background: #5F7BBF;
+    color: #eee;
+}
+
+/* media queries */
+@media only screen and (max-width: 40em) {
+    div#left-pane{
+        min-height: 50rem;
+    }
+}

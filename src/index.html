@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+    <script type="text/javascript" src="https://rdv42.rendez-vous.renater.fr/external_api.js"></script>
+    <script src="https://kit.fontawesome.com/0d01ffef9c.js" crossorigin="anonymous"></script>
+
+    <!--JS_FILES-->
+    <!--CSS_FILES-->
+    <!--external_api-->
+</head>
+
+
+<div id="main"
+     data-turn-endpoint="https://rdv42.rendez-vous.renater.fr/home/rest.php/TurnServer"
+     data-websocket-url="wss://rdv42.rendez-vous.renater.fr/colibri-ws/echo"
+     data-application-url="https://rdv42.rendez-vous.renater.fr"
+     data-room-name="<!--room_name-->"
+     data-room-token="<!--room_token-->"
+>
+
+    <div id="left-pane">
+        <div id="home" title="{tr:home}" class="test-case animate_ease is-active" data-refer-to="pane-home">
+            <span class="icon"><i class="fa fa-house"></i></span>
+        </div>
+        <div id="test_browser" title="{tr:browser}" class="test-case animate_ease" data-refer-to="browser_pane">
+            <span class="icon"><i class="fa fa-globe"></i></span>
+        </div>
+
+        <div id="test_devices" title="{tr:devices} "class="test-case animate_ease"  data-refer-to="devices_pane">
+            <span class="icon"><i class="fa fa-plug"></i></span>
+        </div>
+
+        <div id="test_camera" title="{tr:camera}" class="test-case animate_ease"  data-refer-to="camera_pane">
+            <span class="icon"><i class="fa fa-video"></i></span>
+        </div>
+
+        <div id="test_micro" title="{tr:micro}" class="test-case animate_ease"  data-refer-to="micro_pane">
+            <span class="icon"><i class="fa fa-microphone"></i></span>
+        </div>
+
+        <div id="test_network" title="{tr:network}" class="test-case animate_ease" data-refer-to="network_pane">
+            <span class="icon"><i class="fa fa-network-wired"></i></span>
+        </div>
+
+        <div id="test_room" title="{tr:room}" class="test-case animate_ease"  data-refer-to="room_pane">
+            <span class="icon"><i class="fa fa-display"></i></span>
+        </div>
+
+        <div id="test_global" title="{tr:results}" class="test-case animate_ease"  data-refer-to="result_global">
+            <span class="icon"><i class="fa fa-chart-column"></i></span>
+        </div>
+    </div>
+
+
+    <div id="right-pane">
+        <h1>{tr:main_title}</h1>
+
+        <div id="pane-home" class="test-result">
+            <p>
+                {tr:home_disclaimer}
+            </p>
+            <ul class="fa-ul">
+                <li><span class="fa-li"><i class="fa fa-globe"></i></span>{tr:home_browser}</li>
+                <li><span class="fa-li"><i class="fa fa-plug"></i></span>{tr:home_devices}</li>
+                <li><span class="fa-li"><i class="fa fa-video"></i></span>{tr:home_camera}</li>
+                <li><span class="fa-li"><i class="fa fa-microphone"></i></span>{tr:home_micro}</li>
+                <li><span class="fa-li"><i class="fa fa-network-wired"></i></span>{tr:home_network}</li>
+                <li><span class="fa-li"><i class="fa fa-display"></i></span>{tr:home_room}</li>
+            </ul>
+
+
+            <div class="actions">
+                <a id="run_all">
+                    <i class="fa-solid fa-play"></i>  <span>{tr:run_all_tests}</span>
+                </a>
+            </div>
+        </div>
+
+
+
+        <div id="browser_pane" class="hide test-result">
+            <h2>
+                <i class="fa fa-globe"></i> {tr:browser_title}
+            </h2>
+            <div class="actions">
+                {tr:run_alone_test}
+                <a data-action="test-runner" data-test-case="test_browser">
+                    <i class="fa-solid fa-play"></i>  <span>{tr:run}</span>
+                </a>
+            </div>
+
+            <div id="browser_results">
+                {tr:results_shown_there}
+            </div>
+
+        </div>
+        <div id="camera_pane" class="hide test-result">
+            <h2>
+                <i class="fa fa-camera"></i>  {tr:camera_title}
+            </h2>
+            <div id="camera_results">
+                {tr:results_shown_there}
+            </div>
+        </div>
+        <div id="devices_pane" class="hide test-result">
+            <h2>
+                <i class="fa fa-plug"></i>  {tr:devices_title}
+            </h2>
+            <div id="devices_results">
+                {tr:results_shown_there}
+            </div>
+        </div>
+        <div id="micro_pane" class="hide test-result">
+            <h2>
+                <i class="fa fa-microphone"></i> {tr:micro_title}
+            </h2>
+            <div id="micro_results">
+                {tr:results_shown_there}
+            </div>
+        </div>
+        <div id="network_pane" class="hide test-result">
+            <h2>
+                <i class="fa fa-network-wired"></i> {tr:network_title}
+            </h2>
+            <div id="network_results">
+                <video id="local_video" playsinline autoplay muted></video>
+                <video id="remote_video" playsinline autoplay muted></video>
+
+                <p>{tr:results_shown_there}</p>
+            </div>
+
+        </div>
+        <div id="room_pane" class="hide test-result">
+            <h2>
+                <i class="fa fa-display"></i> {tr:room_title}
+            </h2>
+            <div id="room_results">
+                <div id="main_test_room_result">
+                    <section data-content="media_stream">
+                        <div id="main_player" class="player-test"></div>
+                    </section>
+                    <section data-content="media_stream">
+                        <div id="second_player" class="player-test-mini"></div>
+                    </section>
+                </div>
+                {tr:results_shown_there}
+            </div>
+
+
+        </div>
+
+        <div id="result_global" class="hide test-result">
+            <h2><i class="fa fa-chart-column"></i> {tr:results}</h2>
+
+            <div>
+                <p>{tr:results_shown_there}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>
