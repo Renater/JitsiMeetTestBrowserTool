@@ -42,6 +42,6 @@ Supported translations are:
 * fr (French)
 * en (English)
 
-If you want have your own translation, just copy the **lang/en.php** file into your language (example: **du.php**).
+If you want have your own translation, just copy the **lang/en.php** file into your language (example: **de.php**), then edit the translations.
 
-Then, re run the make-release.php script with the parameter **--lang=du**
+Then, re run the make-release.php script with the parameter **--lang=de**
