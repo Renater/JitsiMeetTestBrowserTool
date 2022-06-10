@@ -23,7 +23,7 @@
         <div id="home" title="{tr:home}" class="menu-item animate_ease is-active" data-refer-to="pane-home">
             <span class="icon"><i class="fa fa-house"></i></span>
         </div>
-        <div id="test_browser" title="{tr:browser}" class="menu-item animate_ease" data-refer-to="browser_pane">
+        <div id="test_browser" title="{tr:browser}" class="menu-item animate_ease" data-refer-to="browser_pane"  data-results="browser_results">
             <span class="icon"><i class="fa fa-globe"></i></span>
         </div>
 
@@ -97,7 +97,9 @@
                 </a>
             </div>
             <div id="browser_results">
-                {tr:results_shown_there}
+                <div data-result="default">{tr:results_shown_there}</div>
+                <div data-result="success" class="hide">{tr:browser_test_success}</div>
+                <div data-result="fail" class="hide">{tr:browser_test_fail}</div>
             </div>
         </div>
 

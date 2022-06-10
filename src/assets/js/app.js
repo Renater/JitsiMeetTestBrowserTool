@@ -17,7 +17,6 @@ function echo(result, id){
 
 
 window.onload = function() {
-
     // Listen click on item (left menu)
     document.querySelectorAll(".menu-item").forEach(function (element){
         element.addEventListener("click", function() {
@@ -33,11 +32,14 @@ window.onload = function() {
     document.querySelectorAll('[data-action="test-runner"]').forEach(function (element){
         element.addEventListener('click', function(){
             const testCase = element.getAttribute('data-test-case');
-            console.log('====>'+testCase);
+
+            // Do nothing if disabled
+            if (element.classList.contains('disabled')) return;
 
             window.RDVTestBrowser[testCase].run()
                 .then(function(result){
-                    echo(result, testCase)
+                    window.RDVTestBrowser.UI.updateUI(result, testCase);
+                    // echo(result, testCase)
                 })
                 .catch(function(reason){
                     echo(reason, testCase)
@@ -50,6 +52,43 @@ window.onload = function() {
     document.getElementById('run_all').addEventListener('click', function(){
         this.setAttribute('disabled', 'disabled');
 
-        window.RDVTestBrowser.runner.run()
+        window.RDVTestEvents.run.status = window.TestStatuses.PROCESSING;
+        document.dispatchEvent(window.RDVTestEvents.run);
+
+        window.RDVTestBrowser.runner.run();
     });
+
+    /**
+     * Listen to "run_event" event
+     * This function will temporarily disable run buttons for each test case
+     */
+    document.addEventListener('run_event', function(element){
+        const status = element.status;
+        switch (status){
+            case window.TestStatuses.WAITING:
+            case window.TestStatuses.ENDED:
+                // All buttons available
+                document.querySelectorAll('[data-action="test-runner"]').forEach(function (element){
+                    element.classList.remove('disabled');
+                    element.removeAttribute('title');
+                });
+
+                break;
+            case window.TestStatuses.PROCESSING:
+                // No buttons available
+                document.querySelectorAll('[data-action="test-runner"]').forEach(function (element){
+                    element.classList.add('disabled');
+                    element.setAttribute('title', window.lang.get('test_running'));
+                });
+                break;
+            case window.TestStatuses.PAUSED:
+            case window.TestStatuses.STOPPED:
+                // TODO
+                break;
+
+            default:
+                console.error(`Unknown status: ${status}`);
+        }
+    });
+
 };

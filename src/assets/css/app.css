@@ -13,7 +13,7 @@ ul li{
     padding-left: 0.5rem;
 }
 .hide{
-    display: none;
+    display: none !important;
 }
 
 
@@ -118,6 +118,13 @@ div.actions a{
     color: white;
     cursor: pointer;
     background: #6c79b8;
+}
+div.actions a.disabled {
+    background: #b4b9d0;
+    cursor: not-allowed;
+}
+div.actions a.disabled:hover {
+    background: #c5c7ce;
 }
 div.actions a:hover{
     background: #5F7BBF;

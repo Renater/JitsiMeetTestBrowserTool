@@ -8,7 +8,7 @@ if (!window.hasOwnProperty('RDVTestBrowser'))
 /**
  * Test browser case
  *
- * @type {{run: (function(): Promise<unknown>)}}
+ * @type {{swapPanes: Window.RDVTestBrowser.UI.swapPanes, updateUI: Window.RDVTestBrowser.UI.updateUI}}
  */
 window.RDVTestBrowser.UI = {
 
@@ -35,4 +35,27 @@ window.RDVTestBrowser.UI = {
             document.getElementById(id).classList.add('is-active');
         }
     },
-}
+
+
+    /**
+     * Update UI according to result got from test (
+     *
+     * @param result
+     * @param testCase
+     */
+    updateUI: function (result, testCase){
+        const referer = document.getElementById(testCase).getAttribute('data-results');
+        const children = document.getElementById(referer).children;
+
+        for (let id = 0; id < children.length; id++) {
+            let child = children[id];
+            child.classList.add('hide');
+
+            if (result.status === 'success' && child.getAttribute('data-result') === 'success') {
+                child.classList.remove('hide');
+            } else if (result.status === 'fail' && child.getAttribute('data-result') === 'fail') {
+                child.classList.remove('hide');
+            }
+        }
+    }
+};

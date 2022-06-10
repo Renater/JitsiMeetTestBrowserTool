@@ -97,7 +97,7 @@ window.RDVTestBrowser.test_room = {
                 context.onError(reason);
                 context.closeConnections();
                 resolve({
-                    "status": "error"
+                    "status": "fail"
                 });
             };
 
@@ -393,7 +393,7 @@ window.RDVTestBrowser.test_room = {
         // Check if there is participants
         if (context.secondApiClient.getParticipantsInfo().length !== 2) {
             // not participant
-            reject({"status": "error", "reason": "no_participant"})
+            reject({"status": "fail", "reason": "no_participant"})
         }
 
         // Check if there is framerate, so the connection is working

@@ -4,10 +4,13 @@ $lang['home'] = 'Home';
 $lang['main_title'] = 'Test your browser compatibility with Jitsi Meet';
 $lang['run'] = 'Start';
 $lang['run_alone_test'] = 'You can run only this test:';
+$lang['test_running'] = 'Test in progress ...';
 
 // Test cases
 $lang['browser'] = 'Browser';
 $lang['browser_title'] = 'Test of your browser';
+$lang['browser_test_success']= 'Your browser is compatible with Jitsi Meet.<br />  For the best user experience always use last sable version of your browser.';
+$lang['browser_test_fail']= 'Your browser is not compatible with Jitsi Meet.<br />  Please use one these recommended <a href="https://jitsi.github.io/handbook/docs/user-guide/supported-browsers/" target="_blank">Browsers</a>.';
 $lang['devices'] = 'Devices';
 $lang['devices_title'] = 'Test access to your devices';
 $lang['camera'] = 'Camera';

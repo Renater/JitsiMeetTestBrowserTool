@@ -88,7 +88,7 @@ window.RDVTestBrowser.test_network = {
         }
     },
 
-    networkEvent: new Event('network_data'),
+    networkEvent: new Event('"status": "fail"'),
 
     /**
      * Run test
@@ -159,7 +159,7 @@ window.RDVTestBrowser.test_network = {
                     });
                 });
             }, function(reason){
-                resolve({"status": "fail", "error": reason});
+                resolve({"status": "fail", "details": reason});
             });
 
         });
@@ -233,7 +233,7 @@ window.RDVTestBrowser.test_network = {
                 }
             )
             .catch(reason => {
-                resolve({"status": "fail", "error": reason.toString()});
+                resolve({"status": "fail", "details": reason.toString()});
             });
     },
 
@@ -268,11 +268,11 @@ window.RDVTestBrowser.test_network = {
                     wbs.close();
                     context.statuses['wss'] = true;
 
-                    resolve({"status": "success", "protocol": "wss"});
+                    resolve({"status": "success", "details": {"protocol": "wss"}});
                 } else {
                     context.statuses['wss'] = false;
                     wbs.close();
-                    let err = {"status": "fail", "protocol": "wss",  "message": messageEvent.data};
+                    let err = {"status": "fail", "details": {"protocol": "wss",  "message": messageEvent.data}};
                     context.testFail(err);
                     resolve(err);
                 }
@@ -281,7 +281,7 @@ window.RDVTestBrowser.test_network = {
             wbs.onerror = function () {
                 context.statuses['wss'] = false;
                 wbs.close();
-                let err = {"status": "fail","protocol": "wss", "details": 'cannot_connect_wss'};
+                let err = {"status": "fail", "details": {"protocol": "wss", "details": 'cannot_connect_wss'}};
                 context.testFail('wss', err);
                 resolve(err);
             };
@@ -339,7 +339,7 @@ window.RDVTestBrowser.test_network = {
                         if (result instanceof Object && result.status === 'success') {
                             let utils = new WebRTCUtils();
                             utils.wait(5000).then(function () {
-                                resolve({"protocol": "udp", "status": "success"});
+                                resolve({"status": "success", "details": {"protocol": "udp"}});
                             });
                         } else {
                             context.testFail('udp', result);
@@ -361,7 +361,7 @@ window.RDVTestBrowser.test_network = {
     initiateMediaConnexion: function (protocol) {
         return new Promise(resolve => {
             if (protocol !== 'tcp' && protocol !== 'udp') {
-                resolve({"status": "fail", "message": "unknown_protocol"})
+                resolve({"status": "fail", "details": {"message": "unknown_protocol"}})
 
             } else {
                 let context = window.RDVTestBrowser.test_network;
@@ -403,10 +403,10 @@ window.RDVTestBrowser.test_network = {
                         context.localVideo.srcObject = mediaStream;
                         context.createPeerConnection(rtcConfig)
                         context.statuses[protocol] = true;
-                        resolve({"status": "success", "message": "GetUserMedia succeeded"})
+                        resolve({"status": "success", "details": {"message": "GetUserMedia succeeded"}})
                     })
                     .catch(function (err) {
-                        resolve({"status": "fail", "error": err.toString()});
+                        resolve({"status": "fail", "details": err.toString()});
                     })
             }
         });

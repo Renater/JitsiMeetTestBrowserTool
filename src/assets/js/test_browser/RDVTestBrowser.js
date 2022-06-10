@@ -5,13 +5,12 @@
 if (!window.hasOwnProperty('RDVTestBrowser'))
     window.RDVTestBrowser = {};
 
+/**
+ * Global test runner
+ *
+ * @type {{wait: (function(*): Promise<*>), testCases: string[], run: Window.RDVTestBrowser.runner.run}}
+ */
 window.RDVTestBrowser.runner = {
-
-    /**
-     * Test status
-     * TODO: use it!
-     */
-    status: 'idle',
 
     /**
      * List of test cases
@@ -63,6 +62,10 @@ window.RDVTestBrowser.runner = {
 
             // Show final results
             window.RDVTestBrowser.UI.swapPanes('test_global');
+
+            // Update status
+            window.RDVTestEvents.run.status = window.TestStatuses.ENDED;
+            document.dispatchEvent(window.RDVTestEvents.run);
         }
 
         runTests()
@@ -75,8 +78,7 @@ window.RDVTestBrowser.runner = {
      *
      * @returns {Promise<unknown>}
      */
-    wait: function(delay){
-        if (!delay) delay = 1000;
+    wait: function(delay = 1000){
         return new Promise(r => setTimeout(r, delay))
     }
 }
