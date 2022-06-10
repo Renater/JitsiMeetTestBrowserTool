@@ -50,7 +50,7 @@ window.RDVTestBrowser.runner = {
          * @return {Promise<void>}
          */
         async function runTests() {
-            for (const templateName of window.RDVTestBrowser.testCases) {
+            for (const templateName of window.RDVTestBrowser.runner.testCases) {
                 await getPromise(templateName);
                 await window.RDVTestBrowser.runner.wait();
             }
