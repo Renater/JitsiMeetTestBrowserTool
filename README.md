@@ -2,7 +2,7 @@
 
 <hr />
 
-This tools allows you to take a release for Jitsi test browser page (minify js/css files, pack in one file the app).
+This tools allows you to make a release for Jitsi test browser page (minify js/css files, pack the app in one file).
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/Renater/JitsiMeetTestBrowserTool/master/readme-img1.png" width="500" alt="App screenshot 1" />
@@ -20,7 +20,7 @@ This tools allows you to take a release for Jitsi test browser page (minify js/c
 ### Requirements
 
 To make a release, you need to have at lease:
-* php (7.x)
+* php (7.4+)
 * composer (1.10+)
 
 Then, use **composer install** to get the dependencies.
