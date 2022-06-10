@@ -29,10 +29,10 @@ window.RDVTestBrowser.UI = {
         document.getElementById(referer).classList.remove('hide')
 
         if (withMenu){
-            document.querySelectorAll(".test-case").forEach(function (element){
+            document.querySelectorAll(".menu-item").forEach(function (element){
                 element.classList.remove('is-active');
             });
             document.getElementById(id).classList.add('is-active');
         }
-    }
+    },
 }

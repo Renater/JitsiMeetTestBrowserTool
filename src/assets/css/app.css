@@ -43,8 +43,8 @@ div#right-pane{
 }
 div#right-pane h1{
     font-style: italic;
-    border-bottom:1px solid #5f7bbf;
-    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0.7rem;
 }
 div#right-pane h2{
     font-style: italic;
@@ -52,8 +52,8 @@ div#right-pane h2{
 }
 
 
-/* Test cases*/
-.test-case{
+/* Menu item */
+.menu-item{
     color: white;
     text-align: center;
     border: 1px solid #039be5;
@@ -68,14 +68,14 @@ div#right-pane h2{
     border-left 100ms ease-in-out, padding-left 300ms ease-in-out;
 
 }
-.test-case:hover{
+.menu-item:hover{
     border-bottom-left-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
     background: #42a5f5;
     padding-left: 1rem;
     border-left: 0.3rem solid #A8BEF3FF;
 }
-.test-case.is-active{
+.menu-item.is-active{
     background: #42a5f5;
 }
 

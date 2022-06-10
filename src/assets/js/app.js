@@ -19,9 +19,9 @@ function echo(result, id){
 window.onload = function() {
 
     // Listen click on item (left menu)
-    document.querySelectorAll(".test-case").forEach(function (element){
+    document.querySelectorAll(".menu-item").forEach(function (element){
         element.addEventListener("click", function() {
-            document.querySelectorAll(".test-case").forEach(function (element){
+            document.querySelectorAll(".menu-item").forEach(function (element){
                 element.classList.remove('is-active');
             });
             element.classList.add('is-active');

@@ -50,9 +50,15 @@ window.RDVTestBrowser.runner = {
          * @return {Promise<void>}
          */
         async function runTests() {
+            const nbTestCases = window.RDVTestBrowser.runner.testCases.length;
+            let cpt = 1;
+
             for (const templateName of window.RDVTestBrowser.runner.testCases) {
                 await getPromise(templateName);
                 await window.RDVTestBrowser.runner.wait();
+                // Update progress
+                document.querySelector(".progress").style.width = `${100*cpt/nbTestCases}%`;
+                cpt++;
             }
 
             // Show final results

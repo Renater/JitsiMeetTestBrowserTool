@@ -20,34 +20,34 @@
 >
 
     <div id="left-pane">
-        <div id="home" title="{tr:home}" class="test-case animate_ease is-active" data-refer-to="pane-home">
+        <div id="home" title="{tr:home}" class="menu-item animate_ease is-active" data-refer-to="pane-home">
             <span class="icon"><i class="fa fa-house"></i></span>
         </div>
-        <div id="test_browser" title="{tr:browser}" class="test-case animate_ease" data-refer-to="browser_pane">
+        <div id="test_browser" title="{tr:browser}" class="menu-item animate_ease" data-refer-to="browser_pane">
             <span class="icon"><i class="fa fa-globe"></i></span>
         </div>
 
-        <div id="test_devices" title="{tr:devices} "class="test-case animate_ease"  data-refer-to="devices_pane">
+        <div id="test_devices" title="{tr:devices} "class="menu-item animate_ease"  data-refer-to="devices_pane">
             <span class="icon"><i class="fa fa-plug"></i></span>
         </div>
 
-        <div id="test_camera" title="{tr:camera}" class="test-case animate_ease"  data-refer-to="camera_pane">
+        <div id="test_camera" title="{tr:camera}" class="menu-item animate_ease"  data-refer-to="camera_pane">
             <span class="icon"><i class="fa fa-video"></i></span>
         </div>
 
-        <div id="test_micro" title="{tr:micro}" class="test-case animate_ease"  data-refer-to="micro_pane">
+        <div id="test_micro" title="{tr:micro}" class="menu-item animate_ease"  data-refer-to="micro_pane">
             <span class="icon"><i class="fa fa-microphone"></i></span>
         </div>
 
-        <div id="test_network" title="{tr:network}" class="test-case animate_ease" data-refer-to="network_pane">
+        <div id="test_network" title="{tr:network}" class="menu-item animate_ease" data-refer-to="network_pane">
             <span class="icon"><i class="fa fa-network-wired"></i></span>
         </div>
 
-        <div id="test_room" title="{tr:room}" class="test-case animate_ease"  data-refer-to="room_pane">
+        <div id="test_room" title="{tr:room}" class="menu-item animate_ease"  data-refer-to="room_pane">
             <span class="icon"><i class="fa fa-display"></i></span>
         </div>
 
-        <div id="test_global" title="{tr:results}" class="test-case animate_ease"  data-refer-to="result_global">
+        <div id="test_global" title="{tr:results}" class="menu-item animate_ease"  data-refer-to="result_global">
             <span class="icon"><i class="fa fa-chart-column"></i></span>
         </div>
     </div>
@@ -56,10 +56,17 @@
     <div id="right-pane">
         <h1>{tr:main_title}</h1>
 
+        <div class="progress-container">
+            <div class="progress"></div>
+        </div>
+
         <div id="pane-home" class="test-result">
+
+
             <p>
                 {tr:home_disclaimer}
             </p>
+
             <ul class="fa-ul">
                 <li><span class="fa-li"><i class="fa fa-globe"></i></span>{tr:home_browser}</li>
                 <li><span class="fa-li"><i class="fa fa-plug"></i></span>{tr:home_devices}</li>
