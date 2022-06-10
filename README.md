@@ -35,7 +35,7 @@ To make a new release, you need to run the **make-release.php** scripts.
 Once done, you will find your unique index.html file containing the test tool. 
 
 
-## Translate the App
+## Translate the app
 
 By default, this app is on **english**.
 Supported translations are:
