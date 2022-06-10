@@ -62,7 +62,7 @@ window.RDVTestBrowser.runner = {
             }
 
             // Show final results
-            window.RDVTestBrowser.UI.swapPanes('result_global');
+            window.RDVTestBrowser.UI.swapPanes('test_global');
         }
 
         runTests()

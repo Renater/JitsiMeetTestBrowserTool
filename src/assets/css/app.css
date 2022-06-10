@@ -89,10 +89,19 @@ div.test-result div a{
 }
 
 
-/* Video components */
+/* Video & room components */
 video{
     background-color: black;
 }
+#main_player {
+    width: 80%;
+    height: 37.5rem;
+}
+#second_player {
+    display: none;
+}
+
+
 
 
 
