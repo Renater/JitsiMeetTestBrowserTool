@@ -78,7 +78,7 @@
         </div>
 
 
-
+        <!-- Test browser -->
         <div id="browser_pane" class="hide test-result">
             <h2>
                 <i class="fa fa-globe"></i> {tr:browser_title}
@@ -89,52 +89,89 @@
                     <i class="fa-solid fa-play"></i>  <span>{tr:run}</span>
                 </a>
             </div>
-
             <div id="browser_results">
                 {tr:results_shown_there}
             </div>
+        </div>
 
-        </div>
-        <div id="camera_pane" class="hide test-result">
-            <h2>
-                <i class="fa fa-camera"></i>  {tr:camera_title}
-            </h2>
-            <div id="camera_results">
-                {tr:results_shown_there}
-            </div>
-        </div>
+        <!-- Test devices -->
         <div id="devices_pane" class="hide test-result">
             <h2>
                 <i class="fa fa-plug"></i>  {tr:devices_title}
             </h2>
+            <div class="actions">
+                {tr:run_alone_test}
+                <a data-action="test-runner" data-test-case="test_devices">
+                    <i class="fa-solid fa-play"></i>  <span>{tr:run}</span>
+                </a>
+            </div>
             <div id="devices_results">
                 {tr:results_shown_there}
             </div>
         </div>
+
+        <!-- Test camera -->
+        <div id="camera_pane" class="hide test-result">
+            <h2>
+                <i class="fa fa-camera"></i>  {tr:camera_title}
+            </h2>
+            <div class="actions">
+                {tr:run_alone_test}
+                <a data-action="test-runner" data-test-case="test_camera">
+                    <i class="fa-solid fa-play"></i>  <span>{tr:run}</span>
+                </a>
+            </div>
+            <div id="camera_results">
+                {tr:results_shown_there}
+            </div>
+        </div>
+
+        <!-- Test micro -->
         <div id="micro_pane" class="hide test-result">
             <h2>
                 <i class="fa fa-microphone"></i> {tr:micro_title}
             </h2>
+            <div class="actions">
+                {tr:run_alone_test}
+                <a data-action="test-runner" data-test-case="test_micro">
+                    <i class="fa-solid fa-play"></i>  <span>{tr:run}</span>
+                </a>
+            </div>
             <div id="micro_results">
                 {tr:results_shown_there}
             </div>
         </div>
+
+        <!-- Test network -->
         <div id="network_pane" class="hide test-result">
             <h2>
                 <i class="fa fa-network-wired"></i> {tr:network_title}
             </h2>
+            <div class="actions">
+                {tr:run_alone_test}
+                <a data-action="test-runner" data-test-case="test_network">
+                    <i class="fa-solid fa-play"></i>  <span>{tr:run}</span>
+                </a>
+            </div>
             <div id="network_results">
                 <video id="local_video" playsinline autoplay muted></video>
                 <video id="remote_video" playsinline autoplay muted></video>
 
                 <p>{tr:results_shown_there}</p>
             </div>
-
         </div>
+
+        <!-- Test room -->
         <div id="room_pane" class="hide test-result">
             <h2>
                 <i class="fa fa-display"></i> {tr:room_title}
             </h2>
+            <div class="actions">
+                {tr:run_alone_test}
+                <a data-action="test-runner" data-test-case="test_room">
+                    <i class="fa-solid fa-play"></i>  <span>{tr:run}</span>
+                </a>
+            </div>
             <div id="room_results">
                 <div id="main_test_room_result">
                     <section data-content="media_stream">
@@ -146,10 +183,9 @@
                 </div>
                 {tr:results_shown_there}
             </div>
-
-
         </div>
 
+        <!-- Global results -->
         <div id="result_global" class="hide test-result">
             <h2><i class="fa fa-chart-column"></i> {tr:results}</h2>
 

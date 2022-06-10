@@ -16,7 +16,7 @@ function echo(result, id){
 }
 
 
-window.addEventListener("DOMContentLoaded", () => {
+window.onload = function() {
 
     // Listen click on item (left menu)
     document.querySelectorAll(".test-case").forEach(function (element){
@@ -30,16 +30,19 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     // Listen to click on run alone test case
-    document.querySelector('[data-action="test-runner"]').addEventListener('click', function(){
-        const testCase = this.getAttribute('data-test-case');
+    document.querySelectorAll('[data-action="test-runner"]').forEach(function (element){
+        element.addEventListener('click', function(){
+            const testCase = element.getAttribute('data-test-case');
+            console.log('====>'+testCase);
 
-        window.RDVTestBrowser[testCase].run()
-            .then(function(result){
-                echo(result, testCase)
-            })
-            .catch(function(reason){
-                echo(reason, testCase)
-            });
+            window.RDVTestBrowser[testCase].run()
+                .then(function(result){
+                    echo(result, testCase)
+                })
+                .catch(function(reason){
+                    echo(reason, testCase)
+                });
+        });
     });
 
 
@@ -49,4 +52,4 @@ window.addEventListener("DOMContentLoaded", () => {
 
         window.RDVTestBrowser.runner.run()
     });
-});
+};
