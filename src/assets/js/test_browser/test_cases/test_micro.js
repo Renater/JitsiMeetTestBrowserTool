@@ -2,15 +2,15 @@
  * TestCase: test_micro
  */
 
-if (!window.hasOwnProperty('RDVTestBrowser'))
-    window.RDVTestBrowser = {};
+if (!window.hasOwnProperty('JitsiTestBrowser'))
+    window.JitsiTestBrowser = {};
 
 /**
  * Test micro case
  *
  * @type {{run: (function(*): Promise<unknown>)}}
  */
-window.RDVTestBrowser.test_micro = {
+window.JitsiTestBrowser.test_micro = {
 
     /**
      * Run test

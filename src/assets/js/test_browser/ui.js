@@ -2,15 +2,15 @@
  * TestCase: test_browser
  */
 
-if (!window.hasOwnProperty('RDVTestBrowser'))
-    window.RDVTestBrowser = {};
+if (!window.hasOwnProperty('JitsiTestBrowser'))
+    window.JitsiTestBrowser = {};
 
 /**
  * Test browser case
  *
- * @type {{swapPanes: Window.RDVTestBrowser.UI.swapPanes, updateUI: Window.RDVTestBrowser.UI.updateUI}}
+ * @type {{swapPanes: Window.JitsiTestBrowser.UI.swapPanes, updateUI: Window.JitsiTestBrowser.UI.updateUI}}
  */
-window.RDVTestBrowser.UI = {
+window.JitsiTestBrowser.UI = {
 
     /**
      * Swap between right panes

@@ -2,15 +2,15 @@
  * TestCase: test_browser
  */
 
-if (!window.hasOwnProperty('RDVTestBrowser'))
-    window.RDVTestBrowser = {};
+if (!window.hasOwnProperty('JitsiTestBrowser'))
+    window.JitsiTestBrowser = {};
 
 /**
  * Global test runner
  *
- * @type {{wait: (function(*): Promise<*>), testCases: string[], run: Window.RDVTestBrowser.runner.run}}
+ * @type {{wait: (function(*): Promise<*>), testCases: string[], run: Window.JitsiTestBrowser.runner.run}}
  */
-window.RDVTestBrowser.runner = {
+window.JitsiTestBrowser.runner = {
 
     /**
      * List of test cases
@@ -29,10 +29,10 @@ window.RDVTestBrowser.runner = {
         function getPromise(templateName) {
             return new Promise(resolve => {
                 // Show right panel
-                window.RDVTestBrowser.UI.swapPanes(templateName);
+                window.JitsiTestBrowser.UI.swapPanes(templateName);
 
                 // Run test
-                window.RDVTestBrowser[templateName].run()
+                window.JitsiTestBrowser[templateName].run()
                     .then(function (result) {
                         // Default show result
                         echo(result, templateName)
@@ -49,23 +49,23 @@ window.RDVTestBrowser.runner = {
          * @return {Promise<void>}
          */
         async function runTests() {
-            const nbTestCases = window.RDVTestBrowser.runner.testCases.length;
+            const nbTestCases = window.JitsiTestBrowser.runner.testCases.length;
             let cpt = 1;
 
-            for (const templateName of window.RDVTestBrowser.runner.testCases) {
+            for (const templateName of window.JitsiTestBrowser.runner.testCases) {
                 await getPromise(templateName);
-                await window.RDVTestBrowser.runner.wait();
+                await window.JitsiTestBrowser.runner.wait();
                 // Update progress
                 document.querySelector(".progress").style.width = `${100*cpt/nbTestCases}%`;
                 cpt++;
             }
 
             // Show final results
-            window.RDVTestBrowser.UI.swapPanes('test_global');
+            window.JitsiTestBrowser.UI.swapPanes('test_global');
 
             // Update status
-            window.RDVTestEvents.run.status = window.TestStatuses.ENDED;
-            document.dispatchEvent(window.RDVTestEvents.run);
+            window.JitsiTestEvents.run.status = window.TestStatuses.ENDED;
+            document.dispatchEvent(window.JitsiTestEvents.run);
         }
 
         runTests()

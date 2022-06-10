@@ -2,16 +2,16 @@
  * TestCase: test_room
  */
 
-if (!window.hasOwnProperty('RDVTestBrowser'))
-    window.RDVTestBrowser = {};
+if (!window.hasOwnProperty('JitsiTestBrowser'))
+    window.JitsiTestBrowser = {};
 
 
 /**
  * Test room access case
  *
- * @type {{testRoomConnection: Window.RDVTestBrowser.test_room.testRoomConnection, timerInterval: undefined, onError: Window.RDVTestBrowser.test_room.onError, testInterval: undefined, secondNodePlayer: undefined, secondsRemaining: number, run: (function(): Promise<*>), mainNodePlayer: undefined, roomName: undefined, mainApiClient: undefined, secondApiClient: undefined, domain_url: undefined, connectClients: (function(): Promise<*>), closeConnections: Window.RDVTestBrowser.test_room.closeConnections, domain: undefined, getRoomToken: (function(): Promise<unknown>), reset: Window.RDVTestBrowser.test_room.reset, lang: {stored: undefined, local: undefined}, roomToken: undefined, addListeners: (function(): Promise<*>), getRoomName: (function(): Promise<unknown>), initTestRoom: (function(): Promise<*>), onSuccess: Window.RDVTestBrowser.test_room.onSuccess}}
+ * @type {{testRoomConnection: Window.JitsiTestBrowser.test_room.testRoomConnection, timerInterval: undefined, onError: Window.JitsiTestBrowser.test_room.onError, testInterval: undefined, secondNodePlayer: undefined, secondsRemaining: number, run: (function(): Promise<*>), mainNodePlayer: undefined, roomName: undefined, mainApiClient: undefined, secondApiClient: undefined, domain_url: undefined, connectClients: (function(): Promise<*>), closeConnections: Window.JitsiTestBrowser.test_room.closeConnections, domain: undefined, getRoomToken: (function(): Promise<unknown>), reset: Window.JitsiTestBrowser.test_room.reset, lang: {stored: undefined, local: undefined}, roomToken: undefined, addListeners: (function(): Promise<*>), getRoomName: (function(): Promise<unknown>), initTestRoom: (function(): Promise<*>), onSuccess: Window.JitsiTestBrowser.test_room.onSuccess}}
  */
-window.RDVTestBrowser.test_room = {
+window.JitsiTestBrowser.test_room = {
     /**
      * Use to set player lang
      */
@@ -84,7 +84,7 @@ window.RDVTestBrowser.test_room = {
         return new Promise(resolve => {
             console.log("> Running test_room");
 
-            let context = window.RDVTestBrowser.test_room;
+            let context = window.JitsiTestBrowser.test_room;
             context.status = "pending"
 
             /**
@@ -162,7 +162,7 @@ window.RDVTestBrowser.test_room = {
         return new Promise((resolve, reject) => {
 
             let appUrl = document.getElementById('main').getAttribute('data-application-url');
-            let context = window.RDVTestBrowser.test_room;
+            let context = window.JitsiTestBrowser.test_room;
 
             let settings = {
                 method: 'get',
@@ -195,7 +195,7 @@ window.RDVTestBrowser.test_room = {
     getRoomToken: function() {
         return new Promise((resolve, reject) => {
             let appUrl = document.getElementById('main').getAttribute('data-application-url');
-            let context = window.RDVTestBrowser.test_room;
+            let context = window.JitsiTestBrowser.test_room;
 
             let settings = {
                 method: 'get'
@@ -232,10 +232,10 @@ window.RDVTestBrowser.test_room = {
      */
     addListeners: function () {
         return new Promise((resolve) => {
-            let context = window.RDVTestBrowser.test_room;
+            let context = window.JitsiTestBrowser.test_room;
 
             context.mainApiClient.addEventListener("participantJoined", function () {
-                let context = window.RDVTestBrowser.test_room;
+                let context = window.JitsiTestBrowser.test_room;
                 context.mainApiClient.removeEventListener("participantJoined");
             });
 
@@ -260,7 +260,7 @@ window.RDVTestBrowser.test_room = {
         return new Promise((resolve, reject) => {
             console.log('[test_room]: Init test room...');
 
-            let context = window.RDVTestBrowser.test_room;
+            let context = window.JitsiTestBrowser.test_room;
 
             // Set lang into local storage to force translation into jitsi test room
             context.lang.local = document.querySelector('html').getAttribute('lang');
@@ -326,7 +326,7 @@ window.RDVTestBrowser.test_room = {
      */
     connectClients: function () {
         return new Promise((resolve) => {
-            let context = window.RDVTestBrowser.test_room;
+            let context = window.JitsiTestBrowser.test_room;
             console.log('[test_room]: Connect clients...');
 
             let mainOptions = {
@@ -388,7 +388,7 @@ window.RDVTestBrowser.test_room = {
      */
     testRoomConnection: function (resolve, reject) {
         console.log('[test_room]: test room connection ...');
-        let context = window.RDVTestBrowser.test_room;
+        let context = window.JitsiTestBrowser.test_room;
 
         // Check if there is participants
         if (context.secondApiClient.getParticipantsInfo().length !== 2) {
@@ -416,7 +416,7 @@ window.RDVTestBrowser.test_room = {
      * Close API connections, clear test interval
      */
     closeConnections: function () {
-        let context = window.RDVTestBrowser.test_room;
+        let context = window.JitsiTestBrowser.test_room;
         console.log('[test_room]: Close connections ...');
 
         // Close connections for main & second client
@@ -453,7 +453,7 @@ window.RDVTestBrowser.test_room = {
      * @param error
      */
     onError: function (error) {
-        let context = window.RDVTestBrowser.test_room;
+        let context = window.JitsiTestBrowser.test_room;
 
         console.log('[test_room]: Error');
 

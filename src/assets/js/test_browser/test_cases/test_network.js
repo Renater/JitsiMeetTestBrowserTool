@@ -2,16 +2,16 @@
  * TestCase: test_network
  */
 
-if (!window.hasOwnProperty('RDVTestBrowser'))
-    window.RDVTestBrowser = {};
+if (!window.hasOwnProperty('JitsiTestBrowser'))
+    window.JitsiTestBrowser = {};
 
 
 /**
  * Test network case
  *
- * @type {{timestampPrev: undefined, localPeerConnection: undefined, run: (function(): Promise<*>), testFail: Window.RDVTestBrowser.test_network.testFail, getNetworkStatistics: Window.RDVTestBrowser.test_network.getNetworkStatistics, onAddIceCandidateSuccess: Window.RDVTestBrowser.test_network.onAddIceCandidateSuccess, hangup: Window.RDVTestBrowser.test_network.hangup, onsignalingstatechange: Window.RDVTestBrowser.test_network.onsignalingstatechange, stats: {tcp: {jitter: *[], droppedFrames: number, packetsLost: number, fps: *[], bitrate: *[]}, udp: {jitter: *[], droppedFrames: number, packetsLost: number, fps: *[], bitrate: *[]}, video: {remote: *[], local: *[]}}, testWebSocket: (function(): Promise<*>), testTCP: (function(): Promise<*>), initiateMediaConnexion: (function(*): Promise<unknown>), initTURNCredentials: Window.RDVTestBrowser.test_network.initTURNCredentials, showLocalStats: Window.RDVTestBrowser.test_network.showLocalStats, testing_protocol: undefined, localVideo: undefined, remoteVideo: undefined, networkEvent: Event, onicecandidate: Window.RDVTestBrowser.test_network.onicecandidate, turn_credentials: *[], createPeerConnection: Window.RDVTestBrowser.test_network.createPeerConnection, oniceconnectionstatechange: Window.RDVTestBrowser.test_network.oniceconnectionstatechange, onAddIceCandidateError: Window.RDVTestBrowser.test_network.onAddIceCandidateError, statuses: {}, intervalID: undefined, bytesPrev: undefined, testUDP: (function(): Promise<*>), turn_servers: *[], remotePeerConnection: undefined, localStream: undefined, showRemoteStats: Window.RDVTestBrowser.test_network.showRemoteStats}}
+ * @type {{timestampPrev: undefined, localPeerConnection: undefined, run: (function(): Promise<*>), testFail: Window.JitsiTestBrowser.test_network.testFail, getNetworkStatistics: Window.JitsiTestBrowser.test_network.getNetworkStatistics, onAddIceCandidateSuccess: Window.JitsiTestBrowser.test_network.onAddIceCandidateSuccess, hangup: Window.JitsiTestBrowser.test_network.hangup, onsignalingstatechange: Window.JitsiTestBrowser.test_network.onsignalingstatechange, stats: {tcp: {jitter: *[], droppedFrames: number, packetsLost: number, fps: *[], bitrate: *[]}, udp: {jitter: *[], droppedFrames: number, packetsLost: number, fps: *[], bitrate: *[]}, video: {remote: *[], local: *[]}}, testWebSocket: (function(): Promise<*>), testTCP: (function(): Promise<*>), initiateMediaConnexion: (function(*): Promise<unknown>), initTURNCredentials: Window.JitsiTestBrowser.test_network.initTURNCredentials, showLocalStats: Window.JitsiTestBrowser.test_network.showLocalStats, testing_protocol: undefined, localVideo: undefined, remoteVideo: undefined, networkEvent: Event, onicecandidate: Window.JitsiTestBrowser.test_network.onicecandidate, turn_credentials: *[], createPeerConnection: Window.JitsiTestBrowser.test_network.createPeerConnection, oniceconnectionstatechange: Window.JitsiTestBrowser.test_network.oniceconnectionstatechange, onAddIceCandidateError: Window.JitsiTestBrowser.test_network.onAddIceCandidateError, statuses: {}, intervalID: undefined, bytesPrev: undefined, testUDP: (function(): Promise<*>), turn_servers: *[], remotePeerConnection: undefined, localStream: undefined, showRemoteStats: Window.JitsiTestBrowser.test_network.showRemoteStats}}
  */
-window.RDVTestBrowser.test_network = {
+window.JitsiTestBrowser.test_network = {
 
     /**
      * TURN credentials
@@ -99,7 +99,7 @@ window.RDVTestBrowser.test_network = {
         return new Promise(resolve => {
             console.log("> Running test_network");
 
-            let context = window.RDVTestBrowser.test_network;
+            let context = window.JitsiTestBrowser.test_network;
 
             // Init TURN credentials
             context.initTURNCredentials(function(){
@@ -169,7 +169,7 @@ window.RDVTestBrowser.test_network = {
      * Get network statistics
      */
     getNetworkStatistics: function () {
-        let context = window.RDVTestBrowser.test_network;
+        let context = window.JitsiTestBrowser.test_network;
 
         context.intervalID = setInterval(() => {
             if (context.localPeerConnection && context.remotePeerConnection) {
@@ -209,7 +209,7 @@ window.RDVTestBrowser.test_network = {
      * Init TURN credentials
      */
     initTURNCredentials: function (resolve) {
-        let context = window.RDVTestBrowser.test_network;
+        let context = window.JitsiTestBrowser.test_network;
 
         let turnServer = document.getElementById('main').getAttribute('data-turn-endpoint');
 
@@ -249,7 +249,7 @@ window.RDVTestBrowser.test_network = {
         return new Promise(resolve => {
             console.log(" >>> Test WebSocket connection");
 
-            let context = window.RDVTestBrowser.test_network;
+            let context = window.JitsiTestBrowser.test_network;
             context.testing_protocol = 'wss';
 
             let wssUrl = document.getElementById('main').getAttribute('data-websocket-url');
@@ -297,7 +297,7 @@ window.RDVTestBrowser.test_network = {
         return new Promise(resolve => {
             console.log(" >>> Test TCP media network");
 
-            let context = window.RDVTestBrowser.test_network;
+            let context = window.JitsiTestBrowser.test_network;
             context.testing_protocol = 'tcp';
 
             // Start getting network statistics
@@ -328,7 +328,7 @@ window.RDVTestBrowser.test_network = {
         return new Promise(resolve => {
             console.log(" >>> Test UDP media network");
 
-            let context = window.RDVTestBrowser.test_network;
+            let context = window.JitsiTestBrowser.test_network;
             context.testing_protocol = 'udp';
 
             // Start getting network statistics
@@ -364,7 +364,7 @@ window.RDVTestBrowser.test_network = {
                 resolve({"status": "fail", "details": {"message": "unknown_protocol"}})
 
             } else {
-                let context = window.RDVTestBrowser.test_network;
+                let context = window.JitsiTestBrowser.test_network;
 
                 if (context.localStream) {
                     context.localStream.getTracks().forEach(track => track.stop());
@@ -420,7 +420,7 @@ window.RDVTestBrowser.test_network = {
      */
     createPeerConnection: function (rtcConfig = null) {
         console.log('Call Start');
-        let context = window.RDVTestBrowser.test_network;
+        let context = window.JitsiTestBrowser.test_network;
         try {
             context.localPeerConnection = new RTCPeerConnection(rtcConfig);
             context.remotePeerConnection = new RTCPeerConnection(rtcConfig);
@@ -511,7 +511,7 @@ window.RDVTestBrowser.test_network = {
      * @param results
      */
     showRemoteStats: function (results) {
-        let context = window.RDVTestBrowser.test_network;
+        let context = window.JitsiTestBrowser.test_network;
 
         // calculate video bitrate
         results.forEach(report => {
@@ -595,7 +595,7 @@ window.RDVTestBrowser.test_network = {
      * Close the 2 active peerConnection localPeerConnection and remotePeerConnection and release media capture
      */
     hangup: function () {
-        let context = window.RDVTestBrowser.test_network;
+        let context = window.JitsiTestBrowser.test_network;
         if (context.localPeerConnection) {
             console.log("localPeerConnection iceConnectionState :" + context.localPeerConnection.iceConnectionState);
             console.log("remotePeerConnection iceConnectionState :" + context.remotePeerConnection.iceConnectionState);
@@ -644,7 +644,7 @@ window.RDVTestBrowser.test_network = {
      * @param result
      */
     testFail: function (protocol, result) {
-        let context = window.RDVTestBrowser.test_network;
+        let context = window.JitsiTestBrowser.test_network;
 
         context.statuses[protocol] = false;
 

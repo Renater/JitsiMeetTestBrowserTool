@@ -2,15 +2,15 @@
  * TestCase: test_devices
  */
 
-if (!window.hasOwnProperty('RDVTestBrowser'))
-    window.RDVTestBrowser = {};
+if (!window.hasOwnProperty('JitsiTestBrowser'))
+    window.JitsiTestBrowser = {};
 
 /**
  * Test devices case
  *
  * @type {{run: (function(): Promise<unknown>)}}
  */
-window.RDVTestBrowser.test_devices = {
+window.JitsiTestBrowser.test_devices = {
 
     /**
      * Run test

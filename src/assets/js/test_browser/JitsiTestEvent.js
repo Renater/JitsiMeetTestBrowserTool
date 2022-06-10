@@ -1,9 +1,9 @@
 /**
- * List of Rdv tests events
+ * List of Jitsi tests events
  *
  * @type {{run: Event}}
  */
-window.RDVTestEvents = {
+window.JitsiTestEvents = {
 
     /**
      * Test running event

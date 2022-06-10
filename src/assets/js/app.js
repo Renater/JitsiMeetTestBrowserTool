@@ -24,7 +24,7 @@ window.onload = function() {
                 element.classList.remove('is-active');
             });
             element.classList.add('is-active');
-            window.RDVTestBrowser.UI.swapPanes(this.id);
+            window.JitsiTestBrowser.UI.swapPanes(this.id);
         });
     });
 
@@ -36,9 +36,9 @@ window.onload = function() {
             // Do nothing if disabled
             if (element.classList.contains('disabled')) return;
 
-            window.RDVTestBrowser[testCase].run()
+            window.JitsiTestBrowser[testCase].run()
                 .then(function(result){
-                    window.RDVTestBrowser.UI.updateUI(result, testCase);
+                    window.JitsiTestBrowser.UI.updateUI(result, testCase);
                     // echo(result, testCase)
                 })
                 .catch(function(reason){
@@ -52,10 +52,10 @@ window.onload = function() {
     document.getElementById('run_all').addEventListener('click', function(){
         this.setAttribute('disabled', 'disabled');
 
-        window.RDVTestEvents.run.status = window.TestStatuses.PROCESSING;
-        document.dispatchEvent(window.RDVTestEvents.run);
+        window.JitsiTestEvents.run.status = window.TestStatuses.PROCESSING;
+        document.dispatchEvent(window.JitsiTestEvents.run);
 
-        window.RDVTestBrowser.runner.run();
+        window.JitsiTestBrowser.runner.run();
     });
 
     /**
