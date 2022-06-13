@@ -15,8 +15,6 @@
      data-turn-endpoint="https://rdv42.rendez-vous.renater.fr/home/rest.php/TurnServer"
      data-websocket-url="wss://rdv42.rendez-vous.renater.fr/colibri-ws/echo"
      data-application-url="https://rdv42.rendez-vous.renater.fr"
-     data-room-name="<!--room_name-->"
-     data-room-token="<!--room_token-->"
 >
 
     <div id="left-pane">
@@ -115,7 +113,9 @@
                 </a>
             </div>
             <div id="devices_results">
-                {tr:results_shown_there}
+                <div data-result="default">{tr:results_shown_there}</div>
+                <div data-result="success" class="hide">{tr:devices_test_success}</div>
+                <div data-result="fail" class="hide">{tr:devices_test_fail}</div>
             </div>
         </div>
 
@@ -131,7 +131,9 @@
                 </a>
             </div>
             <div id="camera_results">
-                {tr:results_shown_there}
+                <div data-result="default">{tr:results_shown_there}</div>
+                <div data-result="success" class="hide">{tr:camera_test_success}</div>
+                <div data-result="fail" class="hide">{tr:camera_test_fail}</div>
             </div>
         </div>
 
@@ -147,27 +149,140 @@
                 </a>
             </div>
             <div id="micro_results">
-                {tr:results_shown_there}
+                <div data-result="default">{tr:results_shown_there}</div>
+                <div data-result="success" class="hide">{tr:micro_test_success}</div>
+                <div data-result="fail" class="hide">{tr:micro_test_fail}</div>
             </div>
         </div>
 
         <!-- Test network -->
-        <div id="network_pane" class="hide test-result">
-            <h2>
-                <i class="fa fa-network-wired"></i> {tr:network_title}
-            </h2>
-            <div class="actions">
-                {tr:run_alone_test}
-                <a data-action="test-runner" data-test-case="test_network">
-                    <i class="fa-solid fa-play"></i>  <span>{tr:run}</span>
-                </a>
-            </div>
-            <div id="network_results">
-                <video id="local_video" playsinline autoplay muted></video>
-                <video id="remote_video" playsinline autoplay muted></video>
+        <div id="network_pane" class="hide test-result ">
 
-                <p>{tr:results_shown_there}</p>
+            <div class="stat-left">
+
+                <h2>
+                    <i class="fa fa-network-wired"></i> {tr:network_title}
+                </h2>
+                <div class="actions">
+                    {tr:run_alone_test}
+                    <a data-action="test-runner" data-test-case="test_network">
+                        <i class="fa-solid fa-play"></i>  <span>{tr:run}</span>
+                    </a>
+                </div>
+
+                <div id="video_container">
+                    <section data-content='local_stats'>
+                        <div>Local video</div>
+                        <video id="local_video" playsinline autoplay muted></video>
+                        <div data-content="video_dimensions">
+                            <span data-content="title">Video dimensions: </span>
+                            <span data-content="value">N/C</span>
+                        </div>
+                    </section>
+                    <section data-content='remote_stats' >
+                        <div>Remote video</div>
+                        <video id="remote_video" playsinline autoplay muted></video>
+                        <div data-content="video_dimensions">
+                            <span data-content="title">Video dimensions: </span>
+                            <span data-content="value">N/C</span>
+                        </div>
+                        <div data-content="ip_connected_to">
+                            <span data-content="title">Connected to: </span>
+                            <span data-content="value">N/C</span>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="network_results">
+                    <div data-result="default">{tr:results_shown_there}</div>
+                    <div data-result="success" class="hide">{tr:network_test_success}</div>
+                    <div data-result="fail" class="hide">{tr:network_test_fail}</div>
+                </div>
             </div>
+
+            <div class="stat-right">
+
+
+                <div id="media_connectivity_wss" class="stat-right-item">
+                    <span class="">
+                        <span data-content="title">{tr:websocket}</span>
+                        <span data-content="value"></span>
+                    </span>
+                    <span data-content="status_icon" class="hide">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </div>
+                <div id="media_connectivity_udp" class="stat-right-item">
+                    <span class="">
+                        <span data-content="title">{tr:udp}</span>
+                        <span data-content="value"></span>
+                    </span>
+                    <span data-content="status_icon" class="hide">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </div>
+
+                <div id="media_connectivity_tcp" class="stat-right-item">
+                    <span class="">
+                        <span data-content="title">{tr:tcp}</span>
+                        <span data-content="value"></span>
+                    </span>
+                    <span data-content="status_icon" class="hide">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </div>
+
+                <div id="media_connectivity_bitrate" class="stat-right-item">
+                    <span class="" data-sub="bitrate">
+                        <span data-content="title">{tr:bitrate}</span>
+                        <span data-content="value">0 kbit/s</span>
+                    </span>
+                    <span class="" data-sub="average_bitrate">
+                        <span data-content="title">{tr:average_bitrate}</span>
+                        <span data-content="value">0 kbit/s</span>
+                    </span>
+                    <span data-content="status_icon" class="hide">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </div>
+                <div id="media_connectivity_packetlost" class="stat-right-item">
+                    <span class="">
+                        <span data-content="title">{tr:packetlost}</span>
+                        <span data-content="value">0</span>
+                    </span>
+                    <span data-content="status_icon" class="hide">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </div>
+                <div id="media_connectivity_framerate" class="stat-right-item">
+                    <span class="">
+                        <span data-content="title">{tr:framerate}</span>
+                        <span data-content="value">0</span>
+                    </span>
+                    <span data-content="status_icon" class="hide">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </div>
+                <div id="media_connectivity_droppedframes" class="stat-right-item">
+                    <span class="">
+                        <span data-content="title">{tr:droppedframes}</span>
+                        <span data-content="value">0</span>
+                    </span>
+                    <span data-content="status_icon" class="hide">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </div>
+                <div id="media_connectivity_jitter" class="stat-right-item">
+                    <span class="">
+                        <span data-content="title">{tr:jitter}</span>
+                        <span data-content="value"></span>
+                    </span>
+                    <span data-content="status_icon" class="hide">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </div>
+            </div>
+
         </div>
 
         <!-- Test room -->
@@ -181,7 +296,7 @@
                     <i class="fa-solid fa-play"></i>  <span>{tr:run}</span>
                 </a>
             </div>
-            <div id="room_results">
+            <div id="room_container">
                 <div id="main_test_room_result">
                     <section data-content="media_stream">
                         <div id="main_player" class="player-test"></div>
@@ -190,7 +305,12 @@
                         <div id="second_player" class="player-test-mini"></div>
                     </section>
                 </div>
-                {tr:results_shown_there}
+            </div>
+
+            <div id="room_results">
+                <div data-result="default">{tr:results_shown_there}</div>
+                <div data-result="success" class="hide">{tr:room_test_success}</div>
+                <div data-result="fail" class="hide">{tr:room_test_fail}</div>
             </div>
         </div>
 

@@ -8,8 +8,6 @@ if (!window.hasOwnProperty('JitsiTestBrowser'))
 
 /**
  * Test room access case
- *
- * @type {{testRoomConnection: Window.JitsiTestBrowser.test_room.testRoomConnection, timerInterval: undefined, onError: Window.JitsiTestBrowser.test_room.onError, testInterval: undefined, secondNodePlayer: undefined, secondsRemaining: number, run: (function(): Promise<*>), mainNodePlayer: undefined, roomName: undefined, mainApiClient: undefined, secondApiClient: undefined, domain_url: undefined, connectClients: (function(): Promise<*>), closeConnections: Window.JitsiTestBrowser.test_room.closeConnections, domain: undefined, getRoomToken: (function(): Promise<unknown>), reset: Window.JitsiTestBrowser.test_room.reset, lang: {stored: undefined, local: undefined}, roomToken: undefined, addListeners: (function(): Promise<*>), getRoomName: (function(): Promise<unknown>), initTestRoom: (function(): Promise<*>), onSuccess: Window.JitsiTestBrowser.test_room.onSuccess}}
  */
 window.JitsiTestBrowser.test_room = {
     /**

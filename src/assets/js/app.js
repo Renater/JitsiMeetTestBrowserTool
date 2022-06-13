@@ -90,4 +90,74 @@ window.onload = function() {
         }
     });
 
+    /**
+     * Listen to "run_event" event
+     * This function will temporarily disable run buttons for each test case
+     */
+    document.addEventListener('network_stat', function(element){
+        console.log('GOT NETWORK STAT');
+        console.log(element.data);
+        if (element.data !==  undefined && element.context !== undefined){
+            switch (element.context){
+                case 'wss':
+                case 'tcp':
+                case 'udp':
+                    if (element.data.status !== undefined) {
+                        let res = document.createElement('i');
+                        res.classList.add('fa-solid');
+                        res.classList.add(element.data.status === "success" ? 'fa-check' : 'fa-square-xmarl');
+
+                        document.getElementById(`media_connectivity_${element.context}`)
+                            .querySelector('span[data-content="value"]').append(res)
+                    }
+                    if (element.data.framesPerSecond !== undefined){
+                        // Got a framerate
+                        document.getElementById(`media_connectivity_framerate`)
+                            .querySelector('span[data-content="value"]').innerHTML = element.data.framesPerSecond;
+
+                    }else if (element.data.bitrate !== undefined){
+                        // Got a bitrate
+                        document.getElementById(`media_connectivity_bitrate`)
+                            .querySelector('span[data-sub="bitrate"] span[data-content="value"]').innerHTML = element.data.bitrate+' kbit/s';
+
+                    }else if (element.data.average_bitrate !== undefined){
+                        // Got a bitrate
+                        document.getElementById(`media_connectivity_bitrate`)
+                            .querySelector('span[data-sub="average_bitrate"] span[data-content="value"]').innerHTML = `${element.data.average_bitrate} kbit/s`;
+
+                    }else if (element.data.packetLost !== undefined){
+                        // Got droppedFrames
+                        document.getElementById(`media_connectivity_packetlost`)
+                            .querySelector('span[data-content="value"]').innerHTML = element.data.packetLost;
+
+                    }else if (element.data.jitter !== undefined){
+                        // Got droppedFrames
+                        document.getElementById(`media_connectivity_jitter`)
+                            .querySelector('span[data-content="value"]').innerHTML = element.data.jitter;
+                    }
+
+                    break;
+
+
+                case 'video_player':
+                    if (element.data.local !== undefined) {
+                        // Local video dimensions
+                        document.getElementById(`video_container`)
+                            .querySelector('section[data-content="local_stats"] div[data-content="video_dimensions"] span[data-content="value"]')
+                                .innerHTML = `${element.data.local.video_dimension.width}x${element.data.local.video_dimension.height} px`;
+                    }else{
+                        // Remote video dimensions
+                        document.getElementById(`video_container`)
+                            .querySelector('section[data-content="remote_stats"] div[data-content="video_dimensions"] span[data-content="value"]')
+                            .innerHTML = `${element.data.remote.video_dimension.width}x${element.data.remote.video_dimension.height} px`;
+                    }
+
+                    break;
+
+            }
+        }
+
+
+    });
+
 };

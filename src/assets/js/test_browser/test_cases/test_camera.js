@@ -7,8 +7,6 @@ if (!window.hasOwnProperty('JitsiTestBrowser'))
 
 /**
  * Test camera case
- *
- * @type {{run: (function(): Promise<unknown>)}}
  */
 window.JitsiTestBrowser.test_camera = {
 

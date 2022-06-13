@@ -7,8 +7,6 @@ if (!window.hasOwnProperty('JitsiTestBrowser'))
 
 /**
  * Global test runner
- *
- * @type {{wait: (function(*): Promise<*>), testCases: string[], run: Window.JitsiTestBrowser.runner.run}}
  */
 window.JitsiTestBrowser.runner = {
 

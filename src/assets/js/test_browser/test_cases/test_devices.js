@@ -7,8 +7,6 @@ if (!window.hasOwnProperty('JitsiTestBrowser'))
 
 /**
  * Test devices case
- *
- * @type {{run: (function(): Promise<unknown>)}}
  */
 window.JitsiTestBrowser.test_devices = {
 

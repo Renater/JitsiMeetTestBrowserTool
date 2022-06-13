@@ -7,8 +7,6 @@ if (!window.hasOwnProperty('JitsiTestBrowser'))
 
 /**
  * Test browser case
- *
- * @type {{run: (function(): Promise<unknown>)}}
  */
 window.JitsiTestBrowser.test_browser = {
 

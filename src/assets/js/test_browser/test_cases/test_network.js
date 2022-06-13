@@ -5,11 +5,12 @@
 if (!window.hasOwnProperty('JitsiTestBrowser'))
     window.JitsiTestBrowser = {};
 
+if (!window.JitsiTestBrowser.hasOwnProperty('test_network'))
+    window.JitsiTestBrowser.test_network = {};
+
 
 /**
  * Test network case
- *
- * @type {{timestampPrev: undefined, localPeerConnection: undefined, run: (function(): Promise<*>), testFail: Window.JitsiTestBrowser.test_network.testFail, getNetworkStatistics: Window.JitsiTestBrowser.test_network.getNetworkStatistics, onAddIceCandidateSuccess: Window.JitsiTestBrowser.test_network.onAddIceCandidateSuccess, hangup: Window.JitsiTestBrowser.test_network.hangup, onsignalingstatechange: Window.JitsiTestBrowser.test_network.onsignalingstatechange, stats: {tcp: {jitter: *[], droppedFrames: number, packetsLost: number, fps: *[], bitrate: *[]}, udp: {jitter: *[], droppedFrames: number, packetsLost: number, fps: *[], bitrate: *[]}, video: {remote: *[], local: *[]}}, testWebSocket: (function(): Promise<*>), testTCP: (function(): Promise<*>), initiateMediaConnexion: (function(*): Promise<unknown>), initTURNCredentials: Window.JitsiTestBrowser.test_network.initTURNCredentials, showLocalStats: Window.JitsiTestBrowser.test_network.showLocalStats, testing_protocol: undefined, localVideo: undefined, remoteVideo: undefined, networkEvent: Event, onicecandidate: Window.JitsiTestBrowser.test_network.onicecandidate, turn_credentials: *[], createPeerConnection: Window.JitsiTestBrowser.test_network.createPeerConnection, oniceconnectionstatechange: Window.JitsiTestBrowser.test_network.oniceconnectionstatechange, onAddIceCandidateError: Window.JitsiTestBrowser.test_network.onAddIceCandidateError, statuses: {}, intervalID: undefined, bytesPrev: undefined, testUDP: (function(): Promise<*>), turn_servers: *[], remotePeerConnection: undefined, localStream: undefined, showRemoteStats: Window.JitsiTestBrowser.test_network.showRemoteStats}}
  */
 window.JitsiTestBrowser.test_network = {
 
@@ -88,7 +89,7 @@ window.JitsiTestBrowser.test_network = {
         }
     },
 
-    networkEvent: new Event('"status": "fail"'),
+    networkEvent: new Event('network_stat'),
 
     /**
      * Run test
@@ -101,16 +102,14 @@ window.JitsiTestBrowser.test_network = {
 
             let context = window.JitsiTestBrowser.test_network;
 
+            context.localVideo = document.querySelector('video#local_video');
+            context.remoteVideo = document.querySelector('video#remote_video');
+
             // Init TURN credentials
             context.initTURNCredentials(function(){
 
-                context.localVideo = document.querySelector('video#local_video');
-                context.remoteVideo = document.querySelector('video#remote_video');
-
                 // Run websocket test
                 context.testWebSocket().then(function (result) {
-                    context.networkEvent.data = result;
-                    document.dispatchEvent(context.networkEvent);
 
                     // Run UDP test
                     context.testUDP().then(function () {
@@ -192,15 +191,18 @@ window.JitsiTestBrowser.test_network = {
             if (context.localVideo.videoWidth) {
                 const width = context.localVideo.videoWidth;
                 const height = context.localVideo.videoHeight;
-                context.networkEvent.data = {"local": {"video_dimension": {"width": width, "height": height}}};
-                document.dispatchEvent(context.networkEvent);
+
+                window.JitsiTestEvents.networkStat.context = 'video_player';
+                window.JitsiTestEvents.networkStat.data = {"local": {"video_dimension": {"width": width, "height": height}}};
+                document.dispatchEvent(window.JitsiTestEvents.networkStat);
             }
             if (context.remoteVideo.videoWidth) {
                 const rHeight = context.remoteVideo.videoHeight;
                 const rWidth = context.remoteVideo.videoWidth;
 
-                context.networkEvent.data = {"remote": {"video_dimension": {"width": rWidth, "height": rHeight}}};
-                document.dispatchEvent(context.networkEvent);
+                window.JitsiTestEvents.networkStat.context = 'video_player';
+                window.JitsiTestEvents.networkStat.data = {"remote": {"video_dimension": {"width": rWidth, "height": rHeight}}};
+                document.dispatchEvent(window.JitsiTestEvents.networkStat);
             }
         }, 1000);
     },
@@ -262,19 +264,27 @@ window.JitsiTestBrowser.test_network = {
             };
 
             wbs.onmessage = function (messageEvent) {
-                console.log(`Got data from WSS: ${messageEvent.data}`)
+                console.log(`Got data from WSS: ${messageEvent.data}`);
+                let result;
+
                 if (messageEvent.data === `echo ${expected}`) {
                     wbs.close();
                     context.statuses['wss'] = true;
+                    result = {"status": "success"};
 
-                    resolve({"status": "success", "details": {"protocol": "wss"}});
                 } else {
                     context.statuses['wss'] = false;
                     wbs.close();
-                    let err = {"status": "fail", "details": {"protocol": "wss",  "message": messageEvent.data}};
+                    result = {"status": "fail", "details": {"protocol": "wss",  "message": messageEvent.data}};
                     context.testFail(err);
                     resolve(err);
                 }
+
+                window.JitsiTestEvents.networkStat.context = 'wss';
+                window.JitsiTestEvents.networkStat.data = result;
+                document.dispatchEvent(window.JitsiTestEvents.networkStat);
+
+                resolve(result);
             };
 
             wbs.onerror = function () {
@@ -306,10 +316,20 @@ window.JitsiTestBrowser.test_network = {
                 if (result instanceof Object && result.status === 'success') {
                     let utils = new WebRTCUtils();
                     utils.wait(5000).then(function () {
+
+                        window.JitsiTestEvents.networkStat.context = 'tcp';
+                        window.JitsiTestEvents.networkStat.data = result;
+                        document.dispatchEvent(window.JitsiTestEvents.networkStat);
+
                         resolve();
                     });
                 } else {
                     context.testFail('tcp', result);
+
+                    window.JitsiTestEvents.networkStat.context = 'tcp';
+                    window.JitsiTestEvents.networkStat.data = result;
+                    document.dispatchEvent(window.JitsiTestEvents.networkStat);
+
                     resolve();
                 }
             });
@@ -338,10 +358,20 @@ window.JitsiTestBrowser.test_network = {
                         if (result instanceof Object && result.status === 'success') {
                             let utils = new WebRTCUtils();
                             utils.wait(5000).then(function () {
+
+                                window.JitsiTestEvents.networkStat.context = 'udp';
+                                window.JitsiTestEvents.networkStat.data = result;
+                                document.dispatchEvent(window.JitsiTestEvents.networkStat);
+
                                 resolve({"status": "success", "details": {"protocol": "udp"}});
                             });
                         } else {
                             context.testFail('udp', result);
+
+                            window.JitsiTestEvents.networkStat.context = 'udp';
+                            window.JitsiTestEvents.networkStat.data = result;
+                            document.dispatchEvent(window.JitsiTestEvents.networkStat);
+
                             resolve();
                         }
                     }
@@ -510,11 +540,13 @@ window.JitsiTestBrowser.test_network = {
      * @param results
      */
     showRemoteStats: function (results) {
+        console.log(results);
         let context = window.JitsiTestBrowser.test_network;
 
         // calculate video bitrate
         results.forEach(report => {
             const now = report.timestamp;
+            window.JitsiTestEvents.networkStat.context = context.testing_protocol;
 
             let bitrate;
             if (report.type === 'inbound-rtp' && report.mediaType === 'video') {
@@ -529,30 +561,28 @@ window.JitsiTestBrowser.test_network = {
             if (bitrate) {
                 context.stats[context.testing_protocol].bitrate.push(bitrate);
 
-                context.networkEvent.data = {"bitrate": bitrate};
-                document.dispatchEvent(context.networkEvent);
+                window.JitsiTestEvents.networkStat.data = {"bitrate": bitrate};
+                document.dispatchEvent(window.JitsiTestEvents.networkStat);
 
-                // TODO: show on UI
-                // context.updateBitrateAverage();
-            }
+                if (context.stats[context.testing_protocol].bitrate.length) {
+                    let average = 0;
+                    context.stats[context.testing_protocol].bitrate.forEach(bitrate => {
+                        average += bitrate;
+                    });
+                    average = (average / context.stats[context.testing_protocol].bitrate.length).toFixed(2);
 
-            if (report.framesPerSecond) {
-                context.networkEvent.data = {"framerate": report.framesPerSecond};
-                document.dispatchEvent(context.networkEvent);
-            }
-            if (report.framesDropped) {
-                context.networkEvent.data = {"framesDropped": report.framesDropped};
-                document.dispatchEvent(context.networkEvent);
-            }
-            if (report.packetsLost) {
-                context.networkEvent.data = {"packetsLost": report.packetsLost};
-                document.dispatchEvent(context.networkEvent);
-            }
-            if (report.jitter) {
-                context.networkEvent.data = {"jitter": report.jitter};
-                document.dispatchEvent(context.networkEvent);
+                    window.JitsiTestEvents.networkStat.data = {"average_bitrate": average};
+                    document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                }
             }
 
+            // Dispatch statistics
+            ['framesPerSecond', 'framesDropped', 'packetsLost', 'jitter'].forEach(item => {
+                if (report[item] !== undefined) {
+                    window.JitsiTestEvents.networkStat.data[item] = report[item];
+                    document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                }
+            });
         });
 
         // figure out the peer's ip
@@ -578,14 +608,14 @@ window.JitsiTestBrowser.test_network = {
         }
         if (remoteCandidate) {
             if (remoteCandidate.address && remoteCandidate.port) {
-                context.networkEvent.data = {"ip_connected_to": `${remoteCandidate.address}:${remoteCandidate.port}`};
-                document.dispatchEvent(context.networkEvent);
+                window.JitsiTestEvents.networkStat.data = {"ip_connected_to": `${remoteCandidate.address}:${remoteCandidate.port}`};
+                document.dispatchEvent(window.JitsiTestEvents.networkStat);
             } else if (remoteCandidate.ip && remoteCandidate.port) {
-                context.networkEvent.data = {"ip_connected_to": `${remoteCandidate.ip}:${remoteCandidate.port}`};
-                document.dispatchEvent(context.networkEvent);
+                window.JitsiTestEvents.networkStat.data = {"ip_connected_to": `${remoteCandidate.ip}:${remoteCandidate.port}`};
+                document.dispatchEvent(window.JitsiTestEvents.networkStat);
             } else if (remoteCandidate.ipAddress && remoteCandidate.portNumber) {
-                context.networkEvent.data = {"ip_connected_to": `${remoteCandidate.ipAddress}:${remoteCandidate.portNumber}`};
-                document.dispatchEvent(context.networkEvent);
+                window.JitsiTestEvents.networkStat.data = {"ip_connected_to": `${remoteCandidate.ipAddress}:${remoteCandidate.portNumber}`};
+                document.dispatchEvent(window.JitsiTestEvents.networkStat);
             }
         }
     },
@@ -656,7 +686,7 @@ window.JitsiTestBrowser.test_network = {
 
         console.error(details);
 
-        context.networkEvent.data = {"error": details};
-        document.dispatchEvent(context.networkEvent);
+        window.JitsiTestEvents.networkStat.data = {"error": details};
+        document.dispatchEvent(window.JitsiTestEvents.networkStat);
     },
 }
