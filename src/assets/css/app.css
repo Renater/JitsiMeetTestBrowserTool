@@ -80,18 +80,54 @@ div#right-pane h2{
 }
 
 
+/* Network */
 
-/* test results */
-div.test-result div,
-div.test-result div a{
+.stat-left{
     display: block;
-    margin-top: 1rem;
+    float: left;
+    width: 33%;
+}
+.stat-right{
+    display: block;
+    float: left;
+}
+.stat-right:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em;
+}
+.stat-right-item{
+    margin-bottom: 1rem;
+    width: 100%;
+    min-width: 13rem;
+    border: 1px solid lightgrey;
+    padding: 0.7rem;
+    box-shadow: 2px 2px lightgrey;
+}
+.stat-right-item span[data-content="title"]{
+    font-weight: bold;
+}
+.stat-right-item span[data-content="value"] i{
+    float: right;
 }
 
+.stat-right-item span[data-sub]{
+    display: block;
+}
+.stat-right-item span[data-sub="average_bitrate"]{
+    font-style: italic;
+    font-size: small;
+    font-weight: normal;
+}
 
 /* Video & room components */
 video{
     background-color: black;
+}
+div#video_container section{
+    margin-bottom: 1rem;
 }
 #main_player {
     width: 80%;
@@ -100,9 +136,6 @@ video{
 #second_player {
     display: none;
 }
-
-
-
 
 
 /* Actions */
@@ -129,6 +162,9 @@ div.actions a.disabled:hover {
 div.actions a:hover{
     background: #5F7BBF;
     color: #eee;
+}
+div.test-result div a[data-action="test-runner"]{
+    display: block;
 }
 
 /* media queries */
