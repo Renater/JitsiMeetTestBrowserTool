@@ -190,11 +190,7 @@ class MakeRelease{
             $str = str_replace('{tr:'.$id.'}', utf8_decode($tr), $str);
         }
     
-        // Also add into lang.js
-        $jsonified = json_encode($lang);
-        $str = str_replace('"<!--DICTIONARY_CONTENT-->"', utf8_decode($jsonified), $str);
-        
-        return $str;
+        return str_replace('"<!--DICTIONARY_CONTENT-->"', utf8_decode(json_encode($lang)), $str);
     }
     
     

@@ -221,7 +221,6 @@ window.JitsiTestBrowser.test_network = {
             .then(response => {
                     response.json()
                         .then(function (data) {
-                            let a = 2;
                             context.turn_servers = {
                                 "username": data.username,
                                 "credential": data.credentials,

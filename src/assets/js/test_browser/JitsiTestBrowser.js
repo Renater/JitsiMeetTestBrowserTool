@@ -23,23 +23,23 @@ window.JitsiTestBrowser.runner = {
         /**
          * Get promise to chain tests
          *
-         * @param templateName
+         * @param testCase
          * @return {Promise<unknown>}
          */
-        function getPromise(templateName) {
+        function getPromise(testCase) {
             return new Promise(resolve => {
                 // Show right panel
-                window.JitsiTestBrowser.UI.swapPanes(templateName);
+                window.JitsiTestBrowser.UI.swapPanes(testCase);
 
                 // Run test
-                window.JitsiTestBrowser[templateName].run()
+                window.JitsiTestBrowser[testCase].run()
                     .then(function (result) {
                         // Default show result
-                        echo(result, templateName)
+                        window.JitsiTestBrowser.UI.updateUI(result, testCase);
                         resolve();
                     })
                     .catch(function(reason){
-                        echo(reason, templateName)
+                        echo(reason, testCase)
                     });
             })
         }
