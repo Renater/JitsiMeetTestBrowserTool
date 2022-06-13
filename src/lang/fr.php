@@ -31,6 +31,17 @@ $lang['home_micro'] = 'Accès à votre microphone';
 $lang['home_network'] = 'Connexions réseaux (WebRTC, TCP, UDP)';
 $lang['home_room'] = 'Accès direct à une conférence de test';
 
+// Network test
+$lang['websocket'] = 'WebSocket';
+$lang['udp'] = 'UDP';
+$lang['tcp'] = 'TCP';
+$lang['bitrate'] = 'Bitrate :';
+$lang['average_bitrate'] = 'Average:';
+$lang['packetlost'] = 'Packetlost :';
+$lang['framerate'] = 'Framerate :';
+$lang['droppedframes'] = 'Dropped frames :';
+$lang['jitter'] = 'Jitter :';
+
 // Buttons
 $lang['run_all_tests'] = 'Démarrer le test';
 
