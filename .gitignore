@@ -1,3 +1,4 @@
 gen/**
 !gen/.keep
 vendor/**
+src/debug/**
