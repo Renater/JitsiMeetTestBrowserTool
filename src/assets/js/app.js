@@ -51,17 +51,16 @@ window.onload = function() {
     document.getElementById('run_all').addEventListener('click', function(){
         this.setAttribute('disabled', 'disabled');
 
-        window.JitsiTestEvents.run.status = window.TestStatuses.PROCESSING;
-        document.dispatchEvent(window.JitsiTestEvents.run);
+        window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING});
 
         window.JitsiTestBrowser.runner.run();
     });
 
     /**
-     * Listen to "run_event" event
+     * Listen to "run" event
      * This function will temporarily disable run buttons for each test case
      */
-    document.addEventListener('run_event', function(element){
+    document.addEventListener('run', function(element){
         const status = element.status;
         switch (status){
             case window.TestStatuses.WAITING:
@@ -101,12 +100,10 @@ window.onload = function() {
     });
 
     /**
-     * Listen to "run_event" event
+     * Listen to "network_stat" event
      * This function will temporarily disable run buttons for each test case
      */
     document.addEventListener('network_stat', function(element){
-        console.log('GOT NETWORK STAT');
-        console.log(element.data);
         if (element.data !==  undefined && element.context !== undefined){
             switch (element.context){
                 case 'wss':
@@ -154,7 +151,6 @@ window.onload = function() {
                         document.querySelector(`div[data-content="ip_connected_to"]`)
                             .querySelector('span[data-content="value"]').innerHTML = element.data.ip_connected_to;
                     }
-
                     break;
 
 
@@ -170,9 +166,7 @@ window.onload = function() {
                             .querySelector('section[data-content="remote_stats"] div[data-content="video_dimensions"] span[data-content="value"]')
                             .innerHTML = `${element.data.remote.video_dimension.width}x${element.data.remote.video_dimension.height} px`;
                     }
-
                     break;
-
             }
         }
 

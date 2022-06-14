@@ -153,8 +153,8 @@ window.JitsiTestBrowser.test_network = {
                                 "details" : context.statuses
                             };
 
-                            window.JitsiTestEvents.run.status = window.TestStatuses.ENDED;
-                            document.dispatchEvent(window.JitsiTestEvents.run);
+
+                            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.ENDED});
 
                             resolve(res);
                         })
@@ -195,17 +195,13 @@ window.JitsiTestBrowser.test_network = {
                 const width = context.localVideo.videoWidth;
                 const height = context.localVideo.videoHeight;
 
-                window.JitsiTestEvents.networkStat.context = 'video_player';
-                window.JitsiTestEvents.networkStat.data = {"local": {"video_dimension": {"width": width, "height": height}}};
-                document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                window.JitsiTestEvents.dispatch('network_stat', {"context":"video_player", "data": {"local": {"video_dimension": {"width": width, "height": height}}}});
             }
             if (context.remoteVideo.videoWidth) {
                 const rHeight = context.remoteVideo.videoHeight;
                 const rWidth = context.remoteVideo.videoWidth;
 
-                window.JitsiTestEvents.networkStat.context = 'video_player';
-                window.JitsiTestEvents.networkStat.data = {"remote": {"video_dimension": {"width": rWidth, "height": rHeight}}};
-                document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                window.JitsiTestEvents.dispatch('network_stat', {"context":"video_player", "data": {"remote": {"video_dimension": {"width": rWidth, "height": rHeight}}}});
             }
         }, 1000);
     },
@@ -252,9 +248,8 @@ window.JitsiTestBrowser.test_network = {
     testWebSocket: function () {
         return new Promise(resolve => {
             console.log(" >>> Test WebSocket connection");
-            window.JitsiTestEvents.run.status = window.TestStatuses.PROCESSING;
-            window.JitsiTestEvents.run.component = 'wss';
-            document.dispatchEvent(window.JitsiTestEvents.run);
+
+            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "component": "wss"});
 
             let context = window.JitsiTestBrowser.test_network;
             context.testing_protocol = 'wss';
@@ -286,9 +281,7 @@ window.JitsiTestBrowser.test_network = {
                     resolve(err);
                 }
 
-                window.JitsiTestEvents.networkStat.context = 'wss';
-                window.JitsiTestEvents.networkStat.data = result;
-                document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                window.JitsiTestEvents.dispatch('network_stat', {"context":"wss", "data": result});
 
                 resolve(result);
             };
@@ -311,9 +304,8 @@ window.JitsiTestBrowser.test_network = {
     testTCP: function () {
         return new Promise(resolve => {
             console.log(" >>> Test TCP media network");
-            window.JitsiTestEvents.run.status = window.TestStatuses.PROCESSING;
-            window.JitsiTestEvents.run.component = 'tcp';
-            document.dispatchEvent(window.JitsiTestEvents.run);
+
+            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "component":"tcp"});
 
             let context = window.JitsiTestBrowser.test_network;
             context.testing_protocol = 'tcp';
@@ -326,18 +318,14 @@ window.JitsiTestBrowser.test_network = {
                     let utils = new WebRTCUtils();
                     utils.wait(5000).then(function () {
 
-                        window.JitsiTestEvents.networkStat.context = 'tcp';
-                        window.JitsiTestEvents.networkStat.data = result;
-                        document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                        window.JitsiTestEvents.dispatch('network_stat', {"context": "tcp", "data": result});
 
                         resolve();
                     });
                 } else {
                     context.testFail('tcp', result);
 
-                    window.JitsiTestEvents.networkStat.context = 'tcp';
-                    window.JitsiTestEvents.networkStat.data = result;
-                    document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                    window.JitsiTestEvents.dispatch('network_stat', {"context": "tcp", "data": result});
 
                     resolve();
                 }
@@ -355,9 +343,8 @@ window.JitsiTestBrowser.test_network = {
     testUDP: function () {
         return new Promise(resolve => {
             console.log(" >>> Test UDP media network");
-            window.JitsiTestEvents.run.status = window.TestStatuses.PROCESSING;
-            window.JitsiTestEvents.run.component = 'udp';
-            document.dispatchEvent(window.JitsiTestEvents.run);
+
+            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "component": "udp"});
 
             let context = window.JitsiTestBrowser.test_network;
             context.testing_protocol = 'udp';
@@ -371,18 +358,14 @@ window.JitsiTestBrowser.test_network = {
                             let utils = new WebRTCUtils();
                             utils.wait(5000).then(function () {
 
-                                window.JitsiTestEvents.networkStat.context = 'udp';
-                                window.JitsiTestEvents.networkStat.data = result;
-                                document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                                window.JitsiTestEvents.dispatch('network_stat', {"context":"udp", "data": result});
 
                                 resolve({"status": "success", "details": {"protocol": "udp"}});
                             });
                         } else {
                             context.testFail('udp', result);
 
-                            window.JitsiTestEvents.networkStat.context = 'udp';
-                            window.JitsiTestEvents.networkStat.data = result;
-                            document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                            window.JitsiTestEvents.dispatch('network_stat', {"context":"udp", "data": result});
 
                             resolve();
                         }
@@ -573,8 +556,7 @@ window.JitsiTestBrowser.test_network = {
             if (bitrate) {
                 context.stats[context.testing_protocol].bitrate.push(bitrate);
 
-                window.JitsiTestEvents.networkStat.data = {"bitrate": bitrate};
-                document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                window.JitsiTestEvents.dispatch('network_stat', {"data": {"bitrate": bitrate}});
 
                 if (context.stats[context.testing_protocol].bitrate.length) {
                     let average = 0;
@@ -583,16 +565,17 @@ window.JitsiTestBrowser.test_network = {
                     });
                     average = (average / context.stats[context.testing_protocol].bitrate.length).toFixed(2);
 
-                    window.JitsiTestEvents.networkStat.data = {"average_bitrate": average};
-                    document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                    window.JitsiTestEvents.dispatch('network_stat', {"data": {"average_bitrate": bitrate}});
                 }
             }
 
             // Dispatch statistics
             ['framesPerSecond', 'framesDropped', 'packetsLost', 'jitter'].forEach(item => {
                 if (report[item] !== undefined) {
-                    window.JitsiTestEvents.networkStat.data[item] = report[item];
-                    document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                    let data = {};
+                    data[item] = report[item];
+
+                    window.JitsiTestEvents.dispatch('network_stat', {data});
                 }
             });
         });
@@ -620,14 +603,13 @@ window.JitsiTestBrowser.test_network = {
         }
         if (remoteCandidate) {
             if (remoteCandidate.address && remoteCandidate.port) {
-                window.JitsiTestEvents.networkStat.data = {"ip_connected_to": `${remoteCandidate.address}:${remoteCandidate.port}`};
-                document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                window.JitsiTestEvents.dispatch('network_stat', {"data": {"ip_connected_to": `${remoteCandidate.address}:${remoteCandidate.port}`}});
+
             } else if (remoteCandidate.ip && remoteCandidate.port) {
-                window.JitsiTestEvents.networkStat.data = {"ip_connected_to": `${remoteCandidate.ip}:${remoteCandidate.port}`};
-                document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                window.JitsiTestEvents.dispatch('network_stat', {"data": {"ip_connected_to": `${remoteCandidate.ip}:${remoteCandidate.port}`}});
+
             } else if (remoteCandidate.ipAddress && remoteCandidate.portNumber) {
-                window.JitsiTestEvents.networkStat.data = {"ip_connected_to": `${remoteCandidate.ipAddress}:${remoteCandidate.portNumber}`};
-                document.dispatchEvent(window.JitsiTestEvents.networkStat);
+                window.JitsiTestEvents.dispatch('network_stat', {"data": {"ip_connected_to": `${remoteCandidate.ipAddress}:${remoteCandidate.portNumber}`}});
             }
         }
     },
@@ -698,7 +680,6 @@ window.JitsiTestBrowser.test_network = {
 
         console.error(details);
 
-        window.JitsiTestEvents.networkStat.data = {"error": details};
-        document.dispatchEvent(window.JitsiTestEvents.networkStat);
+        window.JitsiTestEvents.dispatch('network_stat',{"data": {"error": details}});
     },
 }

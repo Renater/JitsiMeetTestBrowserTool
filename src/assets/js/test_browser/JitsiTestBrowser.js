@@ -62,8 +62,7 @@ window.JitsiTestBrowser.runner = {
             window.JitsiTestBrowser.UI.swapPanes('test_global');
 
             // Update status
-            window.JitsiTestEvents.run.status = window.TestStatuses.ENDED;
-            document.dispatchEvent(window.JitsiTestEvents.run);
+            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.ENDED});
         }
 
         runTests()
