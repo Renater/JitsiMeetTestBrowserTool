@@ -163,9 +163,28 @@ div.actions a:hover{
     background: #5F7BBF;
     color: #eee;
 }
+
+/* results */
 div.test-result div a[data-action="test-runner"]{
     display: block;
 }
+
+div.test-result div.stat-right-item.test-success{
+    border: 1px solid green;
+    background-color: #ebf5d6;
+}
+div.test-result div.stat-right-item.test-success i{
+    color: green;
+}
+div.test-result div.stat-right-item.test-fail{
+    border: 1px solid orange;
+    background-color: #fff6e9;
+}
+div.test-result div.stat-right-item.test-fail i{
+    color: orange;
+}
+
+
 
 /* media queries */
 @media only screen and (max-width: 40em) {

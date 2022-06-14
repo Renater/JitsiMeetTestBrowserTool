@@ -153,6 +153,9 @@ window.JitsiTestBrowser.test_network = {
                                 "details" : context.statuses
                             };
 
+                            window.JitsiTestEvents.run.status = window.TestStatuses.ENDED;
+                            document.dispatchEvent(window.JitsiTestEvents.run);
+
                             resolve(res);
                         })
                     });
@@ -249,6 +252,9 @@ window.JitsiTestBrowser.test_network = {
     testWebSocket: function () {
         return new Promise(resolve => {
             console.log(" >>> Test WebSocket connection");
+            window.JitsiTestEvents.run.status = window.TestStatuses.PROCESSING;
+            window.JitsiTestEvents.run.component = 'wss';
+            document.dispatchEvent(window.JitsiTestEvents.run);
 
             let context = window.JitsiTestBrowser.test_network;
             context.testing_protocol = 'wss';
@@ -305,6 +311,9 @@ window.JitsiTestBrowser.test_network = {
     testTCP: function () {
         return new Promise(resolve => {
             console.log(" >>> Test TCP media network");
+            window.JitsiTestEvents.run.status = window.TestStatuses.PROCESSING;
+            window.JitsiTestEvents.run.component = 'tcp';
+            document.dispatchEvent(window.JitsiTestEvents.run);
 
             let context = window.JitsiTestBrowser.test_network;
             context.testing_protocol = 'tcp';
@@ -346,6 +355,9 @@ window.JitsiTestBrowser.test_network = {
     testUDP: function () {
         return new Promise(resolve => {
             console.log(" >>> Test UDP media network");
+            window.JitsiTestEvents.run.status = window.TestStatuses.PROCESSING;
+            window.JitsiTestEvents.run.component = 'udp';
+            document.dispatchEvent(window.JitsiTestEvents.run);
 
             let context = window.JitsiTestBrowser.test_network;
             context.testing_protocol = 'udp';

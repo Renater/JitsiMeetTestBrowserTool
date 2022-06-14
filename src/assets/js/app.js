@@ -79,6 +79,16 @@ window.onload = function() {
                     element.classList.add('disabled');
                     element.setAttribute('title', window.lang.get('test_running'));
                 });
+                // Update loader if needed
+                if (element.component !== undefined){
+                    let res = document.createElement('i');
+                    res.classList.add('fas');
+                    res.classList.add('fa-spinner');
+                    res.classList.add('fa-spin');
+
+                    document.getElementById(`media_connectivity_${element.component}`)
+                        .querySelector('span[data-content="value"]').append(res);
+                }
                 break;
             case window.TestStatuses.PAUSED:
             case window.TestStatuses.STOPPED:
@@ -105,10 +115,14 @@ window.onload = function() {
                     if (element.data.status !== undefined) {
                         let res = document.createElement('i');
                         res.classList.add('fa-solid');
-                        res.classList.add(element.data.status === "success" ? 'fa-check' : 'fa-square-xmarl');
+                        res.classList.add(element.data.status === "success" ? 'fa-check' : 'fa-circle-exclamation');
 
-                        document.getElementById(`media_connectivity_${element.context}`)
-                            .querySelector('span[data-content="value"]').append(res)
+                        let selector = document.getElementById(`media_connectivity_${element.context}`);
+                        let subItem = selector.querySelector('span[data-content="value"]')
+                        subItem.innerHTML = '';
+                        subItem.append(res);
+
+                        selector.classList.add(element.data.status === "success" ? 'test-success' : 'test-fail');
                     }
                     if (element.data.framesPerSecond !== undefined){
                         // Got a framerate
