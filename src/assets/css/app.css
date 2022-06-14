@@ -122,6 +122,17 @@ div#right-pane h2{
     font-weight: normal;
 }
 
+div[data-content="video_dimensions"],
+div[data-content="ip_connected_to"]{
+    font-size: smaller;
+}
+
+div[data-content="video_dimensions"] span[data-content="title"],
+div[data-content="ip_connected_to"] span[data-content="title"]{
+    font-weight: bold;
+}
+
+
 /* Video & room components */
 video{
     background-color: black;

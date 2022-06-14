@@ -148,6 +148,11 @@ window.onload = function() {
                         // Got droppedFrames
                         document.getElementById(`media_connectivity_jitter`)
                             .querySelector('span[data-content="value"]').innerHTML = element.data.jitter;
+
+                    }else if (element.data.ip_connected_to !== undefined){
+                        // Got droppedFrames
+                        document.querySelector(`div[data-content="ip_connected_to"]`)
+                            .querySelector('span[data-content="value"]').innerHTML = element.data.ip_connected_to;
                     }
 
                     break;
