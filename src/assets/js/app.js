@@ -65,11 +65,13 @@ window.onload = function() {
         switch (status){
             case window.TestStatuses.WAITING:
             case window.TestStatuses.ENDED:
-                // All buttons available
-                document.querySelectorAll('[data-action="test-runner"]').forEach(function (element){
-                    element.classList.remove('disabled');
-                    element.removeAttribute('title');
-                });
+                // All buttons available if not all processing
+                if (!window.JitsiTestBrowser.runner.all_processing) {
+                    document.querySelectorAll('[data-action="test-runner"]').forEach(function (element) {
+                        element.classList.remove('disabled');
+                        element.removeAttribute('title');
+                    });
+                }
 
                 break;
             case window.TestStatuses.PROCESSING:

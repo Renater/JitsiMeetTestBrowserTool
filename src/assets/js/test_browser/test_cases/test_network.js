@@ -565,7 +565,7 @@ window.JitsiTestBrowser.test_network = {
                     });
                     average = (average / context.stats[context.testing_protocol].bitrate.length).toFixed(2);
 
-                    window.JitsiTestEvents.dispatch('network_stat', {"data": {"average_bitrate": bitrate}});
+                    window.JitsiTestEvents.dispatch('network_stat', {"data": {"average_bitrate": average}});
                 }
             }
 

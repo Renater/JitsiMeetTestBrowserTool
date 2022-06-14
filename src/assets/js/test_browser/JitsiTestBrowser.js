@@ -11,6 +11,11 @@ if (!window.hasOwnProperty('JitsiTestBrowser'))
 window.JitsiTestBrowser.runner = {
 
     /**
+     * True if processing all tests (not a single one)
+     */
+    all_processing: false,
+
+    /**
      * List of test cases
      */
     testCases: [
@@ -18,6 +23,7 @@ window.JitsiTestBrowser.runner = {
     ],
 
     run: function(){
+        this.all_processing = true;
         /**
          * Get promise to chain tests
          *
@@ -60,6 +66,8 @@ window.JitsiTestBrowser.runner = {
 
             // Show final results
             window.JitsiTestBrowser.UI.swapPanes('test_global');
+
+            window.JitsiTestBrowser.runner.all_processing = false;
 
             // Update status
             window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.ENDED});
