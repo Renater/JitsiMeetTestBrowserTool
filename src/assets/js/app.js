@@ -72,6 +72,10 @@ window.onload = function() {
                         element.removeAttribute('title');
                     });
                 }
+                // Hide loader if needed
+                if (element.context !== undefined){
+                    window.JitsiTestBrowser.UI.showLoader(element.context, false);
+                }
 
                 break;
             case window.TestStatuses.PROCESSING:
@@ -89,6 +93,9 @@ window.onload = function() {
 
                     document.getElementById(`media_connectivity_${element.component}`)
                         .querySelector('span[data-content="value"]').append(res);
+                }
+                if (element.context !== undefined){
+                    window.JitsiTestBrowser.UI.showLoader(element.context);
                 }
                 break;
             case window.TestStatuses.PAUSED:

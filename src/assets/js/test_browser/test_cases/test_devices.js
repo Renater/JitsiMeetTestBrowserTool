@@ -18,18 +18,18 @@ window.JitsiTestBrowser.test_devices = {
     run: function () {
         return new Promise(resolve => {
             console.log("> Running test_devices");
+            window.JitsiTestEvents.dispatch('run', {
+                "status": window.TestStatuses.PROCESSING,
+                "context": "test_devices"
+            });
+
             let utils = new WebRTCUtils();
 
             utils.getListDevices(function (result) {
-                resolve({
-                    "status": "success",
-                    'details': result
-                });
-            }, function(error){
-                resolve({
-                    "status": "fail",
-                    "details": error
-                });
+                window.JitsiTestBrowser.runner.resolve(resolve, {"status": "success", 'details': result}, "test_devices");
+
+            }, function (error) {
+                window.JitsiTestBrowser.runner.resolve(resolve, {"status": "fail", 'details': error}, "test_devices");
             });
         });
     }

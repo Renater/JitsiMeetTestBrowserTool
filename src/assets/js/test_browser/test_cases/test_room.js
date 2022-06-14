@@ -79,8 +79,9 @@ window.JitsiTestBrowser.test_room = {
      * @return {Promise<*>}
      */
     run: function () {
-        return new Promise(resolve => {
+        return new Promise(res => {
             console.log("> Running test_room");
+            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "context": "test_room"});
 
             let context = window.JitsiTestBrowser.test_room;
             context.status = "pending"
@@ -94,10 +95,15 @@ window.JitsiTestBrowser.test_room = {
             let onError = function (reason) {
                 context.onError(reason);
                 context.closeConnections();
-                resolve({
-                    "status": "fail"
-                });
+
+                window.JitsiTestBrowser.runner.resolve(res, {
+                    "status": "fail",
+                    "details": reason
+                }, "test_room");
             };
+
+            onError('not_working_yet');
+            return;
 
 
             // init room name & room token
@@ -119,7 +125,8 @@ window.JitsiTestBrowser.test_room = {
                                                 // and resolve with "success" status
                                                 context.closeConnections();
                                                 context.onSuccess(result);
-                                                resolve(result);
+
+                                                window.JitsiTestBrowser.runner.resolve(res, result, "test_room");
                                             }, onError)
                                         }, 20000);
 

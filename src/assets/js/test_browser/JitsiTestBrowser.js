@@ -85,5 +85,17 @@ window.JitsiTestBrowser.runner = {
      */
     wait: function(delay = 1000){
         return new Promise(r => setTimeout(r, delay))
+    },
+
+
+    /**
+     * Final resolve function
+     *
+     * @param res
+     * @param data
+     */
+    resolve: function(res, data, context){
+        window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.ENDED, "context": context});
+        res(data)
     }
 }

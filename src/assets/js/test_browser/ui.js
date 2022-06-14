@@ -57,5 +57,21 @@ window.JitsiTestBrowser.UI = {
                 child.classList.remove('hide');
             }
         }
+    },
+
+    /**
+     * Show specific loader
+     *
+     * @param context
+     * @param show
+     */
+    showLoader: function(context, show = true){
+        let container = document.querySelector(`div.result-status[data-context="${context}"]`);
+        if (show){
+            container.classList.remove('hidden')
+        }else{
+            container.classList.add('hidden')
+        }
+
     }
 };

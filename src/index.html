@@ -58,6 +58,13 @@
             <div class="progress"></div>
         </div>
 
+        <!--        &lt;!&ndash; Run buttons&ndash;&gt;-->
+        <!--        <div class="run-controls">-->
+        <!--            <i data-action="start" class="fa-solid fa-play"></i>-->
+        <!--            <i data-action="pause" class="fa-solid fa-pause"></i>-->
+        <!--            <i data-action="stop" class="fa-solid fa-stop"></i>-->
+        <!--        </div>-->
+
         <div id="pane-home" class="test-result">
 
 
@@ -88,6 +95,15 @@
             <h2>
                 <i class="fa fa-globe"></i> {tr:browser_title}
             </h2>
+            <div class="result-status hidden" data-context="test_browser">
+                <i class="fas fa-spinner fa-spin" data-loader></i>
+                <span class="hide">
+                    <i class="fa-solid fa-arrow-right-long" ></i>
+                    <span data-status="OK" class="hide">OK</span>
+                    <span data-status="KO" class="hide">KO</span>
+                </span>
+            </div>
+
             <div class="actions">
                 {tr:run_alone_test}
                 <a data-action="test-runner" data-test-case="test_browser">
@@ -106,6 +122,14 @@
             <h2>
                 <i class="fa fa-plug"></i>  {tr:devices_title}
             </h2>
+            <div class="result-status hidden" data-context="test_devices">
+                <i class="fas fa-spinner fa-spin" data-loader></i>
+                <span class="hide">
+                    <i class="fa-solid fa-arrow-right-long" ></i>
+                    <span data-status="OK" class="hide">OK</span>
+                    <span data-status="KO" class="hide">KO</span>
+                </span>
+            </div>
             <div class="actions">
                 {tr:run_alone_test}
                 <a data-action="test-runner" data-test-case="test_devices">
@@ -124,6 +148,14 @@
             <h2>
                 <i class="fa fa-camera"></i>  {tr:camera_title}
             </h2>
+            <div class="result-status hidden" data-context="test_camera">
+                <i class="fas fa-spinner fa-spin" data-loader></i>
+                <span class="hide">
+                    <i class="fa-solid fa-arrow-right-long" ></i>
+                    <span data-status="OK" class="hide">OK</span>
+                    <span data-status="KO" class="hide">KO</span>
+                </span>
+            </div>
             <div class="actions">
                 {tr:run_alone_test}
                 <a data-action="test-runner" data-test-case="test_camera">
@@ -142,6 +174,14 @@
             <h2>
                 <i class="fa fa-microphone"></i> {tr:micro_title}
             </h2>
+            <div class="result-status hidden" data-context="test_micro">
+                <i class="fas fa-spinner fa-spin" data-loader></i>
+                <span class="hide">
+                    <i class="fa-solid fa-arrow-right-long" ></i>
+                    <span data-status="OK" class="hide">OK</span>
+                    <span data-status="KO" class="hide">KO</span>
+                </span>
+            </div>
             <div class="actions">
                 {tr:run_alone_test}
                 <a data-action="test-runner" data-test-case="test_micro">
@@ -159,10 +199,19 @@
         <div id="network_pane" class="hide test-result ">
 
             <div class="stat-left">
-
                 <h2>
                     <i class="fa fa-network-wired"></i> {tr:network_title}
                 </h2>
+
+                <div class="result-status hidden" data-context="test_network">
+                    <i class="fas fa-spinner fa-spin" data-loader></i>
+                    <span class="hide">
+                        <i class="fa-solid fa-arrow-right-long" ></i>
+                        <span data-status="OK">OK</span>
+                        <span data-status="KO">KO</span>
+                    </span>
+                </div>
+
                 <div class="actions">
                     {tr:run_alone_test}
                     <a data-action="test-runner" data-test-case="test_network">
@@ -201,7 +250,6 @@
             </div>
 
             <div class="stat-right">
-
 
                 <div id="media_connectivity_wss" class="stat-right-item">
                     <span class="">
@@ -290,6 +338,14 @@
             <h2>
                 <i class="fa fa-display"></i> {tr:room_title}
             </h2>
+            <div class="result-status hidden" data-context="test_room">
+                <i class="fas fa-spinner fa-spin" data-loader></i>
+                <span class="hide">
+                    <i class="fa-solid fa-arrow-right-long" ></i>
+                    <span data-status="OK" class="hide">OK</span>
+                    <span data-status="KO" class="hide">KO</span>
+                </span>
+            </div>
             <div class="actions">
                 {tr:run_alone_test}
                 <a data-action="test-runner" data-test-case="test_room">

@@ -16,18 +16,18 @@ window.JitsiTestBrowser.test_browser = {
      * @return {Promise<*>}
      */
     run: function () {
-        return new Promise(resolve => {
+        return new Promise(res => {
             console.log("> Running test_browser");
-            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING});
+            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "context": "test_browser"});
 
             let utils = new WebRTCUtils();
+            let status = "fail";
+
             if (navigator.mediaDevices !== undefined && utils.isPeerConnectionSupported() && !utils.isBannedBrowser()) {
-                window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.ENDED});
-                resolve({"status": "success"});
-            } else {
-                window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.ENDED});
-                resolve({"status": "fail"});
+                status = "success";
             }
+
+            window.JitsiTestBrowser.runner.resolve(res, {"status": status}, "test_browser");
         });
     }
 }

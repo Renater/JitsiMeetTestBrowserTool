@@ -15,6 +15,9 @@ ul li{
 .hide{
     display: none !important;
 }
+.hidden{
+    visibility: hidden !important;
+}
 
 
 /* Main & panels */
@@ -49,6 +52,7 @@ div#right-pane h1{
 div#right-pane h2{
     font-style: italic;
     margin-left: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 
@@ -175,7 +179,7 @@ div.actions a:hover{
     color: #eee;
 }
 
-/* results */
+/* Results */
 div.test-result div a[data-action="test-runner"]{
     display: block;
 }
@@ -195,7 +199,42 @@ div.test-result div.stat-right-item.test-fail i{
     color: orange;
 }
 
+div.result-status{
+    margin-left: 1.2rem;
+    font-weight: bold;
+}
+div.result-status.test-fail{
+    color: #ff3131;
+}
+div.result-status.test-success{
+    color:green;
+}
+div.result-status i:nth-child(1){
+    margin-right: 0.7rem;
+}
 
+
+
+
+/* Run controls */
+div.run-controls{
+    text-align: center;
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+div.run-controls i{
+    border: 1px solid #35476b;
+    padding: 0.5rem;
+}
+div.run-controls i[data-action="start"]{
+    border-radius: 10px 0 0 10px;
+}
+div.run-controls i[data-action="stop"]{
+    border-radius: 0 10px 10px 0;
+}
 
 /* media queries */
 @media only screen and (max-width: 40em) {

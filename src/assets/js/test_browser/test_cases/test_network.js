@@ -97,8 +97,9 @@ window.JitsiTestBrowser.test_network = {
      * @return {Promise<unknown>}
      */
     run: function () {
-        return new Promise(resolve => {
+        return new Promise(res => {
             console.log("> Running test_network");
+            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "context": "test_network"});
 
             let context = window.JitsiTestBrowser.test_network;
 
@@ -147,21 +148,12 @@ window.JitsiTestBrowser.test_network = {
                                 }
                             });
 
-                            let res = {
-                                "status": allOK ? "success" : "fail",
-                                "message": allOK ? "network_success_message" : '',
-                                "details" : context.statuses
-                            };
-
-
-                            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.ENDED});
-
-                            resolve(res);
+                            window.JitsiTestBrowser.runner.resolve(res, {"status": window.TestStatuses.ENDED}, "test_network");
                         })
                     });
                 });
             }, function(reason){
-                resolve({"status": "fail", "details": reason});
+                window.JitsiTestBrowser.runner.resolve(res, {"status": "fail", "details": reason}, "test_network");
             });
 
         });
@@ -682,4 +674,16 @@ window.JitsiTestBrowser.test_network = {
 
         window.JitsiTestEvents.dispatch('network_stat',{"data": {"error": details}});
     },
+
+
+    /**
+     * Final resolve function
+     *
+     * @param res
+     * @param data
+     */
+    resolve: function(res, data){
+        window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.ENDED, "context": "test_network"});
+        res(data)
+    }
 }

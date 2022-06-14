@@ -16,20 +16,22 @@ window.JitsiTestBrowser.test_camera = {
      * @return {Promise<*>}
      */
     run: function () {
-        return new Promise(resolve => {
+        return new Promise(res => {
             console.log("> Running test_camera");
+            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "context": "test_camera"});
+
             let utils = new WebRTCUtils();
 
             utils.getDefaultMediaCapture("video", function (result) {
-                resolve({
+                window.JitsiTestBrowser.runner.resolve(res, {
                     "status": "success",
                     'details': result
-                })
+                }, "test_camera")
             }, function(error){
-                resolve({
+                window.JitsiTestBrowser.runner.resolve(res, {
                     "status": "fail",
                     'details': error
-                })
+                }, "test_camera")
             });
         });
     }

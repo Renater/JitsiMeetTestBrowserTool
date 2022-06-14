@@ -16,23 +16,17 @@ window.JitsiTestBrowser.test_micro = {
      * @return {Promise<*>}
      */
     run: function () {
-        return new Promise(callback => {
+        return new Promise(res => {
             console.log("> Running test_micro");
+            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "context": "test_micro"});
 
             let utils = new WebRTCUtils();
 
             utils.getDefaultMediaCapture("audio", function (result) {
-                // TODO: Push statistics
-                callback({
-                    "status": "success",
-                    'details': result
-                });
-            }, function(error){
-                // TODO: Push statistics
-                callback({
-                    "status": "fail",
-                    'details': error
-                });
+                window.JitsiTestBrowser.runner.resolve(res, {"status": "success", 'details': result}, "test_micro");
+
+            }, function (error) {
+                window.JitsiTestBrowser.runner.resolve(res, {"status": "fail", 'details': error}, "test_micro");
             });
         });
     }
