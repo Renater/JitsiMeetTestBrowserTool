@@ -102,5 +102,57 @@ window.JitsiTestBrowser.UI = {
             statusContainer.classList.remove('hide');
             let a = 2;
         }
+    },
+
+    /**
+     * Blink identfied element
+     *
+     * @param id
+     * @param blink
+     */
+    blink: function(id, blink){
+        let element = document.getElementById(id);
+        if (blink) {
+            element.classList.add('blink');
+        }else{
+            element.classList.remove('blink');
+        }
+    },
+
+
+    /**
+     * Update network test status
+     *
+     * @param networkComponent
+     * @param status
+     */
+    updateNetworkStatus: function(networkComponent, status){
+        let container = document.getElementById(`media_connectivity_${networkComponent}`);
+        let sub = container.querySelector('span[data-content="status_icon"]');
+        let icon = sub.querySelector('i');
+
+        container.classList.remove('test-success', 'test-fail');
+        sub.classList.remove('hide');
+        icon.classList = '';
+
+        switch (status){
+            case 'success':
+                icon.classList.add('fa-solid', 'fa-check');
+                container.classList.add('test-success');
+
+                break;
+
+            case 'fail':
+                icon.classList.add('fa-solid', 'fa-circle-xmark');
+                container.classList.add('test-fail');
+                break;
+
+            case 'processing':
+                icon.classList.add('fas', 'fa-spinner', 'fa-spin');
+                break;
+
+            default:
+                console.error(`Unknown status: ${status}`)
+        }
     }
 }

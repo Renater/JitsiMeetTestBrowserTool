@@ -35,6 +35,5 @@ window.JitsiTestEvents = {
             event[key] = value;
         }
         document.dispatchEvent(event);
-
     }
 }

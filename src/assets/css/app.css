@@ -113,7 +113,7 @@ div#right-pane h2{
 .stat-right-item span[data-content="title"]{
     font-weight: bold;
 }
-.stat-right-item span[data-content="value"] i{
+.stat-right-item span[data-content="status_icon"] i{
     float: right;
 }
 

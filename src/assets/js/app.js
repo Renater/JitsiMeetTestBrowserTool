@@ -76,6 +76,13 @@ window.onload = function() {
                 if (element.context !== undefined){
                     window.JitsiTestBrowser.UI.showLoader(element.context, false);
                     window.JitsiTestBrowser.UI.showStatus(element.context, element.data.result, true);
+                    window.JitsiTestBrowser.UI.blink(element.context, false);
+
+
+                    if (element.component !== undefined){
+                        document.getElementById(`media_connectivity_${element.component}`)
+                            .querySelector('span[data-content="value"] i').remove('hide')
+                    }
                 }
 
                 break;
@@ -87,15 +94,12 @@ window.onload = function() {
                 });
                 // Update loader if needed
                 if (element.component !== undefined){
-                    let res = document.createElement('i');
-                    res.classList.add('fas', 'fa-spinner', 'fa-spin');
-
-                    document.getElementById(`media_connectivity_${element.component}`)
-                        .querySelector('span[data-content="value"]').append(res);
+                    window.JitsiTestBrowser.UI.updateNetworkStatus(element.component, 'processing');
                 }
                 if (element.context !== undefined){
                     window.JitsiTestBrowser.UI.showStatus(element.context, false, false);
                     window.JitsiTestBrowser.UI.showLoader(element.context);
+                    window.JitsiTestBrowser.UI.blink(element.context, true);
                 }
                 break;
             case window.TestStatuses.PAUSED:
@@ -119,15 +123,7 @@ window.onload = function() {
                 case 'tcp':
                 case 'udp':
                     if (element.data.status !== undefined) {
-                        let res = document.createElement('i');
-                        res.classList.add('fa-solid', element.data.status === "success" ? 'fa-check' : 'fa-circle-xmark');
-
-                        let selector = document.getElementById(`media_connectivity_${element.context}`);
-                        let subItem = selector.querySelector('span[data-content="value"]')
-                        subItem.innerHTML = '';
-                        subItem.append(res);
-
-                        selector.classList.add(element.data.status === "success" ? 'test-success' : 'test-fail');
+                        window.JitsiTestBrowser.UI.updateNetworkStatus(element.context, element.data.status);
                     }
                     if (element.data.framesPerSecond !== undefined){
                         // Got a framerate
@@ -177,8 +173,6 @@ window.onload = function() {
                     break;
             }
         }
-
-
     });
 
 };

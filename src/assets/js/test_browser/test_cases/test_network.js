@@ -300,7 +300,7 @@ window.JitsiTestBrowser.test_network = {
         return new Promise(resolve => {
             console.log(" >>> Test TCP media network");
 
-            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "component":"tcp"});
+            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "component":"tcp", "dada": "dudu"});
 
             let context = window.JitsiTestBrowser.test_network;
             context.testing_protocol = 'tcp';
