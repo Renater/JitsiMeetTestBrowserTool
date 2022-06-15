@@ -75,6 +75,8 @@ window.JitsiTestBrowser.runner = {
 
             for (const templateName of window.JitsiTestBrowser.runner.testCases) {
                 if (window.JitsiTestBrowser.runner.stop_on_failures && window.JitsiTestBrowser.status === window.TestStatuses.STOPPED){
+                    window.JitsiTestBrowser.runner.all_processing = false;
+                    window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.ENDED});
                     // Stop on failures
                     return;
                 }

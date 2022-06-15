@@ -58,6 +58,7 @@ window.onload = function() {
         this.setAttribute('disabled', 'disabled');
 
         window.JitsiTestBrowser.status = window.TestStatuses.PROCESSING;
+
         window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING});
 
         window.JitsiTestBrowser.runner.run();
