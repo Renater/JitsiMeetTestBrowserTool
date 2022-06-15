@@ -76,7 +76,6 @@ window.onload = function() {
                 if (element.context !== undefined){
                     window.JitsiTestBrowser.UI.showLoader(element.context, false);
                     window.JitsiTestBrowser.UI.showStatus(element.context, element.data.result, true);
-                    window.JitsiTestBrowser.UI.blink(element.context, false);
                 }
 
                 break;
@@ -93,7 +92,6 @@ window.onload = function() {
                 if (element.context !== undefined){
                     window.JitsiTestBrowser.UI.showStatus(element.context, false, false);
                     window.JitsiTestBrowser.UI.showLoader(element.context);
-                    window.JitsiTestBrowser.UI.blink(element.context, true);
                 }
                 break;
             case window.TestStatuses.PAUSED:

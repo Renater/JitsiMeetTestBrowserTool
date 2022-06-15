@@ -43,7 +43,7 @@ window.JitsiTestBrowser.UI = {
      * @param result
      * @param testCase
      */
-    updateUI: function (result, testCase){
+    updateUI: function (data, testCase){
         const referer = document.getElementById(testCase).getAttribute('data-results');
         const children = document.getElementById(referer).children;
 
@@ -51,9 +51,9 @@ window.JitsiTestBrowser.UI = {
             let child = children[id];
             child.classList.add('hide');
 
-            if (result.status === 'success' && child.getAttribute('data-result') === 'success') {
+            if (data.result === 'success' && child.getAttribute('data-result') === 'success') {
                 child.classList.remove('hide');
-            } else if (result.status === 'fail' && child.getAttribute('data-result') === 'fail') {
+            } else if (data.result === 'fail' && child.getAttribute('data-result') === 'fail') {
                 child.classList.remove('hide');
             }
         }

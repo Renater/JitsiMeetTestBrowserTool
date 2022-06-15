@@ -18,7 +18,7 @@
 
 /* Blink */
 .blink {
-    animation: blinker 0.8s linear infinite;
+    animation: blinker 1s linear infinite;
 }
 
 @keyframes blinker {

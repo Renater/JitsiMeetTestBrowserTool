@@ -57,11 +57,16 @@ window.JitsiTestBrowser.runner = {
             let cpt = 1;
 
             for (const templateName of window.JitsiTestBrowser.runner.testCases) {
+                window.JitsiTestBrowser.UI.blink(templateName, true);
                 await getPromise(templateName);
                 await window.JitsiTestBrowser.runner.wait();
+                window.JitsiTestBrowser.UI.blink(templateName, false);
+                await window.JitsiTestBrowser.runner.wait();
+
                 // Update progress
                 document.querySelector(".progress").style.width = `${100*cpt/nbTestCases}%`;
                 cpt++;
+
             }
 
             // Show final results
