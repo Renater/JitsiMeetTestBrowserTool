@@ -675,7 +675,7 @@ window.JitsiTestBrowser.test_network = {
 
         console.error(details);
 
-        window.JitsiTestEvents.dispatch('network_stat', {"context":protocol, "data": result});
+        window.JitsiTestEvents.dispatch('network_stat', {"context": protocol, "data": result});
     },
 
 

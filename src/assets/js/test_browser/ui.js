@@ -100,7 +100,6 @@ window.JitsiTestBrowser.UI = {
         if (status !== false) {
             let statusContainer = sub.querySelector(`span[data-status="${status === "success" ? "OK" : "KO"}"]`);
             statusContainer.classList.remove('hide');
-            let a = 2;
         }
     },
 
