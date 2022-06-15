@@ -94,15 +94,15 @@
         <div id="browser_pane" class="hide test-result">
             <h2>
                 <i class="fa fa-globe"></i> {tr:browser_title}
+                <div class="result-status" data-context="test_browser">
+                    <i class="fas fa-spinner fa-spin hidden" data-loader></i>
+                    <span class="hide">
+                        <span data-status="OK" class="hide">OK</span>
+                        <span data-status="KO" class="hide">KO</span>
+                    </span>
+                </div>
             </h2>
-            <div class="result-status hidden" data-context="test_browser">
-                <i class="fas fa-spinner fa-spin" data-loader></i>
-                <span class="hide">
-                    <i class="fa-solid fa-arrow-right-long" ></i>
-                    <span data-status="OK" class="hide">OK</span>
-                    <span data-status="KO" class="hide">KO</span>
-                </span>
-            </div>
+
 
             <div class="actions">
                 {tr:run_alone_test}
@@ -121,15 +121,15 @@
         <div id="devices_pane" class="hide test-result">
             <h2>
                 <i class="fa fa-plug"></i>  {tr:devices_title}
+                <div class="result-status" data-context="test_devices">
+                    <i class="fas fa-spinner fa-spin hidden" data-loader></i>
+                    <span class="hide">
+                        <span data-status="OK" class="hide">OK</span>
+                        <span data-status="KO" class="hide">KO</span>
+                    </span>
+                </div>
             </h2>
-            <div class="result-status hidden" data-context="test_devices">
-                <i class="fas fa-spinner fa-spin" data-loader></i>
-                <span class="hide">
-                    <i class="fa-solid fa-arrow-right-long" ></i>
-                    <span data-status="OK" class="hide">OK</span>
-                    <span data-status="KO" class="hide">KO</span>
-                </span>
-            </div>
+
             <div class="actions">
                 {tr:run_alone_test}
                 <a data-action="test-runner" data-test-case="test_devices">
@@ -147,15 +147,15 @@
         <div id="camera_pane" class="hide test-result">
             <h2>
                 <i class="fa fa-camera"></i>  {tr:camera_title}
+                <div class="result-status" data-context="test_camera">
+                    <i class="fas fa-spinner fa-spin hidden" data-loader></i>
+                    <span class="hide">
+                        <span data-status="OK" class="hide">OK</span>
+                        <span data-status="KO" class="hide">KO</span>
+                    </span>
+                </div>
             </h2>
-            <div class="result-status hidden" data-context="test_camera">
-                <i class="fas fa-spinner fa-spin" data-loader></i>
-                <span class="hide">
-                    <i class="fa-solid fa-arrow-right-long" ></i>
-                    <span data-status="OK" class="hide">OK</span>
-                    <span data-status="KO" class="hide">KO</span>
-                </span>
-            </div>
+
             <div class="actions">
                 {tr:run_alone_test}
                 <a data-action="test-runner" data-test-case="test_camera">
@@ -173,15 +173,15 @@
         <div id="micro_pane" class="hide test-result">
             <h2>
                 <i class="fa fa-microphone"></i> {tr:micro_title}
+                <div class="result-status" data-context="test_micro">
+                    <i class="fas fa-spinner fa-spin hidden" data-loader></i>
+                    <span class="hide">
+                        <span data-status="OK" class="hide">OK</span>
+                        <span data-status="KO" class="hide">KO</span>
+                    </span>
+                </div>
             </h2>
-            <div class="result-status hidden" data-context="test_micro">
-                <i class="fas fa-spinner fa-spin" data-loader></i>
-                <span class="hide">
-                    <i class="fa-solid fa-arrow-right-long" ></i>
-                    <span data-status="OK" class="hide">OK</span>
-                    <span data-status="KO" class="hide">KO</span>
-                </span>
-            </div>
+
             <div class="actions">
                 {tr:run_alone_test}
                 <a data-action="test-runner" data-test-case="test_micro">
@@ -201,16 +201,14 @@
             <div class="stat-left">
                 <h2>
                     <i class="fa fa-network-wired"></i> {tr:network_title}
+                    <div class="result-status" data-context="test_network">
+                        <i class="fas fa-spinner fa-spin hidden" data-loader></i>
+                        <span class="hide">
+                            <span data-status="OK" class="hide">OK</span>
+                            <span data-status="KO" class="hide">KO</span>
+                        </span>
+                    </div>
                 </h2>
-
-                <div class="result-status hidden" data-context="test_network">
-                    <i class="fas fa-spinner fa-spin" data-loader></i>
-                    <span class="hide">
-                        <i class="fa-solid fa-arrow-right-long" ></i>
-                        <span data-status="OK">OK</span>
-                        <span data-status="KO">KO</span>
-                    </span>
-                </div>
 
                 <div class="actions">
                     {tr:run_alone_test}
@@ -337,15 +335,15 @@
         <div id="room_pane" class="hide test-result">
             <h2>
                 <i class="fa fa-display"></i> {tr:room_title}
+                <div class="result-status" data-context="test_room">
+                    <i class="fas fa-spinner fa-spin hidden" data-loader></i>
+                    <span class="hide">
+                        <span data-status="OK" class="hide">OK</span>
+                        <span data-status="KO" class="hide">KO</span>
+                    </span>
+                </div>
             </h2>
-            <div class="result-status hidden" data-context="test_room">
-                <i class="fas fa-spinner fa-spin" data-loader></i>
-                <span class="hide">
-                    <i class="fa-solid fa-arrow-right-long" ></i>
-                    <span data-status="OK" class="hide">OK</span>
-                    <span data-status="KO" class="hide">KO</span>
-                </span>
-            </div>
+
             <div class="actions">
                 {tr:run_alone_test}
                 <a data-action="test-runner" data-test-case="test_room">

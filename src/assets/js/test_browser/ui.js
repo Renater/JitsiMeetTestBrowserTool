@@ -59,6 +59,7 @@ window.JitsiTestBrowser.UI = {
         }
     },
 
+
     /**
      * Show specific loader
      *
@@ -66,12 +67,40 @@ window.JitsiTestBrowser.UI = {
      * @param show
      */
     showLoader: function(context, show = true){
-        let container = document.querySelector(`div.result-status[data-context="${context}"]`);
+        let container = document.querySelector(`div.result-status[data-context="${context}"] > i[data-loader]`);
+        container.classList = '';
+        container.classList.add('fas', 'fa-spinner', 'fa-spin');
+
+        if (!show){
+            container.classList.add('hide')
+        }
+    },
+
+
+    /**
+     * Show specific test status
+     *
+     * @param context
+     * @param show
+     */
+    showStatus: function(context, status = false, show = true){
+        let container = document.querySelector(`div.result-status[data-context="${context}"] > i[data-loader]`);
+        container.classList = '';
+        container.classList.add('fa-solid', 'fa-arrow-right-long');
+
+
+        let sub = document.querySelector(`div.result-status[data-context="${context}"] > span`);
         if (show){
-            container.classList.remove('hidden')
+            sub.classList.remove('hide');
         }else{
-            container.classList.add('hidden')
+            sub.classList.add('hide');
         }
 
+        // Show status
+        if (status !== false) {
+            let statusContainer = sub.querySelector(`span[data-status="${status === "success" ? "OK" : "KO"}"]`);
+            statusContainer.classList.remove('hide');
+            let a = 2;
+        }
     }
-};
+}

@@ -72,9 +72,10 @@ window.onload = function() {
                         element.removeAttribute('title');
                     });
                 }
-                // Hide loader if needed
+                // Hide loader and show status result if needed
                 if (element.context !== undefined){
                     window.JitsiTestBrowser.UI.showLoader(element.context, false);
+                    window.JitsiTestBrowser.UI.showStatus(element.context, element.data.result, true);
                 }
 
                 break;
@@ -87,14 +88,13 @@ window.onload = function() {
                 // Update loader if needed
                 if (element.component !== undefined){
                     let res = document.createElement('i');
-                    res.classList.add('fas');
-                    res.classList.add('fa-spinner');
-                    res.classList.add('fa-spin');
+                    res.classList.add('fas', 'fa-spinner', 'fa-spin');
 
                     document.getElementById(`media_connectivity_${element.component}`)
                         .querySelector('span[data-content="value"]').append(res);
                 }
                 if (element.context !== undefined){
+                    window.JitsiTestBrowser.UI.showStatus(element.context, false, false);
                     window.JitsiTestBrowser.UI.showLoader(element.context);
                 }
                 break;
@@ -120,8 +120,7 @@ window.onload = function() {
                 case 'udp':
                     if (element.data.status !== undefined) {
                         let res = document.createElement('i');
-                        res.classList.add('fa-solid');
-                        res.classList.add(element.data.status === "success" ? 'fa-check' : 'fa-circle-exclamation');
+                        res.classList.add('fa-solid', element.data.status === "success" ? 'fa-check' : 'fa-circle-xmark');
 
                         let selector = document.getElementById(`media_connectivity_${element.context}`);
                         let subItem = selector.querySelector('span[data-content="value"]')

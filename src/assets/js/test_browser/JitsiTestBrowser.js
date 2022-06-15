@@ -95,7 +95,7 @@ window.JitsiTestBrowser.runner = {
      * @param data
      */
     resolve: function(res, data, context){
-        window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.ENDED, "context": context});
+        window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.ENDED, "context": context, "data" : data});
         res(data)
     }
 }

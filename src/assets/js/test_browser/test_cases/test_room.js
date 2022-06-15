@@ -97,7 +97,7 @@ window.JitsiTestBrowser.test_room = {
                 context.closeConnections();
 
                 window.JitsiTestBrowser.runner.resolve(res, {
-                    "status": "fail",
+                    "result": "fail",
                     "details": reason
                 }, "test_room");
             };

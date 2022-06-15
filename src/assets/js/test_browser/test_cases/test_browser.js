@@ -27,7 +27,7 @@ window.JitsiTestBrowser.test_browser = {
                 status = "success";
             }
 
-            window.JitsiTestBrowser.runner.resolve(res, {"status": status}, "test_browser");
+            window.JitsiTestBrowser.runner.resolve(res, {"result": status}, "test_browser");
         });
     }
 }

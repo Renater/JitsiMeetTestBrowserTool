@@ -24,12 +24,12 @@ window.JitsiTestBrowser.test_camera = {
 
             utils.getDefaultMediaCapture("video", function (result) {
                 window.JitsiTestBrowser.runner.resolve(res, {
-                    "status": "success",
+                    "result": "success",
                     'details': result
                 }, "test_camera")
             }, function(error){
                 window.JitsiTestBrowser.runner.resolve(res, {
-                    "status": "fail",
+                    "result": "fail",
                     'details': error
                 }, "test_camera")
             });

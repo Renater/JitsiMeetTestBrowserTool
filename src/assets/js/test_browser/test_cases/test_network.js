@@ -107,7 +107,10 @@ window.JitsiTestBrowser.test_network = {
             context.remoteVideo = document.querySelector('video#remote_video');
 
             // Init TURN credentials
-            context.initTURNCredentials(function(){
+            context.initTURNCredentials(function(result){
+                if (result.status === "fail"){
+                    window.JitsiTestEvents.dispatch('network_stat', {"context": "wss", "data": result});
+                }
 
                 // Run websocket test
                 context.testWebSocket().then(function (result) {
@@ -148,12 +151,12 @@ window.JitsiTestBrowser.test_network = {
                                 }
                             });
 
-                            window.JitsiTestBrowser.runner.resolve(res, {"status": window.TestStatuses.ENDED}, "test_network");
+                            window.JitsiTestBrowser.runner.resolve(res, {"result": allOK ? "success" : "fail"}, "test_network");
                         })
                     });
                 });
             }, function(reason){
-                window.JitsiTestBrowser.runner.resolve(res, {"status": "fail", "details": reason}, "test_network");
+                window.JitsiTestBrowser.runner.resolve(res, {"result": "fail", "details": reason}, "test_network");
             });
 
         });
@@ -201,7 +204,7 @@ window.JitsiTestBrowser.test_network = {
     /**
      * Init TURN credentials
      */
-    initTURNCredentials: function (resolve) {
+    initTURNCredentials: function (resolve, reject) {
         let context = window.JitsiTestBrowser.test_network;
 
         let turnServer = document.getElementById('main').getAttribute('data-turn-endpoint');
@@ -220,7 +223,7 @@ window.JitsiTestBrowser.test_network = {
                                 "tcp_urls": data.tcpTestUrl,
                                 "udp_urls": data.udpTestUrl,
                             };
-                            resolve();
+                            resolve({"status": "success"});
                         })
                 }
             )
@@ -672,7 +675,7 @@ window.JitsiTestBrowser.test_network = {
 
         console.error(details);
 
-        window.JitsiTestEvents.dispatch('network_stat',{"data": {"error": details}});
+        window.JitsiTestEvents.dispatch('network_stat', {"context":"wss", "data": result});
     },
 
 

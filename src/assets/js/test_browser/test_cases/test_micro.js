@@ -23,10 +23,10 @@ window.JitsiTestBrowser.test_micro = {
             let utils = new WebRTCUtils();
 
             utils.getDefaultMediaCapture("audio", function (result) {
-                window.JitsiTestBrowser.runner.resolve(res, {"status": "success", 'details': result}, "test_micro");
+                window.JitsiTestBrowser.runner.resolve(res, {"result": "success", 'details': result}, "test_micro");
 
             }, function (error) {
-                window.JitsiTestBrowser.runner.resolve(res, {"status": "fail", 'details': error}, "test_micro");
+                window.JitsiTestBrowser.runner.resolve(res, {"result": "fail", 'details': error}, "test_micro");
             });
         });
     }

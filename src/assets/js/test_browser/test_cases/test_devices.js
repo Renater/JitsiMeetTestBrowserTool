@@ -26,10 +26,10 @@ window.JitsiTestBrowser.test_devices = {
             let utils = new WebRTCUtils();
 
             utils.getListDevices(function (result) {
-                window.JitsiTestBrowser.runner.resolve(resolve, {"status": "success", 'details': result}, "test_devices");
+                window.JitsiTestBrowser.runner.resolve(resolve, {"result": "success", 'details': result}, "test_devices");
 
             }, function (error) {
-                window.JitsiTestBrowser.runner.resolve(resolve, {"status": "fail", 'details': error}, "test_devices");
+                window.JitsiTestBrowser.runner.resolve(resolve, {"result": "fail", 'details': error}, "test_devices");
             });
         });
     }

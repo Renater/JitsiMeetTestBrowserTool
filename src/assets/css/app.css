@@ -200,17 +200,14 @@ div.test-result div.stat-right-item.test-fail i{
 }
 
 div.result-status{
-    margin-left: 1.2rem;
-    font-weight: bold;
+    display: inline-block;
+    margin-left: 1rem;
 }
-div.result-status.test-fail{
+span[data-status="KO"]{
     color: #ff3131;
 }
-div.result-status.test-success{
+span[data-status="OK"]{
     color:green;
-}
-div.result-status i:nth-child(1){
-    margin-right: 0.7rem;
 }
 
 
