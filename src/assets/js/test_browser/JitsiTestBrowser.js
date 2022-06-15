@@ -24,7 +24,7 @@ window.JitsiTestBrowser.runner = {
     /**
      * Current process status
      */
-    status: window.TestStatuses.WAITING,
+    status: 0,
 
 
     /**
