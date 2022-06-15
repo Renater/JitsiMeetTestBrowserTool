@@ -34,6 +34,10 @@ window.JitsiTestEvents = {
         for (const [key, value] of Object.entries(data)) {
             event[key] = value;
         }
+
         document.dispatchEvent(event);
+
+        // Reset entities
+        this[eventName] = new Event(eventName);
     }
 }
