@@ -6,7 +6,7 @@ define('APP_ROOT', dirname(__FILE__).'/../');
 
 include APP_ROOT.'vendor/autoload.php';
 
-$options = getopt('hqyv', ['help', 'release:', "turn-endpoint:", "websocket-url:", "application-url:", 'lang:']);
+$options = getopt('hqyv', ['help', 'release:', "turn-endpoint:", "websocket-url:", "application-url:", 'fontawesome-kit:', 'lang:']);
 
 if (array_key_exists('h', $options) || array_key_exists('help', $options)) {
     echo "\n" . 'Make a release for Jitsi test browser page (minify js/css files, pack the app in one file).' . "\n";
@@ -25,6 +25,7 @@ if (array_key_exists('h', $options) || array_key_exists('help', $options)) {
     echo "\t\n";
     echo "\t> Optional options";
     echo "\t\n";
+    echo "\t" . ' --fontawesome-kit : Font Awesome kit URL.' . "\n";
     echo "\t" . ' --lang : the wanted lang code. Default is "en".' . "\n";
     echo "\t" . ' --turn-endpoint : specify the turn endpoint to use for testing. Default is "https://rendez-vous.renater.fr/home/rest.php/TurnServer"' . "\n";
     echo "\t" . ' --websocket-url : specify the web socket url to use for testing. Default is "wss://rendez-vous.renater.fr/colibri-ws/echo"' . "\n";
@@ -51,6 +52,11 @@ class MakeRelease{
      * @var string Application URL to use
      */
     private static string $applicationUrl = 'https://rendez-vous.renater.fr/';
+    
+    /**
+     * @var string Application URL to use
+     */
+    private static string $fontawesomeKitURL = 'https://kit.fontawesome.com/0d01ffef9c.js';
     
     /**
      * @var string Lang to use on the generated page
@@ -104,6 +110,9 @@ class MakeRelease{
         }
         if (array_key_exists('application-url', $options)){
             static::$applicationUrl = $options['application-url'];
+        }
+        if (array_key_exists('fontawesome-kit', $options)){
+            static::$fontawesomeKitURL = $options['fontawesome-kit'];
         }
         if (array_key_exists('lang', $options)){
             if (!file_exists(APP_ROOT.'src/lang/'.$options['lang'].'.php'))
@@ -161,6 +170,7 @@ class MakeRelease{
                 $str = str_replace('<!--turn_endpoint-->', static::$turnEndpoint, $str);
                 $str = str_replace('<!--websocket_url-->', static::$websocketUrl, $str);
                 $str = str_replace('<!--application_url-->', static::$applicationUrl, $str);
+                $str = str_replace('<!--FONTAWESOME_KIT-->', static::$fontawesomeKitURL, $str);
                 
                 // Set up lang translation
                 $str  = $this->applyTranslation($str);
