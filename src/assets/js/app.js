@@ -77,12 +77,6 @@ window.onload = function() {
                     window.JitsiTestBrowser.UI.showLoader(element.context, false);
                     window.JitsiTestBrowser.UI.showStatus(element.context, element.data.result, true);
                     window.JitsiTestBrowser.UI.blink(element.context, false);
-
-
-                    if (element.component !== undefined){
-                        document.getElementById(`media_connectivity_${element.component}`)
-                            .querySelector('span[data-content="value"] i').remove('hide')
-                    }
                 }
 
                 break;

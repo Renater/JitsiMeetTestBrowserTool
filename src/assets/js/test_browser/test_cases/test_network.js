@@ -300,7 +300,7 @@ window.JitsiTestBrowser.test_network = {
         return new Promise(resolve => {
             console.log(" >>> Test TCP media network");
 
-            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "component":"tcp", "dada": "dudu"});
+            window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING, "component":"tcp"});
 
             let context = window.JitsiTestBrowser.test_network;
             context.testing_protocol = 'tcp';
@@ -675,7 +675,7 @@ window.JitsiTestBrowser.test_network = {
 
         console.error(details);
 
-        window.JitsiTestEvents.dispatch('network_stat', {"context":"wss", "data": result});
+        window.JitsiTestEvents.dispatch('network_stat', {"context":protocol, "data": result});
     },
 
 
