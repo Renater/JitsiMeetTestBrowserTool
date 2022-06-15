@@ -16,6 +16,18 @@ window.JitsiTestBrowser.runner = {
     all_processing: false,
 
     /**
+     * True if force stop on failures
+     */
+    stop_on_failures: false,
+
+
+    /**
+     * Current process status
+     */
+    status: window.TestStatuses.WAITING,
+
+
+    /**
      * List of test cases
      */
     testCases: [
@@ -37,13 +49,18 @@ window.JitsiTestBrowser.runner = {
 
                 // Run test
                 window.JitsiTestBrowser[testCase].run()
-                    .then(function (result) {
+                    .then(function (data) {
                         // Default show result
-                        window.JitsiTestBrowser.UI.updateUI(result, testCase);
+                        window.JitsiTestBrowser.UI.updateUI(data, testCase);
+
+                        if (data.result === 'fail' && window.JitsiTestBrowser.runner.stop_on_failures){
+                            window.JitsiTestBrowser.status = window.TestStatuses.STOPPED;
+                        }
+
                         resolve();
                     })
                     .catch(function(reason){
-                        echo(reason, testCase)
+                        echo(reason, testCase);
                     });
             })
         }
@@ -57,11 +74,14 @@ window.JitsiTestBrowser.runner = {
             let cpt = 1;
 
             for (const templateName of window.JitsiTestBrowser.runner.testCases) {
+                if (window.JitsiTestBrowser.runner.stop_on_failures && window.JitsiTestBrowser.status === window.TestStatuses.STOPPED){
+                    // Stop on failures
+                    return;
+                }
                 window.JitsiTestBrowser.UI.blink(templateName, true);
                 await getPromise(templateName);
                 await window.JitsiTestBrowser.runner.wait();
                 window.JitsiTestBrowser.UI.blink(templateName, false);
-                await window.JitsiTestBrowser.runner.wait();
 
                 // Update progress
                 document.querySelector(".progress").style.width = `${100*cpt/nbTestCases}%`;

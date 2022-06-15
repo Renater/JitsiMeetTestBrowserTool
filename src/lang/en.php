@@ -5,6 +5,8 @@ $lang['main_title'] = 'Test your browser compatibility with Jitsi Meet';
 $lang['run'] = 'Start';
 $lang['run_alone_test'] = 'You can run only this test:';
 $lang['test_running'] = 'Test in progress ...';
+$lang['stop_on_failures'] = "Stop testing on failures";
+$lang['advanced_options'] = 'Advanced options';
 
 // Test cases
 $lang['browser'] = 'Browser';

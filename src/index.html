@@ -20,7 +20,7 @@
         <div id="home" title="{tr:home}" class="menu-item animate_ease is-active" data-refer-to="pane-home">
             <span class="icon"><i class="fa fa-house"></i></span>
         </div>
-        <div id="test_browser" title="{tr:browser}" class="menu-item animate_ease " data-refer-to="browser_pane"  data-results="browser_results">
+        <div id="test_browser" title="{tr:browser}" class="menu-item animate_ease" data-refer-to="browser_pane"  data-results="browser_results">
             <span class="icon"><i class="fa fa-globe"></i></span>
         </div>
 
@@ -85,6 +85,12 @@
                 <a id="run_all">
                     <i class="fa-solid fa-play"></i>  <span>{tr:run_all_tests}</span>
                 </a>
+
+                <div data-context="advanced_options">
+                    <input type="checkbox" alt="stop_on_failures" id="stop_on_failures" name="stop_on_failures">
+                    <label for="stop_on_failures">{tr:stop_on_failures}</label>
+
+                </div>
             </div>
         </div>
 
@@ -195,7 +201,7 @@
         </div>
 
         <!-- Test network -->
-        <div id="network_pane" class="hide test-result ">
+        <div id="network_pane" class="hide test-result">
 
             <div class="stat-left">
                 <h2>

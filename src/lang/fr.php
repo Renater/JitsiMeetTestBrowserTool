@@ -5,6 +5,8 @@ $lang['main_title'] = 'Tester la compatibilité de votre navigateur avec Jitsi M
 $lang['run'] = 'Démarrer';
 $lang['run_alone_test'] = 'Vous pouvez lancer uniquement ce test :';
 $lang['test_running'] = 'Test en cours ...';
+$lang['stop_on_failures'] = "Arrêter le test en cas d'erreur";
+$lang['advanced_options'] = 'Option avancées';
 
 // Test cases
 $lang['browser'] = 'Navigateur';

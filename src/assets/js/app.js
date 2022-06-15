@@ -46,11 +46,18 @@ window.onload = function() {
         });
     });
 
+    // Listen to click on stop on failures
+    document.getElementById("stop_on_failures").addEventListener('click', function(element){
+        window.JitsiTestBrowser.runner.stop_on_failures = this.checked === true;
+    });
+
+
 
     // Listen to click on run all test
     document.getElementById('run_all').addEventListener('click', function(){
         this.setAttribute('disabled', 'disabled');
 
+        window.JitsiTestBrowser.status = window.TestStatuses.PROCESSING;
         window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING});
 
         window.JitsiTestBrowser.runner.run();

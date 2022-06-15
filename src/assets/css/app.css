@@ -233,6 +233,13 @@ div.run-controls i[data-action="stop"]{
     border-radius: 0 10px 10px 0;
 }
 
+div[data-context="advanced_options"]{
+    margin-top: 1.5rem;
+}
+div[data-context="advanced_options"] > *{
+    cursor: pointer;
+}
+
 /* media queries */
 @media only screen and (max-width: 40em) {
     div#left-pane{
