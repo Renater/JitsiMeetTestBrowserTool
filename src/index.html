@@ -117,7 +117,9 @@
             </div>
             <div id="browser_results">
                 <div data-result="default">{tr:results_shown_there}</div>
-                <div data-result="success" class="hide">{tr:browser_test_success}</div>
+                <div data-result="success" class="hide">
+                    <div data-result="title">{tr:browser_test_success}</div>
+                </div>
                 <div data-result="fail" class="hide">{tr:browser_test_fail}</div>
             </div>
         </div>
@@ -217,8 +219,14 @@
             </div>
             <div id="micro_results">
                 <div data-result="default">{tr:results_shown_there}</div>
-                <div data-result="success" class="hide">{tr:micro_test_success}</div>
-                <div data-result="fail" class="hide">{tr:micro_test_fail}</div>
+                <div data-result="success" class="hide">
+                    <div data-result="title">{tr:micro_test_success}</div>
+                    <div data-result="title">{tr:micro_test_success_default}</div>
+                    <div data-result="data">
+
+                    </div>
+                </div>
+                <div data-result="fail" class="hide">{tr:camera_test_fail}</div>
             </div>
         </div>
 

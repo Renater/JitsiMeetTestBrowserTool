@@ -34,8 +34,8 @@ $lang['camera_test_success_default'] = 'La caméra utilisée par défaut est :';
 // Test micro
 $lang['micro'] = 'Microphone';
 $lang['micro_title'] = 'Test de l\'accès à votre microphone';
-$lang['micro_test_success_default'] = 'Votre microphone utilisé par défaut est :';
-$lang['micro_test_success_detected'] = 'Votre microphone est correctement détecté.';
+$lang['micro_test_success'] = 'Votre microphone est correctement détecté.';
+$lang['micro_test_success_default'] = 'Le microphone utilisé par défaut est :';
 
 // Test network
 $lang['network'] = 'Réseau';
