@@ -210,12 +210,13 @@ span[data-status="OK"]{
     color:green;
 }
 
-div#devices_results div[data-result="success"] div[data-result="data"] div div[data-result="title"]{
+div[data-result="success"] div[data-result="data"] div div[data-result="title"]{
     font-weight: bold;
     margin-left: 1rem;
     margin-top: 1rem;
 }
-div#devices_results div[data-result="success"] div[data-result="data"] div div[data-result="content"]{
+div#devices_results div[data-result="success"] div[data-result="data"] div div[data-result="content"],
+div#camera_results div[data-result="success"] div[data-result="data"]{
     margin-left: 2rem;
     font-style: italic;
 }

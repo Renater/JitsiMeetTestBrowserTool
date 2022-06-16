@@ -28,6 +28,8 @@ $lang['devices_video_label']='Capture Vidéo :';
 // Test camera
 $lang['camera'] = 'Caméra';
 $lang['camera_title'] = 'Test de l\'accès à votre caméra';
+$lang['camera_test_success'] = 'Votre caméra est correctement détectée.';
+$lang['camera_test_success_default'] = 'La caméra utilisée par défaut est :';
 
 // Test micro
 $lang['micro'] = 'Microphone';

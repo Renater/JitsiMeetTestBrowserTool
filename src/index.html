@@ -167,7 +167,7 @@
         <!-- Test camera -->
         <div id="camera_pane" class="hide test-result">
             <h2>
-                <i class="fa fa-camera"></i>  {tr:camera_title}
+                <i class="fa fa-video"></i>  {tr:camera_title}
                 <div class="result-status" data-context="test_camera">
                     <i class="fas fa-spinner fa-spin hidden" data-loader></i>
                     <span class="hide">
@@ -185,7 +185,13 @@
             </div>
             <div id="camera_results">
                 <div data-result="default">{tr:results_shown_there}</div>
-                <div data-result="success" class="hide">{tr:camera_test_success}</div>
+                <div data-result="success" class="hide">
+                    <div data-result="title">{tr:camera_test_success}</div>
+                    <div data-result="title">{tr:camera_test_success_default}</div>
+                    <div data-result="data">
+
+                    </div>
+                </div>
                 <div data-result="fail" class="hide">{tr:camera_test_fail}</div>
             </div>
         </div>

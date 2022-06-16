@@ -77,26 +77,12 @@ window.JitsiTestBrowser.UI = {
      * @param testCase
      */
     showResult: function (data, testCase){
-
-        if (this.handleResults.hasOwnProperty(testCase)){
+        if (window.JitsiTestBrowser.TestResults.hasOwnProperty(testCase)){
             // Specific handling for this result
-            this.handleResults[testCase](data);
+            window.JitsiTestBrowser.TestResults[testCase](data);
 
         }else {
-            // Default result showing
-            const referer = document.getElementById(testCase).getAttribute('data-results');
-            const children = document.getElementById(referer).children;
-
-            for (let id = 0; id < children.length; id++) {
-                let child = children[id];
-                child.classList.add('hide');
-
-                if (data.result === 'success' && child.getAttribute('data-result') === 'success') {
-                    child.classList.remove('hide');
-                } else if (data.result === 'fail' && child.getAttribute('data-result') === 'fail') {
-                    child.classList.remove('hide');
-                }
-            }
+            window.JitsiTestBrowser.TestResults.defaultRendering(testCase, data);
         }
     },
 
