@@ -76,5 +76,7 @@ window.JitsiTestBrowser.TestResults = {
             let sub = container.querySelector('div[data-result="fail"]')
             sub.classList.remove('hide');
         }
+
+        container.scrollIntoView({ behavior: 'smooth', block: 'end'})
     }
 }

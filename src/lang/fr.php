@@ -7,6 +7,7 @@ $lang['run_alone_test'] = 'Vous pouvez lancer uniquement ce test :';
 $lang['test_running'] = 'Test en cours ...';
 $lang['stop_on_failures'] = "Arrêter le test en cas d'erreur";
 $lang['advanced_options'] = 'Option avancées';
+$lang['error'] = 'Erreur';
 
 /* Test cases */
 

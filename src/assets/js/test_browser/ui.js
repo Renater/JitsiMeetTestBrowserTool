@@ -169,7 +169,7 @@ window.JitsiTestBrowser.UI = {
                 break;
 
             case 'fail':
-                icon.classList.add('fa-solid', 'fa-circle-xmark');
+                icon.classList.add('fa-solid', 'fa-circle-exclamation');
                 container.classList.add('test-fail');
                 break;
 

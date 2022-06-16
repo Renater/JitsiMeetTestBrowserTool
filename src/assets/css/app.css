@@ -18,6 +18,23 @@ ul li{
 .hidden{
     visibility: hidden !important;
 }
+.error-title{
+    font-weight: bold;
+    font-style: italic;
+    font-size: large;
+    color: red;
+    display: block;
+    margin:1rem;
+}
+.error-title::before{
+    font-family: "Font Awesome 6 Free";
+    content: "\f06a";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+    font-style: normal;
+}
 
 
 /* Main & panels */
@@ -197,6 +214,9 @@ div.test-result div.stat-right-item.test-fail{
 }
 div.test-result div.stat-right-item.test-fail i{
     color: orange;
+}
+div#network_results{
+    clear: both;
 }
 
 div.result-status{

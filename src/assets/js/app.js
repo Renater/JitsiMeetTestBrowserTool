@@ -32,6 +32,7 @@ window.onload = function() {
     document.querySelectorAll('[data-action="test-runner"]').forEach(function (element){
         element.addEventListener('click', function(){
             const testCase = element.getAttribute('data-test-case');
+            window.JitsiTestBrowser.UI.blink(testCase, true);
 
             // Do nothing if disabled
             if (element.classList.contains('disabled')) return;
@@ -39,9 +40,11 @@ window.onload = function() {
             window.JitsiTestBrowser[testCase].run()
                 .then(function(result){
                     window.JitsiTestBrowser.UI.showResult(result, testCase);
+                    window.JitsiTestBrowser.UI.blink(testCase, false);
                 })
                 .catch(function(reason){
                     echo(reason, testCase)
+                    window.JitsiTestBrowser.UI.blink(testCase, false);
                 });
         });
     });

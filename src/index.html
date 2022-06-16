@@ -274,23 +274,9 @@
                         </div>
                     </section>
                 </div>
-
-                <div id="network_results">
-                    <div data-result="default">{tr:results_shown_there}</div>
-                    <div data-result="success" class="hide">
-                        <div data-result="title">{tr:network_test_success}</div>
-                    </div>
-                    <div data-result="fail" class="hide">
-                        <span>{tr:network_test_fail}</span>
-                        <div data-result="data">
-
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="stat-right">
-
                 <div id="media_connectivity_wss" class="stat-right-item">
                     <span class="">
                         <span data-content="title">{tr:websocket}</span>
@@ -368,6 +354,20 @@
                     <span data-content="status_icon" class="hide">
                         <i class="fas fa-spinner fa-spin"></i>
                     </span>
+                </div>
+            </div>
+
+            <div id="network_results">
+                <div data-result="default">{tr:results_shown_there}</div>
+                <div data-result="success" class="hide">
+                    <div data-result="title">{tr:network_test_success}</div>
+                </div>
+                <div data-result="fail" class="hide">
+                    <span class="error-title">{tr:error}</span>
+                    <span>{tr:network_test_fail}</span>
+                    <div data-result="data">
+
+                    </div>
                 </div>
             </div>
 
