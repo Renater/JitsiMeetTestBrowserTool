@@ -53,14 +53,14 @@ window.JitsiTestBrowser.TestResults = {
     defaultRendering: function (testCase, data) {
         let container = document.getElementById(document.getElementById(testCase).getAttribute('data-results'));
 
+        // Remove default
+        container.querySelector('div[data-result="default"]')
+            .classList.add('hide');
+
         if (data.result === 'success'){
             // Success
             let sub = container.querySelector('div[data-result="success"]')
             sub.classList.remove('hide');
-
-            // Remove default
-            container.querySelector('div[data-result="default"]')
-                .classList.add('hide');
 
             // Show result title
             sub.querySelector('div[data-result="title"]')

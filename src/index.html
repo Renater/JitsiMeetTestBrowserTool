@@ -277,8 +277,15 @@
 
                 <div id="network_results">
                     <div data-result="default">{tr:results_shown_there}</div>
-                    <div data-result="success" class="hide">{tr:network_test_success}</div>
-                    <div data-result="fail" class="hide">{tr:network_test_fail}</div>
+                    <div data-result="success" class="hide">
+                        <div data-result="title">{tr:network_test_success}</div>
+                    </div>
+                    <div data-result="fail" class="hide">
+                        <span>{tr:network_test_fail}</span>
+                        <div data-result="data">
+
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -40,6 +40,7 @@ $lang['micro_test_success_default'] = 'The microphone used by default is:';
 // Test network
 $lang['network'] = 'Network';
 $lang['network_title'] = 'Test your network connection';
+$lang['network_test_fail']= 'Unable to establish a WebRTC media connection to our test server. You should be connected on media restricted network. Please ask you local support to check your network filter rules.';
 
 // Test room
 $lang['room'] = 'Room';

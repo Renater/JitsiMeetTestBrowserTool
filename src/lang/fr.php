@@ -40,6 +40,7 @@ $lang['micro_test_success_default'] = 'Le microphone utilisé par défaut est :'
 // Test network
 $lang['network'] = 'Réseau';
 $lang['network_title'] = 'Test de votre connexion réseau';
+$lang['network_test_fail'] = 'Impossible de réaliser une connexion média WebRCT vers notre serveur de test.<br />Vous devez vous trouver dans un environnement ou la trafic WebRTC est filtré.<br />Veuillez vérifier auprès de vos responsable informatiques locaux les règles de filtrages des connexions';
 
 // Test room
 $lang['room'] = 'Conférence';
