@@ -8,19 +8,38 @@ $lang['test_running'] = 'Test in progress ...';
 $lang['stop_on_failures'] = "Stop testing on failures";
 $lang['advanced_options'] = 'Advanced options';
 
-// Test cases
+/* Test cases */
+
+// Test browser
 $lang['browser'] = 'Browser';
 $lang['browser_title'] = 'Test of your browser';
 $lang['browser_test_success']= 'Your browser is compatible with Jitsi Meet.<br />  For the best user experience always use last sable version of your browser.';
 $lang['browser_test_fail']= 'Your browser is not compatible with Jitsi Meet.<br />  Please use one these recommended <a href="https://jitsi.github.io/handbook/docs/user-guide/supported-browsers/" target="_blank">Browsers</a>.';
+
+// Test devices
 $lang['devices'] = 'Devices';
 $lang['devices_title'] = 'Test access to your devices';
+$lang['devices_test_success'] = 'Detected media devices :';
+$lang['devices_test_fail']= 'Unable to list your media devices (Audio and Video).';
+$lang['devices_audio_input_label']='Audio input:';
+$lang['devices_audio_output_label']='Audio output:';
+$lang['devices_video_label']='Vidéo input:';
+
+// Test camera
 $lang['camera'] = 'Camera';
 $lang['camera_title'] = 'Test access to your camera';
+
+// Test browser
 $lang['micro'] = 'Microphone';
 $lang['micro_title'] = 'Test access to your microphone';
+$lang['micro_test_success_default'] = 'Your default microphone is :';
+$lang['micro_test_success_detected'] = 'Your microphone is correctly detected.';
+
+// Test network
 $lang['network'] = 'Network';
 $lang['network_title'] = 'Test your network connection';
+
+// Test room
 $lang['room'] = 'Room';
 $lang['room_title'] = 'Test direct access to a test conference';
 

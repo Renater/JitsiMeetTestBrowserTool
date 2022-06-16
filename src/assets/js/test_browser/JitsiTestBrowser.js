@@ -51,7 +51,7 @@ window.JitsiTestBrowser.runner = {
                 window.JitsiTestBrowser[testCase].run()
                     .then(function (data) {
                         // Default show result
-                        window.JitsiTestBrowser.UI.updateUI(data, testCase);
+                        window.JitsiTestBrowser.UI.showResult(data, testCase);
 
                         if (data.result === 'fail' && window.JitsiTestBrowser.runner.stop_on_failures){
                             window.JitsiTestBrowser.status = window.TestStatuses.STOPPED;

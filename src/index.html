@@ -143,7 +143,23 @@
             </div>
             <div id="devices_results">
                 <div data-result="default">{tr:results_shown_there}</div>
-                <div data-result="success" class="hide">{tr:devices_test_success}</div>
+                <div data-result="success" class="hide">
+                    <span data-result="title">{tr:devices_test_success}</span>
+                    <div data-result="data">
+                        <div data-result="audioinput">
+                            <div data-result="title"><i class="fa-solid fa-microphone"></i> {tr:devices_audio_input_label}</div>
+                            <div data-result="content"></div>
+                        </div>
+                        <div data-result="audiooutput">
+                            <div data-result="title"><i class="fa-solid fa-headphones"></i> {tr:devices_audio_output_label}</div>
+                            <div data-result="content"></div>
+                        </div>
+                        <div data-result="videoinput">
+                            <div data-result="title"><i class="fa-solid fa-video"></i> {tr:devices_video_label}</div>
+                            <div data-result="content"></div>
+                        </div>
+                    </div>
+                </div>
                 <div data-result="fail" class="hide">{tr:devices_test_fail}</div>
             </div>
         </div>

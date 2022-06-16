@@ -38,7 +38,7 @@ window.onload = function() {
 
             window.JitsiTestBrowser[testCase].run()
                 .then(function(result){
-                    window.JitsiTestBrowser.UI.updateUI(result, testCase);
+                    window.JitsiTestBrowser.UI.showResult(result, testCase);
                 })
                 .catch(function(reason){
                     echo(reason, testCase)

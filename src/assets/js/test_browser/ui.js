@@ -8,9 +8,43 @@ if (!window.hasOwnProperty('JitsiTestBrowser'))
 /**
  * Test browser case
  *
- * @type {{swapPanes: Window.JitsiTestBrowser.UI.swapPanes, updateUI: Window.JitsiTestBrowser.UI.updateUI}}
+ * @type {{swapPanes: Window.JitsiTestBrowser.UI.swapPanes, showResult: Window.JitsiTestBrowser.UI.showResult}}
  */
 window.JitsiTestBrowser.UI = {
+
+    /**
+     * Custom test result function for
+     */
+    handleResults: {
+        'test_devices': function (data){
+            let container = document.getElementById('devices_results');
+
+            if (data.result === 'success' && data.details){
+                // Success
+                let sub = container.querySelector('div[data-result="success"]')
+                sub.classList.remove('hide');
+
+                // Remove default
+                container.querySelector('div[data-result="default"]')
+                    .classList.add('hide');
+
+                ['audioinput', 'audiooutput', 'videoinput'].forEach(function (element){
+                    if (data.details.hasOwnProperty(element)) {
+                        let elementContainer = sub.querySelector(`div[data-result="${element}"] > div[data-result="content"]`);
+                        elementContainer.innerHTML = '';
+                        let component = document.createElement('div');
+                        component.innerHTML = data.details[element].join('<br />');
+                        elementContainer.append(component);
+                    }
+                });
+
+            }else{
+                // Fail
+                let sub = container.querySelector('div[data-result="fail"]')
+                sub.classList.remove('hide');
+            }
+        }
+    },
 
     /**
      * Swap between right panes
@@ -19,7 +53,6 @@ window.JitsiTestBrowser.UI = {
      * @param withMenu if true, also swap "is-active" class of left menu item
      */
     swapPanes: function(id, withMenu = true){
-        console.log(`SWAP PANE [${id}]`);
         // Hide all
         document.querySelectorAll(".test-result").forEach(function (element){
             element.classList.add('hide');
@@ -43,18 +76,26 @@ window.JitsiTestBrowser.UI = {
      * @param result
      * @param testCase
      */
-    updateUI: function (data, testCase){
-        const referer = document.getElementById(testCase).getAttribute('data-results');
-        const children = document.getElementById(referer).children;
+    showResult: function (data, testCase){
 
-        for (let id = 0; id < children.length; id++) {
-            let child = children[id];
-            child.classList.add('hide');
+        if (this.handleResults.hasOwnProperty(testCase)){
+            // Specific handling for this result
+            this.handleResults[testCase](data);
 
-            if (data.result === 'success' && child.getAttribute('data-result') === 'success') {
-                child.classList.remove('hide');
-            } else if (data.result === 'fail' && child.getAttribute('data-result') === 'fail') {
-                child.classList.remove('hide');
+        }else {
+            // Default result showing
+            const referer = document.getElementById(testCase).getAttribute('data-results');
+            const children = document.getElementById(referer).children;
+
+            for (let id = 0; id < children.length; id++) {
+                let child = children[id];
+                child.classList.add('hide');
+
+                if (data.result === 'success' && child.getAttribute('data-result') === 'success') {
+                    child.classList.remove('hide');
+                } else if (data.result === 'fail' && child.getAttribute('data-result') === 'fail') {
+                    child.classList.remove('hide');
+                }
             }
         }
     },
