@@ -31,7 +31,7 @@ $lang['camera_title'] = 'Test access to your camera';
 $lang['camera_test_success'] = 'Your camera is correctly detected.';
 $lang['camera_test_success_default'] = 'The camera used by default is:';
 
-// Test browser
+// Test micro
 $lang['micro'] = 'Microphone';
 $lang['micro_title'] = 'Test access to your microphone';
 $lang['micro_test_success_default'] = 'Your default microphone is :';
