@@ -249,7 +249,7 @@ class MakeRelease{
             $dir = dir($source);
             while (false !== ($file = $dir->read( ))) {
                 // skip . and ..
-                if (('.' === $file) || ('..' === $file)) {
+                if (('.' === $file) || ('..' === $file) || ('debug' === $file)) {
                     continue;
                 }
             if (is_dir("$source/$file")) {
