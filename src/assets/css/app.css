@@ -292,6 +292,8 @@ div[data-context="advanced_options"] > *{
  * Media queries
  */
 
+
+/* Small screens */
 @media screen and (max-width: 39.9375em) {
     /* Right pane */
     div#right-pane {
@@ -387,5 +389,13 @@ div[data-context="advanced_options"] > *{
 @media screen and (max-width: 0em), screen and (min-width: 40em) {
     .show-for-small-only {
         display: none !important;
+    }
+}
+
+
+/* Medium screens */
+@media only screen and (min-width: 40em) and (max-width: 73.75em) {
+    .stat-left{
+        width: 63%;
     }
 }
