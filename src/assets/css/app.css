@@ -286,3 +286,106 @@ div[data-context="advanced_options"] > *{
         min-height: 50rem;
     }
 }
+
+
+/*
+ * Media queries
+ */
+
+@media screen and (max-width: 39.9375em) {
+    /* Right pane */
+    div#right-pane {
+        padding-left: 0;
+    }
+    div#right-pane h1 {
+        font-size: 1.4rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding-left: 1rem;
+    }
+    div#right-pane h2{
+        font-size: 1.2rem;
+        margin-left: 0;
+    }
+    div.progress-container{
+        width: 95%;
+        margin-left: 0.5rem;
+    }
+    div.test-result{
+        padding-left: 1rem;
+    }
+
+
+    /* Responsive menu */
+    #menu-icon-small{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-right: 0.5rem;
+
+        padding: 1rem 0.5rem 1rem 1rem;
+        font-size: 1.5rem;
+    }
+    #responsive-menu-content{
+        background-color: #5f7bbf;
+        color: white;
+        margin-bottom: 1rem;
+    }
+    #responsive-menu-content > div{
+        padding: 1rem
+    }
+    #responsive-menu-content div.is-active{
+        border-bottom-left-radius: 0.5rem;
+        border-top-left-radius: 0.5rem;
+        background: #42a5f5;
+        padding-left: 1rem;
+        border-left: 0.3rem solid #A8BEF3;
+    }
+
+    .menu-item-small{
+        border-top: 1px solid #039be5;
+
+        padding: 0.4rem;
+    }
+    .menu-item-small i{
+        padding-right: 0.5rem;
+    }
+
+    .icon-opened:before{
+        font-family: "Font Awesome 6 Free";
+        content: "\f0c9";
+        display: inline-block;
+        padding-right: 3px;
+        vertical-align: middle;
+        font-weight: 900;
+        font-style: normal;
+
+    }
+    .icon-closed:before{
+        font-family: "Font Awesome 6 Free";
+        content: "\f00d";
+        display: inline-block;
+        padding-right: 3px;
+        vertical-align: middle;
+        font-weight: 900;
+        font-style: normal;
+    }
+
+    /* Network results */
+
+    div#network_pane .stat-left{
+        width:100%;
+    }
+    div#network_pane .stat-right{
+        width: 90%;
+    }
+
+    .hide-for-small-only {
+        display: none !important;
+    }
+}
+@media screen and (max-width: 0em), screen and (min-width: 40em) {
+    .show-for-small-only {
+        display: none !important;
+    }
+}

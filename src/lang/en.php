@@ -1,7 +1,7 @@
 <?php
 // General
 $lang['home'] = 'Home';
-$lang['main_title'] = 'Test your browser compatibility with Jitsi Meet';
+$lang['main_title'] = 'Jitsi Meet test browser tool';
 $lang['run'] = 'Start';
 $lang['run_alone_test'] = 'You can run only this test:';
 $lang['test_running'] = 'Test in progress ...';

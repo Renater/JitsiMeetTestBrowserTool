@@ -62,10 +62,12 @@ window.JitsiTestBrowser.UI = {
         document.getElementById(referer).classList.remove('hide')
 
         if (withMenu){
-            document.querySelectorAll(".menu-item").forEach(function (element){
+            document.querySelectorAll(".menu-item, .menu-item-small").forEach(function (element){
                 element.classList.remove('is-active');
             });
-            document.getElementById(id).classList.add('is-active');
+            document.querySelectorAll(`[data-pane="${id}"]`).forEach(function(element){
+                element.classList.add('is-active');
+            });
         }
     },
 

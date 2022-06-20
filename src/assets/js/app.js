@@ -18,13 +18,16 @@ function echo(result, id){
 
 window.onload = function() {
     // Listen click on item (left menu)
-    document.querySelectorAll(".menu-item").forEach(function (element){
+    document.querySelectorAll(".menu-item, .menu-item-small").forEach(function (element){
         element.addEventListener("click", function() {
-            document.querySelectorAll(".menu-item").forEach(function (element){
+            document.querySelectorAll(".menu-item, .menu-item-small").forEach(function (element){
                 element.classList.remove('is-active');
             });
             element.classList.add('is-active');
-            window.JitsiTestBrowser.UI.swapPanes(this.id);
+            window.JitsiTestBrowser.UI.swapPanes(this.getAttribute('data-pane'));
+
+            // Hide menu for small only
+            document.getElementById('menu-icon-small').click();
         });
     });
 
@@ -65,6 +68,27 @@ window.onload = function() {
         window.JitsiTestEvents.dispatch('run', {"status": window.TestStatuses.PROCESSING});
 
         window.JitsiTestBrowser.runner.run();
+    });
+
+    // Listen to responsive menu button click
+    document.getElementById('menu-icon-small').addEventListener('click', function(){
+        let iconOpened = this.querySelector('div span.icon-opened');
+        let iconClosed  = this.querySelector('div span.icon-closed');
+
+        // Change icon
+        if (this.getAttribute('data-opened') === "false"){
+            this.setAttribute('data-opened', "true");
+            iconOpened.classList.add('hide');
+            iconClosed.classList.remove('hide');
+
+        }else{
+            this.setAttribute('data-opened', "false");
+            iconOpened.classList.remove('hide');
+            iconClosed.classList.add('hide');
+        }
+
+        // Show content
+        document.getElementById('responsive-menu-content').classList.toggle('hide');
     });
 
     /**
