@@ -46,7 +46,7 @@
             <span class="icon"><i class="fa fa-display"></i></span>
         </div>
 
-        <div id="test_global" data-pane="test_global" title="{tr:results}" class="menu-item animate_ease"  data-refer-to="result_global">
+        <div id="test_global" data-pane="test_global" title="{tr:results}" data-results="global_results" class="menu-item animate_ease"  data-refer-to="global_results_pane">
             <span class="icon"><i class="fa fa-chart-column"></i></span>
         </div>
     </div>
@@ -94,7 +94,7 @@
                 <span class="icon"><i class="fa fa-display"></i>{tr:room}</span>
             </div>
 
-            <div data-pane="test_global" title="{tr:results}" data-refer-to="result_global" class="menu-item-small">
+            <div data-pane="test_global" title="{tr:results}"  data-results="global_results" data-refer-to="global_results_pane" class="menu-item-small">
                 <span class="icon"><i class="fa fa-chart-column"></i> {tr:results}</span>
             </div>
         </div>
@@ -463,11 +463,35 @@
         </div>
 
         <!-- Global results -->
-        <div id="result_global" class="hide test-result">
+        <div id="global_results_pane" class="hide test-result">
             <h2><i class="fa fa-chart-column"></i> {tr:results}</h2>
 
-            <div>
-                <p>{tr:results_shown_there}</p>
+
+            <div id="global_results">
+                <div data-result="default">{tr:results_shown_there}</div>
+                <div data-result="success" class="hide">{tr:global_test_success}</div>
+                <div data-result="fail" class="hide">
+                    <h2>{tr:global_test_fail}</h2>
+
+                    <p>{tr:following_test_failed}</p>
+                    <ul class="fa-ul">
+                        <li class="hide" data-test-case="test_devices"><span class="fa-li"><i class="fa fa-plug"></i></span>{tr:home_devices}</li>
+                        <li class="hide" data-test-case="test_camera"><span class="fa-li"><i class="fa fa-video"></i></span>{tr:home_camera}</li>
+                        <li class="hide" data-test-case="test_micro"><span class="fa-li"><i class="fa fa-microphone"></i></span>{tr:home_micro}</li>
+                        <li class="hide" data-test-case="test_network"><span class="fa-li"><i class="fa fa-network-wired"></i></span>{tr:home_network}</li>
+                        <li class="hide" data-test-case="test_room"><span class="fa-li"><i class="fa fa-display"></i></span>{tr:home_room}</li>
+                    </ul>
+                    <p>{tr:global_more_information}</p>
+
+                    <div class="actions">
+                        <a id="re_run">
+                            <i class="fa-solid fa-play"></i>  <span>{tr:rerun_all_tests}</span>
+                        </a>
+                        <a id="export_results">
+                            <i class="fa-solid fa-play"></i>  <span>{tr:export_results}</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

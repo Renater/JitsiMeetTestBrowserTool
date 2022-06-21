@@ -13,40 +13,6 @@ if (!window.hasOwnProperty('JitsiTestBrowser'))
 window.JitsiTestBrowser.UI = {
 
     /**
-     * Custom test result function for
-     */
-    handleResults: {
-        'test_devices': function (data){
-            let container = document.getElementById('devices_results');
-
-            if (data.result === 'success' && data.details){
-                // Success
-                let sub = container.querySelector('div[data-result="success"]')
-                sub.classList.remove('hide');
-
-                // Remove default
-                container.querySelector('div[data-result="default"]')
-                    .classList.add('hide');
-
-                ['audioinput', 'audiooutput', 'videoinput'].forEach(function (element){
-                    if (data.details.hasOwnProperty(element)) {
-                        let elementContainer = sub.querySelector(`div[data-result="${element}"] > div[data-result="content"]`);
-                        elementContainer.innerHTML = '';
-                        let component = document.createElement('div');
-                        component.innerHTML = data.details[element].join('<br />');
-                        elementContainer.append(component);
-                    }
-                });
-
-            }else{
-                // Fail
-                let sub = container.querySelector('div[data-result="fail"]')
-                sub.classList.remove('hide');
-            }
-        }
-    },
-
-    /**
      * Swap between right panes
      *
      * @param id ID of the pane to show
@@ -78,7 +44,7 @@ window.JitsiTestBrowser.UI = {
      * @param result
      * @param testCase
      */
-    showResult: function (data, testCase){
+    showResult: function (testCase, data = {}){
         if (window.JitsiTestBrowser.TestResults.hasOwnProperty(testCase)){
             // Specific handling for this result
             window.JitsiTestBrowser.TestResults[testCase](data);

@@ -10,6 +10,12 @@ if (!window.hasOwnProperty('JitsiTestBrowser'))
  */
 window.JitsiTestBrowser.TestResults = {
 
+
+    /**
+     * List of test cases which did not passed
+     */
+    testsOnError: [],
+
     /**
      * Show test devices results
      *
@@ -46,11 +52,40 @@ window.JitsiTestBrowser.TestResults = {
 
 
     /**
+     * Show final results
+     */
+    test_global: function() {
+        let container = document.getElementById('global_results');
+
+        // Remove default
+        container.querySelector('div[data-result="default"]')
+            .classList.add('hide');
+
+        if (window.JitsiTestBrowser.TestResults.testsOnError.length > 0){
+            // Got errors
+            let sub = container.querySelector('div[data-result="fail"]')
+            sub.classList.remove('hide');
+
+            // Show test failed
+
+            window.JitsiTestBrowser.TestResults.testsOnError.forEach(testCase => {
+                sub.querySelector(`[data-test-case="${testCase}"]`).classList.remove('hide');
+            })
+
+
+
+        } else {
+
+        }
+    },
+
+
+    /**
      * Default rendering function
      *
      * @param data
      */
-    defaultRendering: function (testCase, data) {
+    defaultRendering: function (data, testCase) {
         let container = document.getElementById(document.getElementById(testCase).getAttribute('data-results'));
 
         // Remove default

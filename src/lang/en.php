@@ -2,12 +2,15 @@
 // General
 $lang['home'] = 'Home';
 $lang['main_title'] = 'Jitsi Meet test browser tool';
+$lang['main_title_expand'] = 'Test your browser compatibility with Jitsi Meet';
 $lang['run'] = 'Start';
 $lang['run_alone_test'] = 'You can run only this test:';
 $lang['test_running'] = 'Test in progress ...';
 $lang['stop_on_failures'] = "Stop testing on failures";
 $lang['advanced_options'] = 'Advanced options';
 $lang['error'] = 'Error';
+$lang['rerun_all_tests'] = 'Restart tests';
+$lang['export_results'] = 'Export results';
 
 /* Test cases */
 
@@ -73,3 +76,6 @@ $lang['run_all_tests'] = 'Start testing';
 // Results
 $lang['results'] = 'Results';
 $lang['results_shown_there'] = 'Results of this test will be shown here.';
+$lang['global_test_fail'] = 'Some problems occurred while executing tests';
+$lang['following_test_failed'] = 'Following test failed:';
+$lang['global_more_information'] = 'For more details, you can consult the result of each test.';

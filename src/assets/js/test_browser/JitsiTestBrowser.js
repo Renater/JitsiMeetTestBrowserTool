@@ -34,6 +34,7 @@ window.JitsiTestBrowser.runner = {
         'test_browser', 'test_devices', 'test_camera', 'test_micro', 'test_network', 'test_room'
     ],
 
+
     run: function(){
         this.all_processing = true;
         /**
@@ -92,6 +93,7 @@ window.JitsiTestBrowser.runner = {
             }
 
             // Show final results
+            window.JitsiTestBrowser.UI.showResult('test_global');
             window.JitsiTestBrowser.UI.swapPanes('test_global');
 
             window.JitsiTestBrowser.runner.all_processing = false;

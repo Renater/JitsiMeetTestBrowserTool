@@ -250,6 +250,10 @@ div#micro_results div[data-result="success"] div[data-result="data"]{
     font-style: italic;
 }
 
+a#export_results{
+    margin-left: 1rem;
+}
+
 
 
 

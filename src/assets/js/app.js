@@ -42,7 +42,7 @@ window.onload = function() {
 
             window.JitsiTestBrowser[testCase].run()
                 .then(function(result){
-                    window.JitsiTestBrowser.UI.showResult(result, testCase);
+                    window.JitsiTestBrowser.UI.showResult(testCase, result);
                     window.JitsiTestBrowser.UI.blink(testCase, false);
                 })
                 .catch(function(reason){
@@ -111,6 +111,9 @@ window.onload = function() {
                 if (element.context !== undefined){
                     window.JitsiTestBrowser.UI.showLoader(element.context, false);
                     window.JitsiTestBrowser.UI.showStatus(element.context, element.data.result, true);
+                    if (element.data.result === 'fail'){
+                        window.JitsiTestBrowser.TestResults.testsOnError.push(element.context);
+                    }
                 }
 
                 break;
