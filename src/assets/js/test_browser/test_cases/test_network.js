@@ -151,6 +151,9 @@ window.JitsiTestBrowser.test_network = {
                                 }
                             });
 
+                            // Push statistics
+                            context.pushStatistics();
+
                             window.JitsiTestBrowser.runner.resolve(res, {"result": allOK ? "success" : "fail"}, "test_network");
                         })
                     });
@@ -190,11 +193,15 @@ window.JitsiTestBrowser.test_network = {
                 const width = context.localVideo.videoWidth;
                 const height = context.localVideo.videoHeight;
 
+                context.stats['video']['local'] = {video_dimension: {"width": width, "height": height}};
+
                 window.JitsiTestEvents.dispatch('network_stat', {"context":"video_player", "data": {"local": {"video_dimension": {"width": width, "height": height}}}});
             }
             if (context.remoteVideo.videoWidth) {
                 const rHeight = context.remoteVideo.videoHeight;
                 const rWidth = context.remoteVideo.videoWidth;
+
+                context.stats['video']['remote'] = {video_dimension: {"width": rWidth, "height": rHeight}};
 
                 window.JitsiTestEvents.dispatch('network_stat', {"context":"video_player", "data": {"remote": {"video_dimension": {"width": rWidth, "height": rHeight}}}});
             }
@@ -570,6 +577,8 @@ window.JitsiTestBrowser.test_network = {
                     let data = {};
                     data[item] = report[item];
 
+                    context.stats[context.testing_protocol][item] = report[item];
+
                     window.JitsiTestEvents.dispatch('network_stat', {data});
                 }
             });
@@ -654,6 +663,34 @@ window.JitsiTestBrowser.test_network = {
         }
     },
 
+
+    /**
+     * Push final statistics
+     */
+    pushStatistics: function(){
+        let context = window.JitsiTestBrowser.test_network;
+
+        let stats = {
+            "websocket": {
+                "status" : context.statuses['wss'] ? "success" : "fail",
+            },
+            "tcp": {
+                "status" : context.statuses['tcp'] ? "success" : "fail",
+                "data": context.stats['tcp']
+
+            },
+            "udp": {
+                "status" : context.statuses['udp'] ? "success" : "fail",
+                "data": context.stats['udp']
+            },
+            "video":{
+                "local": context.stats['video']['local'],
+                "remote": context.stats['video']['local']
+            }
+        };
+
+        window.JitsiTestBrowser.Statistics.addStat('test_network', stats );
+    },
 
     /**
      * Default test fail handler

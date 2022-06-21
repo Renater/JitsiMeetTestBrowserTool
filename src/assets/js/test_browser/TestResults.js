@@ -83,9 +83,10 @@ window.JitsiTestBrowser.TestResults = {
     /**
      * Default rendering function
      *
+     * @param testCase
      * @param data
      */
-    defaultRendering: function (data, testCase) {
+    defaultRendering: function (testCase, data) {
         let container = document.getElementById(document.getElementById(testCase).getAttribute('data-results'));
 
         // Remove default

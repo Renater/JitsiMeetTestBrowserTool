@@ -31,6 +31,11 @@ window.onload = function() {
         });
     });
 
+    // Listen to click on export results
+    document.getElementById('export_results').addEventListener('click', function(){
+        window.JitsiTestBrowser.Statistics.export();
+    });
+
     // Listen to click on run alone test case
     document.querySelectorAll('[data-action="test-runner"]').forEach(function (element){
         element.addEventListener('click', function(){
@@ -152,6 +157,7 @@ window.onload = function() {
                 case 'wss':
                 case 'tcp':
                 case 'udp':
+
                     if (element.data.status !== undefined) {
                         window.JitsiTestBrowser.UI.updateNetworkStatus(element.context, element.data.status);
                     }
