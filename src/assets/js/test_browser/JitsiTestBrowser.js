@@ -109,6 +109,14 @@ window.JitsiTestBrowser.runner = {
         runTests()
     },
 
+
+    /**
+     * Reset UI, statistics
+     */
+    reset: function(){
+        console.log('TODO');
+    },
+
     /**
      * Wait function
      *

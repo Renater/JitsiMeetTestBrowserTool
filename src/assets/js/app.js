@@ -39,7 +39,25 @@ window.onload = function() {
 
     // Listen to click on re run button
     document.getElementById('re_run').addEventListener('click', function(){
-        window.JitsiTestBrowser.Statistics.export();
+        let context = window.JitsiTestBrowser;
+
+        // Reset templates
+        for (const testCase of context.testCases) {
+            if (context.hasOwnProperty(testCase) &&
+                context[testCase].hasOwnProperty('reset')) {
+
+                context.TestCases[testCase].reset()
+
+            } else {
+                context.reset(testCase);
+            }
+        }
+
+        // Clear show final results
+        context.reset('results');
+
+        // Reset stats
+        App.TestBrowserStatistics.reset();
     });
 
     // Listen to click on run alone test case
