@@ -39,7 +39,7 @@ window.onload = function() {
 
     // Listen to click on re run button
     document.getElementById('re_run').addEventListener('click', function(){
-        let context = window.JitsiTestBrowser;
+        let context = window.JitsiTestBrowser.runner;
 
         // Reset templates
         for (const testCase of context.testCases) {
@@ -57,7 +57,7 @@ window.onload = function() {
         context.reset('results');
 
         // Reset stats
-        App.TestBrowserStatistics.reset();
+        window.JitsiTestBrowser.Statistics.reset();
     });
 
     // Listen to click on run alone test case
