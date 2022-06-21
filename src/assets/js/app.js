@@ -17,6 +17,7 @@ function echo(result, id){
 
 
 window.onload = function() {
+
     // Listen click on item (left menu)
     document.querySelectorAll(".menu-item, .menu-item-small").forEach(function (element){
         element.addEventListener("click", function() {
@@ -33,6 +34,11 @@ window.onload = function() {
 
     // Listen to click on export results
     document.getElementById('export_results').addEventListener('click', function(){
+        window.JitsiTestBrowser.Statistics.export();
+    });
+
+    // Listen to click on re run button
+    document.getElementById('re_run').addEventListener('click', function(){
         window.JitsiTestBrowser.Statistics.export();
     });
 

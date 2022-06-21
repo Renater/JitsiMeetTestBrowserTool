@@ -457,6 +457,12 @@ window.JitsiTestBrowser.test_network = {
 
             context.localPeerConnection.onicecandidate = e => {
                 console.log('Candidate localPeerConnection');
+                if (e.candidate && e.candidate.candidate){
+                    let clientIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(e.candidate.candidate)[1];
+                    console.log('Client IP: ', clientIP);
+                    context.stats[context.testing_protocol]['client_ip'] = clientIP;
+                }
+
                 context.remotePeerConnection
                     .addIceCandidate(e.candidate)
                     .then(context.onAddIceCandidateSuccess, context.onAddIceCandidateError);
@@ -607,12 +613,15 @@ window.JitsiTestBrowser.test_network = {
         }
         if (remoteCandidate) {
             if (remoteCandidate.address && remoteCandidate.port) {
+                context.stats[context.testing_protocol]['ip_connected_to'] = `${remoteCandidate.address}:${remoteCandidate.port}`;
                 window.JitsiTestEvents.dispatch('network_stat', {"data": {"ip_connected_to": `${remoteCandidate.address}:${remoteCandidate.port}`}});
 
             } else if (remoteCandidate.ip && remoteCandidate.port) {
+                context.stats[context.testing_protocol]['ip_connected_to'] = `${remoteCandidate.address}:${remoteCandidate.port}`;
                 window.JitsiTestEvents.dispatch('network_stat', {"data": {"ip_connected_to": `${remoteCandidate.ip}:${remoteCandidate.port}`}});
 
             } else if (remoteCandidate.ipAddress && remoteCandidate.portNumber) {
+                context.stats[context.testing_protocol]['ip_connected_to'] = `${remoteCandidate.address}:${remoteCandidate.port}`;
                 window.JitsiTestEvents.dispatch('network_stat', {"data": {"ip_connected_to": `${remoteCandidate.ipAddress}:${remoteCandidate.portNumber}`}});
             }
         }
