@@ -114,7 +114,7 @@ div#right-pane h2{
 .stat-left{
     display: block;
     float: left;
-    width: 33%;
+    width: 50%;
 }
 .stat-right{
     display: block;
@@ -166,8 +166,8 @@ div[data-content="ip_connected_to"] span[data-content="title"]{
 video{
     background-color: black;
 }
-div#video_container section{
-    margin-bottom: 1rem;
+div#video_container{
+    columns: 2;
 }
 #main_player {
     width: 80%;
@@ -386,6 +386,10 @@ div[data-context="advanced_options"] > *{
         width: 90%;
     }
 
+    div#video_container{
+        columns: 1;
+    }
+
     .hide-for-small-only {
         display: none !important;
     }
@@ -401,5 +405,9 @@ div[data-context="advanced_options"] > *{
 @media only screen and (min-width: 40em) and (max-width: 73.75em) {
     .stat-left{
         width: 63%;
+    }
+
+    div#video_container{
+        columns: 1;
     }
 }
