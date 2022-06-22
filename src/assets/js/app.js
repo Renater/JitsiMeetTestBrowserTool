@@ -39,25 +39,31 @@ window.onload = function() {
 
     // Listen to click on re run button
     document.getElementById('re_run').addEventListener('click', function(){
-        let context = window.JitsiTestBrowser.runner;
+        let context = window.JitsiTestBrowser;
 
         // Reset templates
-        for (const testCase of context.testCases) {
+        for (const testCase of context.runner.testCases) {
             if (context.hasOwnProperty(testCase) &&
                 context[testCase].hasOwnProperty('reset')) {
 
-                context.TestCases[testCase].reset()
+                context[testCase].reset()
 
             } else {
-                context.reset(testCase);
+                context.runner.reset(testCase);
             }
         }
 
         // Clear show final results
-        context.reset('results');
+        context.runner.reset('results');
 
         // Reset stats
         window.JitsiTestBrowser.Statistics.reset();
+
+        // Reset progress bar
+        document.querySelector(".progress").style.width = '0%'
+
+        // Restart tests
+        window.JitsiTestBrowser.runner.run();
     });
 
     // Listen to click on run alone test case

@@ -726,6 +726,34 @@ window.JitsiTestBrowser.test_network = {
 
 
     /**
+     * Reset UI elements
+     */
+    reset: function (){
+        let container = document.getElementById('network_pane');
+
+        // Reset stat right items
+        container.querySelectorAll('div.stat-right-item').forEach(function(element){
+            element.classList.remove('test-fail', 'test-success');
+        });
+
+        // Hide status icon
+        container.querySelectorAll('[data-content="status_icon"]').forEach(function(element){
+            element.classList.add('hide');
+        });
+
+        // Reset stat values
+        ['media_connectivity_packetlost', 'media_connectivity_framerate', 'media_connectivity_droppedframes', 'media_connectivity_jitter']
+            .forEach(function (element){
+                document.getElementById(element).querySelector(`span[data-content="value"]`).textContent = '0';
+            });
+        document.querySelectorAll('[data-content="video_dimensions"] span[data-content="value"] ,div[data-content="ip_connected_to"] span[data-content="value"]')
+            .forEach(function (element){
+                element.textContent = 'N/C'
+            });
+    },
+
+
+    /**
      * Final resolve function
      *
      * @param res

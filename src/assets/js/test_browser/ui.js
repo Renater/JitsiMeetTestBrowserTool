@@ -79,7 +79,10 @@ window.JitsiTestBrowser.UI = {
      * @param show
      */
     showStatus: function(context, status = false, show = true){
-        let container = document.querySelector(`div.result-status[data-context="${context}"] > i[data-loader]`);
+        let mainContainer = document.querySelector(`div.result-status[data-context="${context}"]`);
+        mainContainer.classList.remove('hide');
+
+        let container = mainContainer.querySelector(`i[data-loader]`);
         container.classList = '';
         container.classList.add('fa-solid', 'fa-arrow-right-long');
 

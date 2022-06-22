@@ -86,6 +86,8 @@ window.JitsiTestBrowser.test_room = {
             let context = window.JitsiTestBrowser.test_room;
             context.status = "pending"
 
+            document.getElementById('main_player').classList.remove('hide');
+
             /**
              * If there is an error processing test room, display it, close connections
              * if needed, then resolve with "error" status
@@ -95,6 +97,8 @@ window.JitsiTestBrowser.test_room = {
             let onError = function (reason) {
                 context.onError(reason);
                 context.closeConnections();
+
+                document.getElementById('main_player').classList.add('hide');
 
                 window.JitsiTestBrowser.runner.resolve(res, {
                     "result": "fail",

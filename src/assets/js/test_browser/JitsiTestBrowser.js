@@ -111,10 +111,28 @@ window.JitsiTestBrowser.runner = {
 
 
     /**
-     * Reset UI, statistics
+     * Reset
      */
-    reset: function(){
-        console.log('TODO');
+    reset: function(testCase){
+        // Reset stop on failures checkbox
+        document.getElementById('stop_on_failures').removeAttribute('checked')
+
+        // Show default message
+        document.querySelectorAll('[data-result="default"]').forEach(function(element){
+            element.classList.remove('hide');
+        });
+
+        // Hide results
+        document.querySelectorAll('[data-result="success"], [data-result="fail"]').forEach(function(element){
+            element.classList.add('hide');
+        });
+        document.querySelectorAll('div.result-status[data-context]').forEach(function(element){
+            element.classList.add('hide');
+        });
+
+        // Show first test case
+        window.JitsiTestBrowser.UI.swapPanes('test_browser');
+
     },
 
     /**
