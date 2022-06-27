@@ -55,10 +55,19 @@ window.JitsiTestBrowser.Statistics = {
         fakeLink.click();
     },
 
+
     /**
      * Clear statistics
+     *
+     * @param testCase
      */
-    reset: function(){
-        this.statistics = {};
+    reset: function(testCase = undefined){
+        if (testCase === undefined){
+            this.statistics = {};
+        }else{
+            if (this.statistics.hasOwnProperty(testCase)){
+                delete this.statistics[testCase]
+            }
+        }
     }
 }

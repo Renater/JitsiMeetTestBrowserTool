@@ -75,10 +75,21 @@ window.onload = function() {
             // Do nothing if disabled
             if (element.classList.contains('disabled')) return;
 
+            // Reset UI and statistics first
+            if (window.JitsiTestBrowser[testCase].hasOwnProperty('reset')){
+                window.JitsiTestBrowser[testCase].reset();
+            }else{
+                window.JitsiTestBrowser.runner.reset();
+            }
+            window.JitsiTestBrowser.Statistics.reset(testCase);
+
+            // Run
             window.JitsiTestBrowser[testCase].run()
                 .then(function(result){
                     window.JitsiTestBrowser.UI.showResult(testCase, result);
                     window.JitsiTestBrowser.UI.blink(testCase, false);
+                    // Change button name
+                    element.querySelector('span[data-content="title"]').innerHTML = window.lang.get('rerun_alone_test');
                 })
                 .catch(function(reason){
                     echo(reason, testCase)

@@ -131,7 +131,8 @@ window.JitsiTestBrowser.runner = {
         });
 
         // Show first test case
-        window.JitsiTestBrowser.UI.swapPanes('test_browser');
+        if (testCase)
+            window.JitsiTestBrowser.UI.swapPanes(testCase);
 
     },
 

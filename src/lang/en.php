@@ -10,6 +10,7 @@ $lang['stop_on_failures'] = "Stop testing on failures";
 $lang['advanced_options'] = 'Advanced options';
 $lang['error'] = 'Error';
 $lang['rerun_all_tests'] = 'Restart tests';
+$lang['rerun_alone_test'] = 'Restart test';
 $lang['export_results'] = 'Export results';
 
 /* Test cases */
