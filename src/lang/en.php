@@ -50,6 +50,8 @@ $lang['network_test_fail']= 'Unable to establish a WebRTC media connection to ou
 // Test room
 $lang['room'] = 'Room';
 $lang['room_title'] = 'Test direct access to a test conference';
+$lang['room_test_fail']= 'Unable to detect the connection of your echo media stream.<br />Please wait 30 seconds before ending the test room.<br />Please verify that you have check your browser <a href="faq#answer6" target="_blank">permission</a>.<br />Please verify your local network filter rules to our <a href="https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart/#setup-and-configure-your-firewall" target="_blank">media servers</a>. ';;
+
 
 // Home page
 $lang['home_disclaimer'] = 'This tool allows to check the following cases:';
@@ -77,6 +79,7 @@ $lang['run_all_tests'] = 'Start testing';
 // Results
 $lang['results'] = 'Results';
 $lang['results_shown_there'] = 'Results of this test will be shown here.';
+$lang['all_results_shown_there'] = 'Result of tests will be shown here.';
 $lang['global_test_fail'] = 'Some problems occurred while executing tests';
 $lang['following_test_failed'] = 'Following test failed:';
 $lang['global_more_information'] = 'For more details, you can consult the result of each test.';
