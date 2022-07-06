@@ -61,6 +61,8 @@ window.JitsiTestBrowser.test_network = {
      */
     intervalID: undefined,
 
+    exceptions: null,
+
 
     /**
      * Variables used to get RTC stats
@@ -72,14 +74,14 @@ window.JitsiTestBrowser.test_network = {
         tcp:{
             bitrate: [],
             packetsLost: 0,
-            fps: [],
+            framesPerSecond: [],
             droppedFrames: 0,
             jitter: []
         },
         udp:{
             bitrate: [],
             packetsLost: 0,
-            fps: [],
+            framesPerSecond: [],
             droppedFrames: 0,
             jitter: []
         },
@@ -105,6 +107,7 @@ window.JitsiTestBrowser.test_network = {
 
             context.localVideo = document.querySelector('video#local_video');
             context.remoteVideo = document.querySelector('video#remote_video');
+            context.exceptions = [];
 
             // Init TURN credentials
             context.initTURNCredentials(function(result){
@@ -145,7 +148,7 @@ window.JitsiTestBrowser.test_network = {
                             Object.keys(context.statuses).forEach(status => {
                                 if (context.statuses[status] === false){
                                     allOK = false;
-                                    context.statuses[status] = "fails"
+                                    context.statuses[status] = "fail"
                                 }else{
                                     context.statuses[status] = "success";
                                 }
@@ -226,7 +229,7 @@ window.JitsiTestBrowser.test_network = {
                         .then(function (data) {
                             context.turn_servers = {
                                 "username": data.username,
-                                "credential": data.credentials,
+                                "credential": data.credential,
                                 "tcp_urls": data.tcpTestUrl,
                                 "udp_urls": data.udpTestUrl,
                             };
@@ -681,15 +684,15 @@ window.JitsiTestBrowser.test_network = {
 
         let stats = {
             "websocket": {
-                "status" : context.statuses['wss'] ? "success" : "fail",
+                "status" : context.statuses['wss'],
             },
             "tcp": {
-                "status" : context.statuses['tcp'] ? "success" : "fail",
+                "status" : context.statuses['tcp'],
                 "data": context.stats['tcp']
 
             },
             "udp": {
-                "status" : context.statuses['udp'] ? "success" : "fail",
+                "status" : context.statuses['udp'],
                 "data": context.stats['udp']
             },
             "video":{
@@ -697,6 +700,14 @@ window.JitsiTestBrowser.test_network = {
                 "remote": context.stats['video']['local']
             }
         };
+
+        let protocols = ['wss', 'tcp', 'udp']
+        protocols.forEach(protocol => {
+            if (context.exceptions.hasOwnProperty(protocol)){
+                stats[protocol].exception = context.exceptions[protocol];
+            }
+        })
+
 
         window.JitsiTestBrowser.Statistics.addStat('test_network', stats );
     },
@@ -718,6 +729,8 @@ window.JitsiTestBrowser.test_network = {
         } else if (result instanceof Object) {
             details = JSON.stringify(result);
         }
+
+        context.exceptions[protocol] = result;
 
         console.error(details);
 
