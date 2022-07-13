@@ -463,8 +463,16 @@
 
             <div id="room_results">
                 <div data-result="default">{tr:results_shown_there}</div>
-                <div data-result="success" class="hide">{tr:room_test_success}</div>
-                <div data-result="fail" class="hide">{tr:room_test_fail}</div>
+                <div data-result="success" class="hide">
+                    <div data-result="title">{tr:room_test_success}</div>
+                </div>
+                <div data-result="fail" class="hide">
+                    <span class="error-title">{tr:error}</span>
+                    <span>{tr:room_test_fail}</span>
+                    <div data-result="data">
+
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -475,7 +483,10 @@
 
             <div id="global_results">
                 <div data-result="default">{tr:all_results_shown_there}</div>
-                <div data-result="success" class="hide">{tr:global_test_success}</div>
+                <div data-result="success" class="hide">
+                    <h3>{tr:global_test_success}</h3>
+                    <p>{tr:global_test_message}</p>
+                </div>
                 <div data-result="fail" class="hide">
                     <h2>{tr:global_test_fail}</h2>
 
@@ -488,15 +499,15 @@
                         <li class="hide" data-test-case="test_room"><span class="fa-li"><i class="fa fa-display"></i></span>{tr:home_room}</li>
                     </ul>
                     <p>{tr:global_more_information}</p>
+                </div>
 
-                    <div class="actions">
-                        <a id="re_run">
-                            <i class="fa-solid fa-play"></i>  <span>{tr:rerun_all_tests}</span>
-                        </a>
-                        <a id="export_results">
-                            <i class="fa-solid fa-play"></i>  <span>{tr:export_results}</span>
-                        </a>
-                    </div>
+                <div data-content="action_buttons" class="actions hide">
+                    <a id="re_run">
+                        <i class="fa-solid fa-play"></i>  <span>{tr:rerun_all_tests}</span>
+                    </a>
+                    <a id="export_results">
+                        <i class="fa-solid fa-play"></i>  <span>{tr:export_results}</span>
+                    </a>
                 </div>
             </div>
         </div>

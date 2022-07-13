@@ -61,7 +61,7 @@ class MakeRelease{
     /**
      * @var string Lang to use on the generated page
      */
-    private static string $lang = 'en';
+    private static string $langCode = 'en';
     
     /**
      * @var bool Quiet mod
@@ -115,10 +115,11 @@ class MakeRelease{
             static::$fontawesomeKitURL = $options['fontawesome-kit'];
         }
         if (array_key_exists('lang', $options)){
-            if (!file_exists(APP_ROOT.'src/lang/'.$options['lang'].'.php'))
+            if (!file_exists(APP_ROOT.'src/lang/'.$options['lang'].'.php')){
                 static::error("Lang '".$options['lang']."' not found");
-            
-            static::$lang = $options['lang'];
+            }else{
+                static::$langCode = $options['lang'];
+            }
         }
     }
     
@@ -194,7 +195,7 @@ class MakeRelease{
     private function applyTranslation($str){
         $lang = [];
         
-        include APP_ROOT.'/src/lang/'.static::$lang.'.php';
+        include APP_ROOT.'/src/lang/'.static::$langCode.'.php';
     
         foreach($lang as $id => $tr){
             $str = str_replace('{tr:'.$id.'}', utf8_decode($tr), $str);

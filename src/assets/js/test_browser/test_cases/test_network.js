@@ -571,8 +571,8 @@ window.JitsiTestBrowser.test_network = {
 
                 if (context.stats[context.testing_protocol].bitrate.length) {
                     let average = 0;
-                    context.stats[context.testing_protocol].bitrate.forEach(bitrate => {
-                        average += bitrate;
+                    context.stats[context.testing_protocol].bitrate.forEach(bt => {
+                        average += bt;
                     });
                     average = (average / context.stats[context.testing_protocol].bitrate.length).toFixed(2);
 
@@ -683,7 +683,7 @@ window.JitsiTestBrowser.test_network = {
         let context = window.JitsiTestBrowser.test_network;
 
         let stats = {
-            "websocket": {
+            "wss": {
                 "status" : context.statuses['wss'],
             },
             "tcp": {
