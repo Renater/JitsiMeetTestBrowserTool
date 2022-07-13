@@ -74,6 +74,11 @@ window.JitsiTestBrowser.test_room = {
     secondNodePlayer: undefined,
 
     /**
+     * Network stats got between participants
+     */
+    network_stat:  null,
+
+    /**
      * Run test
      *
      * @return {Promise<*>}
@@ -86,7 +91,12 @@ window.JitsiTestBrowser.test_room = {
             let context = window.JitsiTestBrowser.test_room;
             context.status = "pending"
 
-            document.getElementById('main_player').classList.remove('hide');
+            // Init nodes
+            context.mainNodePlayer = document.getElementById('main_player');
+            context.secondNodePlayer = document.getElementById('second_player');
+
+            context.mainNodePlayer.classList.remove('hide');
+            context.secondNodePlayer.classList.add('hide');
 
             /**
              * If there is an error processing test room, display it, close connections
@@ -98,17 +108,14 @@ window.JitsiTestBrowser.test_room = {
                 context.onError(reason);
                 context.closeConnections();
 
-                document.getElementById('main_player').classList.add('hide');
+                context.mainNodePlayer.classList.add('hide');
+                context.secondNodePlayer.classList.add('hide');
 
                 window.JitsiTestBrowser.runner.resolve(res, {
                     "result": "fail",
                     "details": reason
                 }, "test_room");
             };
-
-            onError('not_working_yet');
-            return;
-
 
             // init room name & room token
             context.getRoomName()
@@ -130,7 +137,7 @@ window.JitsiTestBrowser.test_room = {
                                                 context.closeConnections();
                                                 context.onSuccess(result);
 
-                                                window.JitsiTestBrowser.runner.resolve(res, result, "test_room");
+                                                window.JitsiTestBrowser.runner.resolve(res, {"result": result}, "test_room");
                                             }, onError)
                                         }, 20000);
 
@@ -180,7 +187,6 @@ window.JitsiTestBrowser.test_room = {
 
             // TODO: find a way to make it work without this call
             fetch(`${appUrl}/home/rest.php/TestBrowser/RoomName`, settings)
-
                 .then(response => {
                     response.text()
                         .then(function (data) {
@@ -192,6 +198,9 @@ window.JitsiTestBrowser.test_room = {
                         });
                     }
                 )
+                .catch(reason => {
+                    reject({"status": "fail", "error": reason.toString()});
+                });
         });
     },
 
@@ -243,6 +252,11 @@ window.JitsiTestBrowser.test_room = {
         return new Promise((resolve) => {
             let context = window.JitsiTestBrowser.test_room;
 
+            context.mainApiClient.addEventListener("networkStatUpdated", function (data) {
+                console.log('[networkStatUpdated]');
+                console.log(data);
+                context.network_stat = data
+            });
             context.mainApiClient.addEventListener("participantJoined", function () {
                 let context = window.JitsiTestBrowser.test_room;
                 context.mainApiClient.removeEventListener("participantJoined");
@@ -255,6 +269,7 @@ window.JitsiTestBrowser.test_room = {
                 // TODO: is it usefull anymore?
                 context.closeConnections();
             });
+
             resolve();
         });
     },
@@ -285,11 +300,6 @@ window.JitsiTestBrowser.test_room = {
             // Init domain
             context.domain = document.getElementById('main').getAttribute('data-application-url');
             context.domain_url = context.domain +'/home';
-
-
-            // Init nodes
-            context.mainNodePlayer = document.getElementById('main_player');
-            context.secondNodePlayer = document.getElementById('second_player');
 
             /**
              * Get session ID using the Room endpoint
@@ -399,26 +409,21 @@ window.JitsiTestBrowser.test_room = {
         console.log('[test_room]: test room connection ...');
         let context = window.JitsiTestBrowser.test_room;
 
-        // Check if there is participants
-        if (context.secondApiClient.getParticipantsInfo().length !== 2) {
-            // not participant
-            reject({"status": "fail", "reason": "no_participant"})
-        }
+        context.mainApiClient.getNetworkStat();
 
-        // Check if there is framerate, so the connection is working
-        // TODO: make it works!
+        setTimeout(function(){
+            if (context.network_stat === null || !context.network_stat.hasOwnProperty('stat')){
+                reject({"status": "fail", "reason": "network_error"})
+            }
 
-        // context.mainApiClient.getNetworkStatistics().then(function (data) {
-        //     console.log(data);
-        // })
-        //context.secondApiClient.getNetworkStatistics().then(function (data) {
-        //     console.log(data);
-        // })
-        //
-        resolve({
-            "status": "fail",
-            "post_message": "not_working_yet"
-        });
+            // Check if there is participants
+            if (context.secondApiClient.getParticipantsInfo().length !== 2) {
+                // not participant
+                reject({"status": "fail", "reason": "no_participant"})
+            } else {
+                resolve("success");
+            }
+        }, 2000)
     },
 
     /**
@@ -486,5 +491,8 @@ window.JitsiTestBrowser.test_room = {
     onSuccess: function (result) {
         console.log('[test_room]: All test successful');
         console.log(result);
+
+        // hide room player
+        window.JitsiTestBrowser.test_room.mainNodePlayer.classList.add('hide');
     }
 }
