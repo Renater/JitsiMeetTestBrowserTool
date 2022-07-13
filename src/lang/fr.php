@@ -82,3 +82,6 @@ $lang['all_results_shown_there'] = 'Le résultat des tests s\'affichera ici.';
 $lang['global_test_fail'] = 'Des problèmes sont survenus lors de l\'exécution des tests';
 $lang['following_test_failed'] = 'Les tests suivant n\'ont pas été réussi :';
 $lang['global_more_information'] = 'Pour plus de détails, vous pouvez consulter le résultat de chaque test.';
+
+$lang['global_test_success'] = 'Votre poste de travail est compatible avec notre service';
+$lang['global_test_message'] = 'Vous pouvez pleinement utiliser le services RendezVous.<br /><br />Si vous le souhaitez, vous pouvez exporter les résultats ou relancer les tests en utilisant les boutons ci-dessous.';

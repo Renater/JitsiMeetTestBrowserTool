@@ -50,7 +50,7 @@ $lang['network_test_fail']= 'Unable to establish a WebRTC media connection to ou
 // Test room
 $lang['room'] = 'Room';
 $lang['room_title'] = 'Test direct access to a test conference';
-$lang['room_test_fail']= 'Unable to detect the connection of your echo media stream.<br />Please wait 30 seconds before ending the test room.<br />Please verify that you have check your browser <a href="faq#answer6" target="_blank">permission</a>.<br />Please verify your local network filter rules to our <a href="https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart/#setup-and-configure-your-firewall" target="_blank">media servers</a>. ';;
+$lang['room_test_fail']= 'Unable to detect the connection of your echo media stream.<br />Please wait 30 seconds before ending the test room.<br />Please verify that you have check your browser <a href="faq#answer6" target="_blank">permission</a>.<br />Please verify your local network filter rules to our <a href="https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart/#setup-and-configure-your-firewall" target="_blank">media servers</a>. ';
 
 
 // Home page
@@ -83,3 +83,7 @@ $lang['all_results_shown_there'] = 'Result of tests will be shown here.';
 $lang['global_test_fail'] = 'Some problems occurred while executing tests';
 $lang['following_test_failed'] = 'Following test failed:';
 $lang['global_more_information'] = 'For more details, you can consult the result of each test.';
+
+// Final results
+$lang['global_test_success'] = 'Your work station is compatible with our service';
+$lang['global_test_message'] = 'You can fully use the RendezVous service.<br /><br />If you want, you can export tests result or restart the tests using the buttons below.';
