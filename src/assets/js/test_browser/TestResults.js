@@ -71,12 +71,14 @@ window.JitsiTestBrowser.TestResults = {
             window.JitsiTestBrowser.TestResults.testsOnError.forEach(testCase => {
                 sub.querySelector(`[data-test-case="${testCase}"]`).classList.remove('hide');
             })
-
-
-
-        } else {
-
+        }else{
+            // All test passed successfully
+            let sub = container.querySelector('div[data-result="success"]')
+            sub.classList.remove('hide');
         }
+
+        // Show action buttons
+        container.querySelector('div[data-content="action_buttons"]').classList.remove('hide');
     },
 
 
