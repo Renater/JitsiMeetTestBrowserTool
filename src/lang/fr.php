@@ -51,6 +51,7 @@ $lang['network_test_fail'] = 'Impossible de réaliser une connexion média WebRC
 $lang['room'] = 'Conférence';
 $lang['room_title'] = 'Test de l\'accès direct à une conference de test';
 $lang['room_test_fail'] = 'Impossible de detecter la connection votre flux média.<br />Veuillez attendre au moins 30 secondes avant d\'arrêter le test.<br />Veuillez vérifier vos <a href="faq#answer6" target="_blank">permissions de navigateur</a>.<br />Veuillez vérifier vos règles de filtrages réseaux vers <a href="https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart/#setup-and-configure-your-firewall" target="_blank">nos media servers</a>.';
+$lang['room_test_success']= 'Votre flux média a bien été connecté.';
 
 // Home page
 $lang['home_disclaimer'] = 'Cet outil vous permet de vérifier les cas suivant:';
